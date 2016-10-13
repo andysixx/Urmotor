@@ -7,112 +7,64 @@
 //
 
 import UIKit
-//import <FBSDKCoreKit/FBSDKCoreKit.h>
-//import <FBSDKLoginKit/FBSDKLoginKit.h>
-import SafariServices
-import LocalAuthentication
-import Social
-import MapKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 class ViewController: UIViewController,FBSDKLoginButtonDelegate{
-
    
-//    
-    let LoginBotton: FBSDKLoginButton = {
-        let button = FBSDKLoginButton()
-        button.readPermissions = ["email"]
-        return button
-    }()
    
-   @IBOutlet weak var logButton: FBSDKLoginButton!
+    @IBOutlet weak var LoginButton: FBSDKLoginButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if(FBSDKAccessToken.current() == nil)
-//        {
-//            print("user is not login")
-//        }
-//        else{
-//            print("user is loging")
-//        }
-//        view.addSubview(LoginBotton)
-//        LoginBotton.center = view.center
-//        LoginBotton.delegate = self
-        logButton.delegate = self
-        logButton.readPermissions = ["public_profile","email","user_friends"]
-       
-//        // Do any additional setup after loading the view, typically from a nib.
-//        if let token = FBSDKAccessToken.current(){
-//            fectchProfile()
-//        }
+     
+        LoginButton.delegate = self
+        LoginButton.readPermissions = ["public_profile","email","user_friends"]
     }
 //    func fectchProfile(){
 //        print("fectchProfile")
 //        let parameters = ["fields":"email,first_name,last_name,picture.type(large)"]
-//        FBSDKGraphRequest(graphPath:"me",parameters: parameters).start{(connection,result,error)-> Void in
-//        if error != nil{
+//        FBSDKGraphRequest(graphPath:"me",parameters: parameters).start(completionHandler: (connection, result, error)-> Void in
+//            if error != nil{
 //            print(error)
-//            return
-//        }
-//        if let email = result ["email"] as String{
+//            }
+//            if let email = result ["email"] as? String{
 //            print(email)
-//        
+//            }
+//            if let picture = result["picture"] as? NSDictionary, let data = picture["data"] as NSDictionary, let url = data["url"] as? String{
+//                print(url)
+//            }
+//            
 //        }
 //     }
-//        
-        public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
+        
+    public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
+    {
+        if(error != nil)
         {
-    
-            if(error != nil)
-                    {
-                        print(error.localizedDescription)
-                        return
-                    }
-                    if let userToken = result.token
+            print(error.localizedDescription)
+            return
+        }
+        if let userToken = result.token
             
-                    {
-                        let token : FBSDKAccessToken = result.token
-                        print("Token =\(FBSDKAccessToken.current().tokenString)")
-                        print("User ID =\(FBSDKAccessToken.current().userID)")
-                        let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.window?.rootViewController = revealViewControl
-                        
-                    }
-
+        {
+            let token : FBSDKAccessToken = result.token
+            print("Token =\(FBSDKAccessToken.current().tokenString)")
+            print("User ID =\(FBSDKAccessToken.current().userID)")
+            let revealViewControl1 = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+            let appDelegate1 = UIApplication.shared.delegate as! AppDelegate
+            appDelegate1.window?.rootViewController = revealViewControl1
+            
         }
         
         
-        public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!)
-        {}
+    }
+    
+    public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!)
+    {
+    
+    
+    
+    }
 
-//    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-//        print("complete loggin")
-//        fectchProfile()
-//        if(error != nil)
-//        {
-//            print(error.localizedDescription)
-//            return
-//        }
-//        if let userToken = result.token
-//      
-//        {
-//            let token : FBSDKAccessToken = result.token
-//            print("Token =\(FBSDKAccessToken.current().tokenString)")
-//            print("User ID =\(FBSDKAccessToken.current().userID)")
-//            let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.window?.rootViewController = revealViewControl
-//            
-//        }
-//    }
-//    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-//        print("user is logged out")
-//    }
-//    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
-//        return true
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
