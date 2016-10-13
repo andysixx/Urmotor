@@ -9,6 +9,7 @@ target ‘Umotor’ do
   # Pods for Umotor
   pod 'Firebase'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   pod 'SwiftyJSON', '~> 3.1.0’
   pod 'GoogleMaps'
   pod ‘FBSDKCoreKit’

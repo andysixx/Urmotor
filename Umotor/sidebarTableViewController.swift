@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import  FirebaseAuth
+import FirebaseStorage
 class sidebarTableViewController: UITableViewController {
 
     
@@ -31,26 +32,21 @@ class sidebarTableViewController: UITableViewController {
             User_name.text = "Hi!~"+name!
             let data = NSData(contentsOf:photoUrl!)
             User_profile_pic.image = UIImage(data:data as! Data)
+            //reference to the storage service
+            let storage = FIRStorage.storage()
+            //refer your particular storage service
+            let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+            
+//            var request: FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/{user}")
             // User is signed in.
         } else {
             // No user is signed in.
         }
-      
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     @IBAction func logout(_ sender: AnyObject) {
         try!FIRAuth.auth()!.signOut()
         FBSDKAccessToken.setCurrent(nil)
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
-//        let Firstviewcontroller : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewControllerFirst")
-//        self.present(Firstviewcontroller,animated:true,completion: nil)
-        let loginManager = FBSDKLoginManager()
-        loginManager.logOut()
         let ViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ViewControllerFirst") as! ViewControllerFirst
         let ViewControlNav = UINavigationController(rootViewController:ViewControl)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
