@@ -9,11 +9,33 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import  FirebaseAuth
 class sidebarTableViewController: UITableViewController {
 
+    
+    @IBOutlet weak var User_profile_pic: UIImageView!
+//    @IBOutlet weak var User_profile_pic: UIImageView!
+    @IBOutlet weak var User_name: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.layoutIfNeeded()
+        User_profile_pic.layer.cornerRadius = User_profile_pic.frame.size.width/2
+        User_profile_pic.clipsToBounds = true
+        
+        if let user = FIRAuth.auth()?.currentUser {
+            let name = user.displayName
+            let email = user.email
+            let photoUrl = user.photoURL
+            let uid = user.uid;
+            
+            User_name.text = "Hi!~"+name!
+            let data = NSData(contentsOf:photoUrl!)
+            User_profile_pic.image = UIImage(data:data as! Data)
+            // User is signed in.
+        } else {
+            // No user is signed in.
+        }
+      
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -22,7 +44,11 @@ class sidebarTableViewController: UITableViewController {
     }
 
     @IBAction func logout(_ sender: AnyObject) {
-        
+        try!FIRAuth.auth()!.signOut()
+        FBSDKAccessToken.setCurrent(nil)
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
+//        let Firstviewcontroller : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewControllerFirst")
+//        self.present(Firstviewcontroller,animated:true,completion: nil)
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         let ViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ViewControllerFirst") as! ViewControllerFirst

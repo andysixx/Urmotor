@@ -27,6 +27,7 @@
 		4F8C4D2B1DACCCB700716A05 /* TableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */; };
 		4F8C4D2E1DACCE7900716A05 /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */; };
 		4F8C4D2F1DACCE7900716A05 /* TableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */; };
+		4FA1F38C1DAF77850027A398 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FA1F38B1DAF77850027A398 /* GoogleService-Info.plist */; };
 		4FD192821CEC470900B835E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192811CEC470900B835E4 /* AppDelegate.swift */; };
 		4FD192871CEC470900B835E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD192851CEC470900B835E4 /* Main.storyboard */; };
 		4FD192891CEC470900B835E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD192881CEC470900B835E4 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell1.xib; sourceTree = "<group>"; };
 		4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
 		4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell2.xib; sourceTree = "<group>"; };
+		4FA1F38B1DAF77850027A398 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FD1927E1CEC470900B835E4 /* Umotor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umotor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD192811CEC470900B835E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FD192831CEC470900B835E4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */,
 				4F7B71F21D291F82004A7B20 /* SWRevealViewController.h */,
 				4F7B71F31D291F82004A7B20 /* SWRevealViewController.m */,
+				4FA1F38B1DAF77850027A398 /* GoogleService-Info.plist */,
 				4FD1928D1CEC470900B835E4 /* Info.plist */,
 				4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */,
 				4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */,
@@ -199,7 +202,6 @@
 				TargetAttributes = {
 					4FD1927D1CEC470900B835E4 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = QS7CJQ33F8;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -241,6 +243,7 @@
 				4FD192891CEC470900B835E4 /* Assets.xcassets in Resources */,
 				4F8C4D2F1DACCE7900716A05 /* TableViewCell2.xib in Resources */,
 				4FD192871CEC470900B835E4 /* Main.storyboard in Resources */,
+				4FA1F38C1DAF77850027A398 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,10 +433,12 @@
 				CODE_SIGN_ENTITLEMENTS = Umotor/Umotor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Umotor",
+					/Users/six/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Umotor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -457,10 +462,12 @@
 				CODE_SIGN_ENTITLEMENTS = Umotor/Umotor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Umotor",
+					/Users/six/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Umotor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
