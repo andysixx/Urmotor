@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lKN-Hc-aJd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lKN-Hc-aJd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -303,19 +303,19 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Dn4-Uh-Trr"/>
-                                <exclude reference="4bJ-Ol-I7K"/>
-                                <exclude reference="6oi-3S-8hj"/>
-                                <exclude reference="GiG-M6-bOV"/>
-                                <exclude reference="H1C-hp-Pyl"/>
-                                <exclude reference="a6S-ZR-xbh"/>
-                                <exclude reference="f5j-Mc-mxp"/>
+                                <exclude reference="2lb-vJ-uhC"/>
                                 <exclude reference="0tZ-kX-Cil"/>
                                 <exclude reference="2hc-wb-8Mq"/>
                                 <exclude reference="52k-Q7-nyr"/>
                                 <exclude reference="BBN-dj-E6s"/>
                                 <exclude reference="X7s-vh-wbN"/>
                                 <exclude reference="XQd-Fe-R6d"/>
-                                <exclude reference="2lb-vJ-uhC"/>
+                                <exclude reference="4bJ-Ol-I7K"/>
+                                <exclude reference="6oi-3S-8hj"/>
+                                <exclude reference="GiG-M6-bOV"/>
+                                <exclude reference="H1C-hp-Pyl"/>
+                                <exclude reference="a6S-ZR-xbh"/>
+                                <exclude reference="f5j-Mc-mxp"/>
                             </mask>
                         </variation>
                     </view>
@@ -612,7 +612,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="登出">
-                                                        <color key="titleColor" red="1" green="0.1054526261" blue="0.2933946919" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="logout:" destination="9GU-he-WWH" eventType="touchUpInside" id="LDJ-Cv-5o9"/>
@@ -620,6 +620,7 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -799,7 +800,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKN-Hc-aJd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zyQ-gu-ZWc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zyQ-gu-ZWc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -817,7 +818,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bv2-Ni-dSl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rYf-u6-HRi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="rYf-u6-HRi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -835,7 +836,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Sok-2Y-h20" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J1Z-MW-74P">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J1Z-MW-74P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

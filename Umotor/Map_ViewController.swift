@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-
+import FirebaseStorage
 class Map_ViewController: UIViewController,CLLocationManagerDelegate{
 //   CLLocationManagerDelegate
     @IBOutlet weak var mapV: GMSMapView!
@@ -22,6 +22,30 @@ class Map_ViewController: UIViewController,CLLocationManagerDelegate{
             Button.target = revealViewController()
             Button.action = "revealToggle:"
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            
+            let storage = FIRStorage.storage()
+            //refer your particular storage service
+            let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+            
+            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
+            profilePic!.start(completionHandler: {(connection,result,error) -> Void in
+                
+                if(error == nil)
+                {
+//                    print("erer")
+                    let dictionary = result as? NSDictionary
+                    let data = dictionary?.object(forKey: "data")
+                    let urlPic = ((data as AnyObject).objectForkey("url"))! as! String
+                    
+                    if let imageData = NSData(contentsOfURL: NSURL(string:urlPic)!)
+
+                    {
+                        let profilePicRef = 
+                    }
+                }
+                
+            })
+
         }
         
      

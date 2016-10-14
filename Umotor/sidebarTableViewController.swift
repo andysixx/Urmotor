@@ -19,9 +19,11 @@ class sidebarTableViewController: UITableViewController {
     @IBOutlet weak var User_name: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView(frame:CGRect.zero)
+        self.tableView.separatorColor = UIColor.white
         self.view.layoutIfNeeded()
-        User_profile_pic.layer.cornerRadius = User_profile_pic.frame.size.width/2
-        User_profile_pic.clipsToBounds = true
+        self.User_profile_pic.layer.cornerRadius = self.User_profile_pic.frame.size.width/2
+        self.User_profile_pic.clipsToBounds = true
         
         if let user = FIRAuth.auth()?.currentUser {
             let name = user.displayName
@@ -31,13 +33,64 @@ class sidebarTableViewController: UITableViewController {
             
             User_name.text = "Hi!~"+name!
             let data = NSData(contentsOf:photoUrl!)
-            User_profile_pic.image = UIImage(data:data as! Data)
+            self.User_profile_pic.image = UIImage(data:data as! Data)
             //reference to the storage service
             let storage = FIRStorage.storage()
             //refer your particular storage service
             let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
             
-//            var request: FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/{user}")
+            // Create a reference to the file you want to download
+            let islandRef = storageRef.child("images/island.jpg")
+            
+            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+            storageRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
+                if (error != nil) {
+                    print("Unable to download image")
+                    // Uh-oh, an error occurred!
+                } else {
+                    if(data!=nil)
+                        {
+                            self.User_profile_pic.image = UIImage(data:data!)
+                            
+                        }
+                    // Data for "images/island.jpg" is returned
+                    // ... let islandImage: UIImage! = UIImage(data: data!)
+                }
+            }
+            
+            if(self.User_profile_pic.image == nil)
+            {
+            
+            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
+            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
+            
+                if(error == nil)
+                {
+                    let dictionary = result as? NSDictionary
+                    let data = dictionary?.object(forKey: "data")
+                    let urlPic = (data?.objectForKey("url"))! as ! String
+                    
+                    if let imageData = NSData(contentsOfURL: NSURL(string:urlPic)!)
+                        
+                    {
+                        let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
+                        let uploadTask = profilePicRef.putDate(imageData, metadata:nil){
+                         metadata,error in
+                            if(error == nil)
+                            {
+                                let downloadUrl = metadata.downloadURL
+                            }
+                            else{
+                                print("error in downloading image")
+                            }
+                        }
+                        self.User_profile_pic.image =UIImage(data:imageData)
+                    }
+                }
+            
+            })
+            }//end if
+            
             // User is signed in.
         } else {
             // No user is signed in.
