@@ -9,61 +9,66 @@
 import UIKit
 import GoogleMaps
 import FirebaseStorage
+import MapKit
 class Map_ViewController: UIViewController,CLLocationManagerDelegate{
 //   CLLocationManagerDelegate
-    @IBOutlet weak var mapV: GMSMapView!
+    @IBOutlet weak var MapV: MKMapView!
     @IBOutlet var Button: UIBarButtonItem!
+    @IBOutlet weak var Adress: UITextField!
+    @IBOutlet weak var Adress_LB: UILabel!
+    var geoCoder: CLGeocoder!
     var locationManager = CLLocationManager()
+    var previousAddress: String!
     var didFindMyLocation = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestLocation()
+        geoCoder = CLGeocoder()
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
             Button.action = "revealToggle:"
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             
-            let storage = FIRStorage.storage()
-            //refer your particular storage service
-            let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
             
-            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
-            profilePic!.start(completionHandler: {(connection,result,error) -> Void in
-                
-                if(error == nil)
-                {
-//                    print("erer")
-                    let dictionary = result as? NSDictionary
-                    let data = dictionary?.object(forKey: "data")
-                    let urlPic = ((data as AnyObject).objectForkey("url"))! as! String
-                    
-                    if let imageData = NSData(contentsOfURL: NSURL(string:urlPic)!)
-
-                    {
-                        let profilePicRef = 
-                    }
-                }
-                
-            })
-
         }
-        
-     
-        
         // Do any additional setup after loading the view.
-        
-//        GMSServices.provideAPIKey("AIzaSyAJ6EZJ0Acr4z1amx0UB1Vf5vtMpOX-Lzc")
-//        let camera = GMSCameraPosition.cameraWithLatitude(24.989424, longitude: 121.544074, zoom: 10)
-//        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-//        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
-//        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
-//    
-//        view = mapView
-//        
-//        let currentLocation = CLLocationCoordinate2DMake(24.989424, 121.544074)
-//        let marker = GMSMarker(position : currentLocation)
-//        marker.title = "世新大學"
-//        marker.map = mapView
+    
     }
-  }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation =  locations.first!
+        self.MapV.centerCoordinate = location.coordinate
+        let reg = MKCoordinateRegionMakeWithDistance(location.coordinate,1500,1500)
+        self.MapV.setRegion(reg, animated: true)
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    func geoCode(location : CLLocation!){
+        geoCoder.cancelGeocode()
+        geoCoder.reverseGeocodeLocation(location, completionHandler: {(data,error) -> Void in
+            guard let placeMarks = data as[CLPlacemark]! else{
+            
+                return
+            }
+            let loc : CLPlacemark = placeMarks[0]
+            let addressDict : [NSString : NSObject] = loc.addressDictionary as! [NSString : NSObject]
+            let addrList = addressDict["FormattedAddressLines"] as! [String]
+            let address = addrList.joined(separator: ", ")
+            print(address)
+            self.previousAddress = address
+            self.Adress_LB.text = self.previousAddress
+            
+        })
+    
+    
+    
+    }
+}
