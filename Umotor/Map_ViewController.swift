@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import GoogleMaps
 import FirebaseStorage
 import MapKit
-class Map_ViewController: UIViewController,CLLocationManagerDelegate{
+import  CoreLocation
+class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewDelegate{
 //   CLLocationManagerDelegate
     @IBOutlet weak var MapV: MKMapView!
     @IBOutlet var Button: UIBarButtonItem!
     @IBOutlet weak var Adress: UITextField!
-    @IBOutlet weak var Adress_LB: UILabel!
     var geoCoder: CLGeocoder!
     var locationManager = CLLocationManager()
     var previousAddress: String!
@@ -28,6 +27,7 @@ class Map_ViewController: UIViewController,CLLocationManagerDelegate{
         locationManager.requestAlwaysAuthorization()
         locationManager.requestLocation()
         geoCoder = CLGeocoder()
+        self.MapV.delegate = self
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
@@ -38,18 +38,26 @@ class Map_ViewController: UIViewController,CLLocationManagerDelegate{
         }
         // Do any additional setup after loading the view.
     
+    
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation =  locations.first!
         self.MapV.centerCoordinate = location.coordinate
         let reg = MKCoordinateRegionMakeWithDistance(location.coordinate,1500,1500)
         self.MapV.setRegion(reg, animated: true)
+        geoCode(location: location)
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+    
+        let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        geoCode(location: location)
     }
     func geoCode(location : CLLocation!){
         geoCoder.cancelGeocode()
@@ -63,8 +71,8 @@ class Map_ViewController: UIViewController,CLLocationManagerDelegate{
             let addrList = addressDict["FormattedAddressLines"] as! [String]
             let address = addrList.joined(separator: ", ")
             print(address)
+            self.Adress.text = address
             self.previousAddress = address
-            self.Adress_LB.text = self.previousAddress
             
         })
     

@@ -10,8 +10,9 @@ import UIKit
 import FBSDKCoreKit
 import GoogleMaps
 import Firebase
+import MapKit
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
 
