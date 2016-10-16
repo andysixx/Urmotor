@@ -10,6 +10,7 @@
 		1FFFA6046A18CAF45C431EE8 /* Pods_Umotor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F637F3F187ABE84D49207B /* Pods_Umotor.framework */; };
 		4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */; };
 		4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */; };
+		4F57E7241DB2A13300CE696C /* umotor.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E7231DB2A13300CE696C /* umotor.mov */; };
 		4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */; };
 		4F61EA541D5B2AD9005EC828 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */; };
 		4F75936C1D4F09FE000C305E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192831CEC470900B835E4 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 		4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Umotor-Bridging-Header.h"; sourceTree = "<group>"; };
 		4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableView.swift; sourceTree = "<group>"; };
+		4F57E7231DB2A13300CE696C /* umotor.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = umotor.mov; sourceTree = "<group>"; };
 		4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_ViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */,
 				4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */,
 				4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */,
+				4F57E7231DB2A13300CE696C /* umotor.mov */,
 				4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */,
 				4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */,
 			);
@@ -254,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F57E7241DB2A13300CE696C /* umotor.mov in Resources */,
 				4F8C4D2B1DACCCB700716A05 /* TableViewCell1.xib in Resources */,
 				4FD1928C1CEC470900B835E4 /* LaunchScreen.storyboard in Resources */,
 				4FEECDCB1DAD6905001B324A /* Podfile in Resources */,

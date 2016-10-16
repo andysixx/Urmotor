@@ -37,23 +37,24 @@ class sidebarTableViewController: UITableViewController {
             let data = NSData(contentsOf:photoUrl!)
             self.User_profile_pic.image = UIImage(data:data as! Data)
             
-//            if(self.User_profile_pic.image == nil)
-//            {
-//            
-//            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":300,"redirect":false],httpMethod:"GET")
-//            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
-//            
-//                if(error == nil)
-//                {
-//                    let dictionary = result as? NSDictionary
-//                    let data = dictionary?.object(forKey: "data") as! NSDictionary
-//                    
-//                    let urlPic = data.object(forKey: "url") as! String
-//                    
+            if(self.User_profile_pic.image != nil)
+            {
+            
+            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":300,"redirect":false],httpMethod:"GET")
+            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
+            
+                if(error != nil)
+                {
+                    let dictionary = result as? String
+                    print(dictionary)
+//                    let data = dictionary?.object(forKey: "data")
+                    
+//    z                let urlPic = data.object(forKey: "url") as! String
+//                    print(data)
 //                    if let imageData = NSData(contentsOf: NSURL(string:urlPic) as! URL)
 //                        
 //                    {
-//                        let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
+//                        let profilePicRef = storageR.child(user.uid+"/profile_pic.jpg")
 //                        let uploadTask = profilePicRef.put(imageData as Data, metadata:nil){
 //                         metadata,error in
 //                            if(error == nil)
@@ -66,12 +67,12 @@ class sidebarTableViewController: UITableViewController {
 //                        }
 //                        self.User_profile_pic.image = UIImage(data:imageData as Data)
 //                    }
-//                }
-//            
-//            })
-//            }//end if
-//            
-//            // User is signed in.
+                }
+            
+            })
+            }//end if
+            
+            // User is signed in.
         } else {
             // No user is signed in.
         }

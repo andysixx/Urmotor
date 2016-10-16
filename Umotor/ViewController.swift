@@ -10,6 +10,8 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FirebaseAuth
+import AVKit
+import AVFoundation
 class ViewController: UIViewController,FBSDKLoginButtonDelegate{
    
     @IBOutlet weak var aivLoadingSpinner: UIActivityIndicatorView!

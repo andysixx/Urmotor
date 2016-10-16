@@ -21,11 +21,14 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
     var didFindMyLocation = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager = CLLocationManager()
+//        locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
+        MapV.showsUserLocation = true
+        
+        //Setup our Map View
         geoCoder = CLGeocoder()
         self.MapV.delegate = self
         // burger side bar menu
@@ -46,19 +49,19 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
      func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation =  locations.first!
         self.MapV.centerCoordinate = location.coordinate
-        let reg = MKCoordinateRegionMakeWithDistance(location.coordinate,1500,1500)
+        let reg = MKCoordinateRegionMakeWithDistance(location.coordinate,30,30)
         self.MapV.setRegion(reg, animated: true)
-        geoCode(location: location)
+        locationManager.stopUpdatingLocation()
+//        geoCode(location: location)
+        
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-    
         let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         geoCode(location: location)
-    }
+    }//end move animate
     func geoCode(location : CLLocation!){
         geoCoder.cancelGeocode()
         geoCoder.reverseGeocodeLocation(location, completionHandler: {(data,error) -> Void in
