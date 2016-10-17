@@ -1,122 +1,70 @@
 //
-//  ViewController.swift
-//  te
+//  ViewControllerFirst.swift
+//  Umotor
 //
-//  Created by SIX on 2016/5/18.
+//  Created by SIX on 2016/10/11.
 //  Copyright © 2016年 SIX. All rights reserved.
 //
 
 import UIKit
-import FBSDKCoreKit
 import FBSDKLoginKit
-import FirebaseAuth
 import AVKit
 import AVFoundation
-class ViewController: UIViewController,FBSDKLoginButtonDelegate{
+
+class ViewController: UIViewController {
+
    
-    @IBOutlet weak var aivLoadingSpinner: UIActivityIndicatorView!
-   
-    @IBOutlet weak var LoginButton: FBSDKLoginButton!
-  
-    @IBOutlet weak var user_id_field: UITextField!
-    @IBOutlet weak var user_password_field: UITextField!
-    @IBOutlet weak var LAB: UILabel!
+    @IBOutlet var videoVIew: UIView!
+    @IBOutlet weak var nav: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if let user = user {
-                // User is signed in.
-                // Move to user view
-                let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
-                let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
-                self.present(homeviewcontroller, animated: true, completion: nil)
-            }
-            else{
-            // No user is signed in.
-                self.LoginButton.readPermissions = ["public_profile","email","user_friends"]
-                self.LoginButton.delegate = self
-                self.view!.addSubview(self.LoginButton)
-                
-//                self.LoginButton.isHidden = false
-            
-            }
-        
-        
-        }
-
-//        fetchProfile()
+        nav.hidesBackButton = true
+//        setupView()
+        // Do any additional setup after loading the view.
     }
-    
-    public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
-    {
-        user_id_field.isHidden = true
-        user_password_field.isHidden = true
-        LAB.isHidden = true
-        self.LoginButton.isHidden = true
-        aivLoadingSpinner.startAnimating()
-        if(error != nil)
-        {
-            print(error.localizedDescription)
-            self.LoginButton.isHidden = false
-            aivLoadingSpinner.stopAnimating()
-        }
-        else if (result.isCancelled)
-        {
-            self.LoginButton.isHidden = false
-            aivLoadingSpinner.stopAnimating()
-        }
-        else
-        {
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                // ...
-                print("user logged in Firebase App")
-            }
-        }
-//        if let userToken = result.token
-//            
-//        {
-//            let token : FBSDKAccessToken = result.token
-//            print("Token =\(FBSDKAccessToken.current().tokenString)")
-//            print("User ID =\(FBSDKAccessToken.current().userID)")
-////            let revealViewControl1 = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-////            let appDelegate1 = UIApplication.shared.delegate as! AppDelegate
-////            appDelegate1.window?.rootViewController = revealViewControl1
-//            let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
-//            let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
-//            self.present(homeviewcontroller, animated: true, completion: nil)
-//            
-//        }
-//
-        
-    }
-    
-    public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!)
-    {
-    
-    
-    
-    }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func setupView() {
+        let path = URL(fileURLWithPath: Bundle.main.path(forResource: "umotor", ofType: "mov")!)
+        let player = AVPlayer(url: path as URL)
+        let newlayer = AVPlayerLayer(player: player)
+        newlayer.frame = videoVIew.frame
+        videoVIew.layer.addSublayer(newlayer)
+        newlayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        
+        player.play()
+        player.actionAtItemEnd = AVPlayerActionAtItemEnd.none
+        
+        NotificationCenter.default.addObserver(self, selector: "playerItemDidReachEnd", name: NSNotification.Name(rawValue: "AVPlayerItemDidPlayToEndTimeNotification"), object: player.currentItem)
+        
+    }
+    func playerItemDidReachEnd(notifiction: NSNotification)
+    {
+        let player : AVPlayerItem = notifiction.object as! AVPlayerItem
+        player.seek(to: kCMTimeZero)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(FBSDKAccessToken.current() != nil)
+        {
+            let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = revealViewControl
+            
+        }
+    }
 
-//
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
-
-
-//    FBSDKGraphRequest(graphPath:"me",parameters: parameters).start(completionHandler: (connection, result, error)-> Void in
-//            if error != nil{
-//            print("Error: \(error)")
-//            }
-//            if let email = result ["email"] as? String{
-//            print(email)
-//            }
-//            if let picture = result["picture"] as? NSDictionary, let data = picture["data"] as NSDictionary, let url = data["url"] as? String{
-//                print(url)
-//            }

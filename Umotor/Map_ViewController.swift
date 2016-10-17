@@ -21,13 +21,11 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
     var didFindMyLocation = false
     override func viewDidLoad() {
         super.viewDidLoad()
-//        locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         MapV.showsUserLocation = true
-        
         //Setup our Map View
         geoCoder = CLGeocoder()
         self.MapV.delegate = self
@@ -35,9 +33,7 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
         if revealViewController() != nil{
             Button.target = revealViewController()
             Button.action = "revealToggle:"
-            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            
-            
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())    
         }
         // Do any additional setup after loading the view.
     

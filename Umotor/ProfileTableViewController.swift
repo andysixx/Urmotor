@@ -28,19 +28,19 @@ class ProfileTableViewController: UITableViewController {
                 
                 switch self.about[index] {
                     case "姓名":
-                    self.ref.child("user_profile").child("\(user!.uid)/姓名").setValue(item)
+                    self.ref.child("user_profile").child("\(user!.uid)/name").setValue(item)
                     break
                     case "年齡":
-                        self.ref.child("user_profile").child("\(user!.uid)/年齡").setValue(item)
+                        self.ref.child("user_profile").child("\(user!.uid)/age").setValue(item)
                     break
                     case "電話":
-                        self.ref.child("user_profile").child("\(user!.uid)/電話").setValue(item)
+                        self.ref.child("user_profile").child("\(user!.uid)/phone").setValue(item)
                     break
                     case "性別":
-                        self.ref.child("user_profile").child("\(user!.uid)/性別").setValue(item)
+                        self.ref.child("user_profile").child("\(user!.uid)/gender").setValue(item)
                     break
                     case "學校地區":
-                        self.ref.child("user_profile").child("\(user!.uid)/學校地區").setValue(item)
+                        self.ref.child("user_profile").child("\(user!.uid)/school_area").setValue(item)
                     break
                     case "email":
                         self.ref.child("user_profile").child("\(user!.uid)/email").setValue(item)
@@ -69,56 +69,58 @@ class ProfileTableViewController: UITableViewController {
             
             
         }
-//       var refHandle = self.ref.child("user_profile").observe(FIRDataEventType.value, with: { (snapshot) in
-//            let usersDict = snapshot.value as! NSDictionary
-//        print(usersDict)
-//            let userDetails = usersDict.object(forKey: self.user?.uid)
-//        var index = 0
-//        while index<self.about.count{
-//            let indePath = IndexPath(row: index, section: 0)
-//            let cell: TextInputTableView? = self.tableView.cellForRow(at: indePath) as! TextInputTableView
-//            
-//            if cell?.myTextField.text != ""{
-//                
-//                let item:String = (cell?.myTextField.text!)!
-//                ?.objectForkey("姓名") as? String
-//                switch self.about[index] {
-//                case "姓名":
-//                    cell?.configure(text: (userDetails as AnyObject).object(forkey:"姓名") as! String, placeholder: "姓名")
-//                    break
-//                case "年齡":
-//                    cell?.configure(userDetails?.objectForkey("姓名") as? String, placeholder: "姓名")
-//                    break
-//                case "電話":
-//                    self.ref.child("user_profile").child("\(user!.uid)/電話").setValue(item)
-//                    break
-//                case "性別":
-//                    self.ref.child("user_profile").child("\(user!.uid)/性別").setValue(item)
-//                    break
-//                case "學校地區":
-//                    self.ref.child("user_profile").child("\(user!.uid)/學校地區").setValue(item)
-//                    break
-//                case "email":
-//                    self.ref.child("user_profile").child("\(user!.uid)/email").setValue(item)
-//                    break
-//                    
-//                default:
-//                    print("dont update")
-//                }//end switch
-          //  }//end if
-//            index+=1
-//        }
-//
-//            // ...
-//        })
+       
+       var refHandle = self.ref.child("user_profile").observe(FIRDataEventType.value, with: { (snapshot) in
+            let usersDict = snapshot.value as! NSDictionary
+            let userDetails = usersDict.object(forKey: self.user!.uid) as! NSDictionary
+            print(userDetails)
+            var index = 0
+    
+    
+        while index<self.about.count{
+            let indePath = IndexPath(row: index, section: 0)
+            let cell: TextInputTableView? = self.tableView.cellForRow(at: indePath) as! TextInputTableView?
+            let field: String = (cell?.myTextField.placeholder?.lowercased())!
+            print(field)
         
+                switch field {
+                case "姓名":
+                    cell?.configure(text: userDetails.object(forKey: "name") as? String, placeholder:"姓名")
+                    break
+                case "年齡":
+                    cell?.configure(text: userDetails.object(forKey: "age") as? String, placeholder:"年齡")
+                    break
+                case "電話":
+                   cell?.configure(text: userDetails.object(forKey: "phone") as? String, placeholder:"電話")
+                    break
+                case "性別":
+                    cell?.configure(text: userDetails.object(forKey: "gender") as? String, placeholder:"性別")
+                    break
+                case "學校地區":
+                    cell?.configure(text: userDetails.object(forKey: "school_area") as? String, placeholder:"學校地區")
+                    break
+                case "email":
+                    cell?.configure(text: userDetails.object(forKey: "email") as? String, placeholder:"email")
+                    break
+//
+                default:
+                    print("dont update")
+                }//end switch
+            index+=1
+            }//end if
+        
+        
+
+//            // ...
+        })
+//
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -7,13 +7,35 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class Credit_Driver_TableViewController: UITableViewController {
 
+    let databaseRef = FIRDatabase.database().reference()
+    var userDict = NSDictionary()
+    var userNameArray = [String]()
+    var userImagesArray = [String]()
     @IBOutlet var Button: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.databaseRef.child("user_profile").observeSingleEvent(of: .value, with: {snapshot in
+        print(snapshot)
+            self.userDict = (snapshot.value as? NSDictionary)!
+            for(userID,details) in self.userDict {
+                print(userID)
+                print(details)
+                let img = (details as? NSDictionary)?.object(forKey: "profile_pic_small") as! String
+                let name = (details as? NSDictionary)?.object(forKey: "name") as! String
+                let firstName = name.components(separatedBy: " ")[0]
+                print(firstName)
+                self.userNameArray.append(firstName)
+                self.userImagesArray.append(img)
+                self.tableView?.reloadData()
+            
+            }
+        
+        })
         
         // burger side bar menu
         if revealViewController() != nil{
@@ -28,35 +50,41 @@ class Credit_Driver_TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-//
-//    // MARK: - Table view data source
-//
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    // MARK: - Table view data source
 
-        // Configure the cell...
+    override public func numberOfSections(in tableView: UITableView) -> Int{ // Default is 1 if not {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return self.userNameArray.count
+    }
+
+//    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Drivercell", for: indexPath) as! Driver_TableViewCell
+        let imageUrl = NSURL(string: userImagesArray[indexPath.row])
+        let imageData = NSData(contentsOf : imageUrl! as URL)
+        cell.driverImage.image = UIImage(data: imageData! as Data)
+        cell.DriverName.text = userNameArray[indexPath.row]
+
+        
+//         Configure the cell...
 
         return cell
     }
-    */
+
 
     /*
-    // Override to support conditional editing of the table view.
+     Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true

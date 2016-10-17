@@ -12,9 +12,6 @@ import FBSDKLoginKit
 import  FirebaseAuth
 import FirebaseStorage
 class sidebarTableViewController: UITableViewController {
-
-    
-    
     @IBOutlet weak var User_profile_pic: UIImageView!
 //    @IBOutlet weak var User_profile_pic: UIImageView!
     @IBOutlet weak var User_name: UILabel!
@@ -32,57 +29,121 @@ class sidebarTableViewController: UITableViewController {
             let email = user.email
             let photoUrl = user.photoURL
             let uid = user.uid
-            
             User_name.text = "Hi!~"+name!
-            let data = NSData(contentsOf:photoUrl!)
-            self.User_profile_pic.image = UIImage(data:data as! Data)
             
-            if(self.User_profile_pic.image != nil)
-            {
             
-            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":300,"redirect":false],httpMethod:"GET")
-            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
+            let storage = FIRStorage.storage()
             
-                if(error != nil)
-                {
-                    let dictionary = result as? String
-                    print(dictionary)
-//                    let data = dictionary?.object(forKey: "data")
+            let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+            var profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
+            
+            
+            let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
+            
+            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+            profilePicRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
+                if (error != nil) {
                     
-//    z                let urlPic = data.object(forKey: "url") as! String
-//                    print(data)
-//                    if let imageData = NSData(contentsOf: NSURL(string:urlPic) as! URL)
-//                        
-//                    {
-//                        let profilePicRef = storageR.child(user.uid+"/profile_pic.jpg")
-//                        let uploadTask = profilePicRef.put(imageData as Data, metadata:nil){
-//                         metadata,error in
-//                            if(error == nil)
-//                            {
-//                                let downloadUrl = metadata?.downloadURL
-//                            }
-//                            else{
-//                                print("error in downloading image")
-//                            }
-//                        }
-//                        self.User_profile_pic.image = UIImage(data:imageData as Data)
-//                    }
+                    print("Uable to download image")
+                    
+                    // Uh-oh, an error occurred!
+                } else {
+                    
+                    
+                    if(data != nil)
+                    {
+                        print("User already has an Image Not need to Download from facebook")
+                        self.User_profile_pic.image = UIImage(data : data!)
+                    }
+                    
+                    // Data for "images/island.jpg" is returned
+                    // ... let islandImage: UIImage! = UIImage(data: data!)
                 }
+            }
             
+            
+            
+            if(self.User_profile_pic.image == nil)
+            {
+                profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
+            
+                if(error == nil){
+                    let dictionary = result as? NSDictionary
+                    let data = dictionary?.object(forKey: "data") as? NSDictionary
+                    let urlPic = data?.object(forKey: "url") as! String
+                    if let imageData = NSData(contentsOf: URL(string:urlPic)!)
+                    {
+                        let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
+                        let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+                            metadata,error in
+                            
+                            if(error == nil)
+                            {
+                                let downloadUrl = metadata?.downloadURLs
+                            }
+                            else
+                            {
+                                print("error in download image")
+                            }
+                        }
+                        
+                        self.User_profile_pic.image = UIImage(data: imageData as Data)
+                    }
+                    
+                    
+                }
             })
-            }//end if
-            
-            // User is signed in.
-        } else {
+            }
+            //            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
+//            if(self.User_profile_pic.image == nil)
+//            {
+//
+//            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":300,"redirect":false],httpMethod:"GET")
+//            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
+//            
+//                if(error != nil)
+//                {
+//                    let dictionary = result as? String
+//                    print(dictionary)
+////                    let data = dictionary?.object(forKey: "data")
+//                    
+////    z                let urlPic = data.object(forKey: "url") as! String
+////                    print(data)
+////                    if let imageData = NSData(contentsOf: NSURL(string:urlPic) as! URL)
+////                        
+////                    {
+////                        let profilePicRef = storageR.child(user.uid+"/profile_pic.jpg")
+////                        let uploadTask = profilePicRef.put(imageData as Data, metadata:nil){
+////                         metadata,error in
+////                            if(error == nil)
+////                            {
+////                                let downloadUrl = metadata?.downloadURL
+////                            }
+////                            else{
+////                                print("error in downloading image")
+////                            }
+////                        }
+////                        self.User_profile_pic.image = UIImage(data:imageData as Data)
+////                    }
+//                }
+//            
+//            })
+//            }//end if
+//            
+//            // User is signed in.
+        
+        }
+            else {
             // No user is signed in.
         }
-        }
+        
+    }
     
 
     @IBAction func logout(_ sender: AnyObject) {
         try!FIRAuth.auth()!.signOut()
         FBSDKAccessToken.setCurrent(nil)
-        let ViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ViewControllerFirst") as! ViewControllerFirst
+        let ViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         let ViewControlNav = UINavigationController(rootViewController:ViewControl)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = ViewControlNav

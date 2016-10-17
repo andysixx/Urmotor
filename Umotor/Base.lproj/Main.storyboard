@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller First-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerFirst" id="BYZ-38-t0r" customClass="ViewControllerFirst" customModule="Umotor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Umotor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -41,6 +41,9 @@
                                 <state key="normal" title="註冊">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="btT-6u-ckr" kind="show" id="Wia-Kx-Yu8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -69,7 +72,7 @@
         <!--登入-->
         <scene sceneID="ZdL-A2-l9g">
             <objects>
-                <viewController storyboardIdentifier="ViewController" title="登入" id="cbR-1n-AZL" customClass="ViewController" customModule="Umotor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="登入" id="cbR-1n-AZL" customClass="LoginViewController" customModule="Umotor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P2t-dU-OgB"/>
                         <viewControllerLayoutGuide type="bottom" id="PkF-IV-4KG"/>
@@ -150,7 +153,7 @@
         <!--註冊-->
         <scene sceneID="FcI-1a-dDZ">
             <objects>
-                <viewController title="註冊" id="btT-6u-ckr" customClass="ViewControllerSec" customModule="Umotor" customModuleProvider="target" colorLabel="IBBuiltInLabel-Red" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterViewController" title="註冊" id="btT-6u-ckr" customClass="RegisterViewController" customModule="Umotor" customModuleProvider="target" colorLabel="IBBuiltInLabel-Red" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BUy-BR-T4q"/>
                         <viewControllerLayoutGuide type="bottom" id="0dl-aW-qxF"/>
@@ -464,7 +467,7 @@
                                             <frame key="frameInset" width="375" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="S__9101319" translatesAutoresizingMaskIntoConstraints="NO" id="KLF-fe-eNp">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KLF-fe-eNp">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="90" id="EiD-Wm-Ikm"/>
                                                         <constraint firstAttribute="width" constant="90" id="Unw-Aa-dGG"/>
@@ -507,10 +510,8 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="cP9-Xv-mDW" secondAttribute="bottom" constant="11" id="0oP-2y-qbD"/>
-                                                <constraint firstItem="cP9-Xv-mDW" firstAttribute="top" secondItem="iiA-bp-FOU" secondAttribute="top" constant="11" id="FsN-u3-eDq"/>
+                                                <constraint firstItem="cP9-Xv-mDW" firstAttribute="centerY" secondItem="iiA-bp-FOU" secondAttribute="centerY" id="NYi-f3-bMy"/>
                                                 <constraint firstItem="cP9-Xv-mDW" firstAttribute="leading" secondItem="iiA-bp-FOU" secondAttribute="leading" constant="45" id="O4m-cE-QbT"/>
-                                                <constraint firstItem="cP9-Xv-mDW" firstAttribute="centerY" secondItem="iiA-bp-FOU" secondAttribute="centerY" id="Wou-GQ-0ia"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -699,41 +700,50 @@
         <scene sceneID="MyQ-mI-tYQ">
             <objects>
                 <tableViewController title="信用司機" id="hrd-Ls-2bu" customClass="Credit_Driver_TableViewController" customModule="Umotor" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eeF-7B-PgC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="eeF-7B-PgC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <sections>
-                            <tableViewSection id="WYq-Zw-kbW">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="42" id="fQa-bk-8mL">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="42"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fQa-bk-8mL" id="TC4-SN-Qfr">
-                                            <frame key="frameInset" width="375" height="41"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" red="1" green="0.91363168589999999" blue="0.41252902540000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="znH-6P-yyx">
-                                        <rect key="frame" x="0.0" y="106" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znH-6P-yyx" id="Rqa-FB-Jvx">
-                                            <frame key="frameInset" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Urw-Jz-Mle">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Urw-Jz-Mle" id="r5i-ul-xcc">
-                                            <frame key="frameInset" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Driver_TableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Drivercell" rowHeight="70" id="zqi-Ki-rsf" customClass="Driver_TableViewCell" customModule="Umotor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zqi-Ki-rsf" id="umN-Hl-h1O">
+                                    <frame key="frameInset" width="375" height="69"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IjH-Un-rtk">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="Pxq-x2-Q1j"/>
+                                                <constraint firstAttribute="width" constant="70" id="hmR-eB-xte"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-zR-nze">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="75" id="EJg-Q5-KkF"/>
+                                                <constraint firstAttribute="height" constant="30" id="e34-Yk-Zf4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gGD-zR-nze" firstAttribute="leading" secondItem="IjH-Un-rtk" secondAttribute="trailing" constant="8" id="3eL-yE-MXE"/>
+                                        <constraint firstItem="IjH-Un-rtk" firstAttribute="leading" secondItem="umN-Hl-h1O" secondAttribute="leading" id="Fzl-LN-FDS"/>
+                                        <constraint firstAttribute="bottom" secondItem="IjH-Un-rtk" secondAttribute="bottom" id="P0g-RJ-FJk"/>
+                                        <constraint firstItem="IjH-Un-rtk" firstAttribute="top" secondItem="umN-Hl-h1O" secondAttribute="top" id="dXC-Go-1ek"/>
+                                        <constraint firstItem="gGD-zR-nze" firstAttribute="top" secondItem="umN-Hl-h1O" secondAttribute="topMargin" id="i4j-7j-lnH"/>
+                                        <constraint firstItem="IjH-Un-rtk" firstAttribute="centerY" secondItem="umN-Hl-h1O" secondAttribute="centerY" id="tz6-45-cMa"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="DriverName" destination="gGD-zR-nze" id="Gqo-7a-nWU"/>
+                                    <outlet property="driverImage" destination="IjH-Un-rtk" id="RZd-00-ccr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="hrd-Ls-2bu" id="az9-g2-kty"/>
                             <outlet property="delegate" destination="hrd-Ls-2bu" id="COU-Qu-KIt"/>
@@ -748,7 +758,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYk-fV-jLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2117" y="2799"/>
+            <point key="canvasLocation" x="2116" y="2798.9505247376314"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Mq-NF-mrb">
@@ -868,7 +878,6 @@
     <resources>
         <image name="Burger" width="25" height="25"/>
         <image name="Image" width="118" height="120"/>
-        <image name="S__9101319" width="1108" height="1478"/>
         <image name="location-pin" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>

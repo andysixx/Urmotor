@@ -11,9 +11,10 @@
 		4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */; };
 		4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */; };
 		4F57E7241DB2A13300CE696C /* umotor.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E7231DB2A13300CE696C /* umotor.mov */; };
+		4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */; };
 		4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */; };
 		4F61EA541D5B2AD9005EC828 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */; };
-		4F75936C1D4F09FE000C305E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192831CEC470900B835E4 /* ViewController.swift */; };
+		4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192831CEC470900B835E4 /* LoginViewController.swift */; };
 		4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */; };
 		4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */; };
 		4F7593721D4F2010000C305E /* Mile_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7593711D4F2010000C305E /* Mile_ViewController.swift */; };
@@ -23,9 +24,9 @@
 		4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController.swift */; };
 		4F88CF341DAE6FF200B7B2AC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F88CF311DAE6FF200B7B2AC /* FBSDKCoreKit.framework */; };
 		4F88CF351DAE6FF200B7B2AC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F88CF321DAE6FF200B7B2AC /* FBSDKLoginKit.framework */; };
-		4F88CF391DAE861E00B7B2AC /* ViewControllerSec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88CF381DAE861E00B7B2AC /* ViewControllerSec.swift */; };
+		4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */; };
 		4F8A472E1DAD4E40002D7E56 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */; };
-		4F8C4D271DACB4A700716A05 /* ViewControllerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D261DACB4A700716A05 /* ViewControllerFirst.swift */; };
+		4F8C4D271DACB4A700716A05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D261DACB4A700716A05 /* ViewController.swift */; };
 		4F8C4D2A1DACCCB700716A05 /* TableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */; };
 		4F8C4D2B1DACCCB700716A05 /* TableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */; };
 		4F8C4D2E1DACCE7900716A05 /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */; };
@@ -45,6 +46,7 @@
 		4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableView.swift; sourceTree = "<group>"; };
 		4F57E7231DB2A13300CE696C /* umotor.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = umotor.mov; sourceTree = "<group>"; };
+		4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver_TableViewCell.swift; sourceTree = "<group>"; };
 		4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_ViewController.swift; sourceTree = "<group>"; };
@@ -58,9 +60,9 @@
 		4F88CF311DAE6FF200B7B2AC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.13.1 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		4F88CF321DAE6FF200B7B2AC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.13.1 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		4F88CF371DAE761500B7B2AC /* Umotor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Umotor.entitlements; path = Umotor/Umotor.entitlements; sourceTree = "<group>"; };
-		4F88CF381DAE861E00B7B2AC /* ViewControllerSec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSec.swift; sourceTree = "<group>"; };
+		4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		4F8C4D261DACB4A700716A05 /* ViewControllerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFirst.swift; sourceTree = "<group>"; };
+		4F8C4D261DACB4A700716A05 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell1.swift; sourceTree = "<group>"; };
 		4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell1.xib; sourceTree = "<group>"; };
 		4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 		4FA1F38B1DAF77850027A398 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FD1927E1CEC470900B835E4 /* Umotor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umotor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD192811CEC470900B835E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4FD192831CEC470900B835E4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4FD192831CEC470900B835E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4FD192861CEC470900B835E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FD192881CEC470900B835E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FD1928B1CEC470900B835E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,10 +152,11 @@
 			children = (
 				4F7302D51DB0E5E500BD6CB3 /* TableView */,
 				4FD192811CEC470900B835E4 /* AppDelegate.swift */,
-				4FD192831CEC470900B835E4 /* ViewController.swift */,
+				4FD192831CEC470900B835E4 /* LoginViewController.swift */,
 				4FD192851CEC470900B835E4 /* Main.storyboard */,
-				4F88CF381DAE861E00B7B2AC /* ViewControllerSec.swift */,
-				4F8C4D261DACB4A700716A05 /* ViewControllerFirst.swift */,
+				4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */,
+				4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */,
+				4F8C4D261DACB4A700716A05 /* ViewController.swift */,
 				4F7593731D4F2B5B000C305E /* Map_ViewController.swift */,
 				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
@@ -326,11 +329,12 @@
 				4F8C4D2E1DACCE7900716A05 /* TableViewCell2.swift in Sources */,
 				4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */,
 				4F8A472E1DAD4E40002D7E56 /* TableViewController.swift in Sources */,
+				4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */,
 				4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController.swift in Sources */,
 				4FD192821CEC470900B835E4 /* AppDelegate.swift in Sources */,
-				4F75936C1D4F09FE000C305E /* ViewController.swift in Sources */,
+				4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
-				4F88CF391DAE861E00B7B2AC /* ViewControllerSec.swift in Sources */,
+				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
 				4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */,
 				4F7593721D4F2010000C305E /* Mile_ViewController.swift in Sources */,
@@ -338,7 +342,7 @@
 				4F7B71F41D291F82004A7B20 /* SWRevealViewController.m in Sources */,
 				4F8C4D2A1DACCCB700716A05 /* TableViewCell1.swift in Sources */,
 				4F7593741D4F2B5B000C305E /* Map_ViewController.swift in Sources */,
-				4F8C4D271DACB4A700716A05 /* ViewControllerFirst.swift in Sources */,
+				4F8C4D271DACB4A700716A05 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,10 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import  FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
-class ViewControllerSec: UIViewController,FBSDKLoginButtonDelegate {
+class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var user_passwordch: UITextField!
     @IBOutlet weak var user_password: UITextField!
@@ -37,14 +39,8 @@ class ViewControllerSec: UIViewController,FBSDKLoginButtonDelegate {
                     self.loginButton.readPermissions = ["public_profile","email","user_friends"]
                     self.loginButton.delegate = self
                     self.view!.addSubview(self.loginButton)
-                    
-                    //                self.LoginButton.isHidden = false
-                    
                 }
             }
-//        loginButton.delegate = self
-//        loginButton.readPermissions = ["public_profile","email","user_friends"]
-        // Do any additional setup after loading the view.
     }
 
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
@@ -75,6 +71,55 @@ class ViewControllerSec: UIViewController,FBSDKLoginButtonDelegate {
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 // ...
                 print("user logged in Firebase App")
+                
+                if(error == nil){
+                    let storage = FIRStorage.storage()
+                    
+                    let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+                    let profilePicRef = storageRef.child(user!.uid + "profile_pic_small.jpg")
+                    
+                    
+                    //store the user ID
+                    let userID = user?.uid
+                    let databaseRef = FIRDatabase.database().reference()
+                    databaseRef.child("user_profile").child(userID!).child("profile_pic_small").observeSingleEvent(of: .value, with: {(snapshot) in
+                        print(snapshot)
+                        let profilePic = snapshot.value as? String?
+                        
+                        if(profilePic == nil){
+                            if let imageData = NSData(contentsOf: user!.photoURL!){
+                                let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+                                    metadata,error in
+                                    if(error == nil){
+                                        
+                                        let DownloadUrl = metadata!.downloadURL
+                                        databaseRef.child("user_profile").child("\(user!.uid)/profile_pic_small").setValue(DownloadUrl()!.absoluteString)
+                                        
+                                    }
+                                    else{
+                                        
+                                        
+                                        print("error in download image")
+                                        
+                                    }
+                                }
+                            
+                            databaseRef.child("user_profile").child("\(user!.uid)/name").setValue(user?.displayName)
+                            databaseRef.child("user_profile").child("\(user!.uid)/age").setValue("")
+                            databaseRef.child("user_profile").child("\(user!.uid)/phone").setValue("")
+                            databaseRef.child("user_profile").child("\(user!.uid)/gender").setValue("")
+                            databaseRef.child("user_profile").child("\(user!.uid)/school_area").setValue("")
+                            databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
+                            } 
+                        }else{
+                            print("User has logged in earlier")
+                        }
+                        
+                    })
+                    
+                    
+                    
+                }
             }
         }
 
