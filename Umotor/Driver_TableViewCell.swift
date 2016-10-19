@@ -15,6 +15,7 @@ class Driver_TableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.makeItRound()
+        
     }
    
     func makeItRound(){

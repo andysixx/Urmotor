@@ -23,7 +23,7 @@
 		4F7593741D4F2B5B000C305E /* Map_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7593731D4F2B5B000C305E /* Map_ViewController.swift */; };
 		4F7593761D51C1B3000C305E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7593751D51C1B3000C305E /* MapKit.framework */; };
 		4F7B71F41D291F82004A7B20 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B71F31D291F82004A7B20 /* SWRevealViewController.m */; };
-		4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController.swift */; };
+		4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController .swift */; };
 		4F88CF341DAE6FF200B7B2AC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F88CF311DAE6FF200B7B2AC /* FBSDKCoreKit.framework */; };
 		4F88CF351DAE6FF200B7B2AC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F88CF321DAE6FF200B7B2AC /* FBSDKLoginKit.framework */; };
 		4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */; };
@@ -60,7 +60,7 @@
 		4F7593751D51C1B3000C305E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4F7B71F21D291F82004A7B20 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		4F7B71F31D291F82004A7B20 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sidebarTableViewController.swift; sourceTree = "<group>"; };
+		4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "sidebarTableViewController .swift"; sourceTree = "<group>"; };
 		4F88CF311DAE6FF200B7B2AC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.13.1 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		4F88CF321DAE6FF200B7B2AC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.13.1 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		4F88CF371DAE761500B7B2AC /* Umotor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Umotor.entitlements; path = Umotor/Umotor.entitlements; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 				4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */,
 				4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */,
 				4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */,
-				4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController.swift */,
+				4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController .swift */,
 			);
 			name = TableView;
 			sourceTree = "<group>";
@@ -338,7 +338,7 @@
 				4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */,
 				4F8A472E1DAD4E40002D7E56 /* TableViewController.swift in Sources */,
 				4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */,
-				4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController.swift in Sources */,
+				4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController .swift in Sources */,
 				4FD192821CEC470900B835E4 /* AppDelegate.swift in Sources */,
 				4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,

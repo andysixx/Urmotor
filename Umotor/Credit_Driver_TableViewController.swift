@@ -12,7 +12,7 @@ import FirebaseAuth
 
 private let reuseIdentifier = "Drivercell"
 
-class Credit_Driver_TableViewController: UITableViewController {
+class Credit_Driver_TableViewController: UITableViewController{
 
     @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     let databaseRef = FIRDatabase.database().reference()
@@ -92,9 +92,6 @@ class Credit_Driver_TableViewController: UITableViewController {
 //        self.performSegue(withIdentifier: "LoginToChat", sender: self.usersArray[indexPath.item])
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    override func viewDidAppear(_ animated: Bool) {
-        self.tableView?.reloadData()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -103,6 +100,7 @@ class Credit_Driver_TableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    
     override public func numberOfSections(in tableView: UITableView) -> Int{ // Default is 1 if not {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -112,16 +110,17 @@ class Credit_Driver_TableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return self.usersArray.count
     }
-
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+ {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! Driver_TableViewCell
 //        let imageUrl = NSURL(string: userImagesArray[indexPath.row])
 //        let imageData = NSData(contentsOf : imageUrl! as URL)
 //        cell.driverImage.image = UIImage(data: imageData! as Data)
 //        cell.DriverName.text = userNameArray[indexPath.row]
-
+        tableView.delegate = self
+        tableView.dataSource = self
         let imageUrl = NSURL(string: self.usersArray[indexPath.row]["profile_pic_small"] as! String)
         let imageData = NSData(contentsOf: imageUrl as! URL)
         cell.driverImage.image = UIImage(data:imageData! as Data)
@@ -142,19 +141,23 @@ class Credit_Driver_TableViewController: UITableViewController {
 
         let firstName = (self.usersArray[indexPath.row]["name"] as? String)!.components(separatedBy: " ")[0]
         cell.DriverName.text = firstName
+//    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                 super.prepare(for: segue, sender: sender)
+         print(sender)
                 let navVC = segue.destination as! UINavigationController
                 let chatVc = navVC.viewControllers.first as! ChatViewController
                 chatVc.senderId = self.loggedInUser?.uid // 3
                 chatVc.receiverData = sender as AnyObject?
-                chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
+            print(sender)
+                chatVc.senderDisplayName = "\((sender as AnyObject).object(forKey: "name") as? String)" // 4
+        print("fumcfdgdg")
         
             }
 
