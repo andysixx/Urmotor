@@ -506,55 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577211.181329"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577211.817397"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577214.420124"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577215.862683"
+            timestampString = "498583195.77809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "151"
@@ -570,7 +522,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577216.429071"
+            timestampString = "498583195.77809"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Umotor/Credit_Driver_TableViewController.swift"
+            timestampString = "498583195.77809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
@@ -586,23 +554,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577216.925582"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577217.887307"
+            timestampString = "498583195.77809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
@@ -618,11 +570,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577218.63895"
+            timestampString = "498583195.77809"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Umotor/Credit_Driver_TableViewController.swift"
+            timestampString = "498583195.77809"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Umotor/Credit_Driver_TableViewController.swift"
+            timestampString = "498583195.77809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
             endingLineNumber = "155"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Umotor/Credit_Driver_TableViewController.swift"
+            timestampString = "498583195.77809"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
             <Locations>
@@ -634,11 +634,11 @@
                   moduleName = "Umotor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/six/Documents/Umotor/Umotor/Credit_Driver_TableViewController.swift"
-                  timestampString = "498582419.954093"
+                  timestampString = "498583197.246157"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "155"
-                  endingLineNumber = "155"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
                   offsetFromSymbolStart = "1839">
                </Location>
                <Location
@@ -649,11 +649,11 @@
                   moduleName = "Umotor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/six/Documents/Umotor/Umotor/Credit_Driver_TableViewController.swift"
-                  timestampString = "498582419.956961"
+                  timestampString = "498583197.24924"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "155"
-                  endingLineNumber = "155"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
                   offsetFromSymbolStart = "3593">
                </Location>
             </Locations>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Umotor/Credit_Driver_TableViewController.swift"
-            timestampString = "498577219.957106"
+            timestampString = "498583195.77809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>

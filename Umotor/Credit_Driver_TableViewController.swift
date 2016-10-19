@@ -29,7 +29,7 @@ class Credit_Driver_TableViewController: UITableViewController {
         self.aivLoading.startAnimating()
         self.loggedInUser = FIRAuth.auth()?.currentUser
         
-        self.databaseRef.child("user_profile").observeSingleEvent(of: .value, with: {
+        self.databaseRef.child("user_profile").observe(.value, with: {
             (snapshot) in
         print(snapshot)
             self.userDict = snapshot.value as? NSDictionary
@@ -125,12 +125,14 @@ class Credit_Driver_TableViewController: UITableViewController {
         let imageUrl = NSURL(string: self.usersArray[indexPath.row]["profile_pic_small"] as! String)
         let imageData = NSData(contentsOf: imageUrl as! URL)
         cell.driverImage.image = UIImage(data:imageData! as Data)
+//        cell.layoutIfNeeded()
         
         
 //         Configure the cell...
         cell.driverImage.layer.borderWidth = 2.5
         if(self.usersArray[indexPath.row]["online"] as! Bool  ==  true){
         
+            
             cell.driverImage.layer.borderColor = UIColor.green.cgColor
         }
         else{
