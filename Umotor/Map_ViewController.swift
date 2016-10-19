@@ -9,7 +9,9 @@
 import UIKit
 import FirebaseStorage
 import MapKit
-import  CoreLocation
+import CoreLocation
+import FirebaseAuth
+import FirebaseDatabase
 class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewDelegate{
 //   CLLocationManagerDelegate
     @IBOutlet weak var MapV: MKMapView!
@@ -19,8 +21,11 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
     var locationManager = CLLocationManager()
     var previousAddress: String!
     var didFindMyLocation = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -78,4 +83,5 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
     
     
     }
+   
 }

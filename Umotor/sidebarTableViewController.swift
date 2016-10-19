@@ -11,10 +11,13 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import  FirebaseAuth
 import FirebaseStorage
+import FirebaseDatabase
 class sidebarTableViewController: UITableViewController {
     @IBOutlet weak var User_profile_pic: UIImageView!
 //    @IBOutlet weak var User_profile_pic: UIImageView!
     @IBOutlet weak var User_name: UILabel!
+    
+    let deviceID = UIDevice.current.identifierForVendor?.uuidString
     override func viewDidLoad() {
        
         super.viewDidLoad()
@@ -31,6 +34,8 @@ class sidebarTableViewController: UITableViewController {
             let uid = user.uid
             User_name.text = "Hi!~"+name!
             
+            
+            manageConnections(userID: uid)
             
             let storage = FIRStorage.storage()
             
@@ -94,43 +99,7 @@ class sidebarTableViewController: UITableViewController {
                 }
             })
             }
-            //            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
-//            if(self.User_profile_pic.image == nil)
-//            {
-//
-//            var profilePic = FBSDKGraphRequest(graphPath: "/{user-id}/picture", parameters: ["height":300,"width":300,"redirect":false],httpMethod:"GET")
-//            profilePic?.start(completionHandler: {(connection,result,error) -> Void in
-//            
-//                if(error != nil)
-//                {
-//                    let dictionary = result as? String
-//                    print(dictionary)
-////                    let data = dictionary?.object(forKey: "data")
-//                    
-////    z                let urlPic = data.object(forKey: "url") as! String
-////                    print(data)
-////                    if let imageData = NSData(contentsOf: NSURL(string:urlPic) as! URL)
-////                        
-////                    {
-////                        let profilePicRef = storageR.child(user.uid+"/profile_pic.jpg")
-////                        let uploadTask = profilePicRef.put(imageData as Data, metadata:nil){
-////                         metadata,error in
-////                            if(error == nil)
-////                            {
-////                                let downloadUrl = metadata?.downloadURL
-////                            }
-////                            else{
-////                                print("error in downloading image")
-////                            }
-////                        }
-////                        self.User_profile_pic.image = UIImage(data:imageData as Data)
-////                    }
-//                }
-//            
-//            })
-//            }//end if
-//            
-//            // User is signed in.
+            // User is signed in.
         
         }
             else {
@@ -141,6 +110,13 @@ class sidebarTableViewController: UITableViewController {
     
 
     @IBAction func logout(_ sender: AnyObject) {
+        
+        let user = FIRAuth.auth()?.currentUser
+        
+        let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(user!.uid)/connection/\(self.deviceID!)")
+        myConnectionsRef.child("online").setValue(false)
+        myConnectionsRef.child("last_online").setValue(NSDate().timeIntervalSince1970)
+        
         try!FIRAuth.auth()!.signOut()
         FBSDKAccessToken.setCurrent(nil)
         let ViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
@@ -163,6 +139,24 @@ class sidebarTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 7
+    }
+    func manageConnections(userID: String){
+        
+        let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(userID)/connection/\(self.deviceID!)")
+        //When the User logged in, set the value to true!
+        myConnectionsRef.child("online").setValue(true)
+        myConnectionsRef.child("last_online").setValue(NSDate().timeIntervalSince1970)
+        myConnectionsRef.observe(.value, with: {snapshot in
+            //Unlike an if statement, guard statements
+            guard let connected = snapshot.value as? Bool, connected else{
+                
+                return
+                
+            }
+        })
+        
+        
+        
     }
 
     /*

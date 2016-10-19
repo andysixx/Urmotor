@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1FFFA6046A18CAF45C431EE8 /* Pods_Umotor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F637F3F187ABE84D49207B /* Pods_Umotor.framework */; };
+		4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */; };
 		4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */; };
 		4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */; };
 		4F57E7241DB2A13300CE696C /* umotor.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E7231DB2A13300CE696C /* umotor.mov */; };
 		4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */; };
+		4F57E7281DB6A37700CE696C /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E7271DB6A37700CE696C /* CollectionViewController.swift */; };
 		4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */; };
 		4F61EA541D5B2AD9005EC828 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */; };
 		4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192831CEC470900B835E4 /* LoginViewController.swift */; };
@@ -42,11 +44,13 @@
 /* Begin PBXFileReference section */
 		06F637F3F187ABE84D49207B /* Pods_Umotor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umotor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37024A7C1B7BDC079191F5 /* Pods-Umotor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umotor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Umotor/Pods-Umotor.release.xcconfig"; sourceTree = "<group>"; };
+		4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Umotor-Bridging-Header.h"; sourceTree = "<group>"; };
 		4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableView.swift; sourceTree = "<group>"; };
 		4F57E7231DB2A13300CE696C /* umotor.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = umotor.mov; sourceTree = "<group>"; };
 		4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver_TableViewCell.swift; sourceTree = "<group>"; };
+		4F57E7271DB6A37700CE696C /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_ViewController.swift; sourceTree = "<group>"; };
@@ -154,12 +158,14 @@
 				4FD192811CEC470900B835E4 /* AppDelegate.swift */,
 				4FD192831CEC470900B835E4 /* LoginViewController.swift */,
 				4FD192851CEC470900B835E4 /* Main.storyboard */,
+				4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */,
 				4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */,
 				4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */,
 				4F8C4D261DACB4A700716A05 /* ViewController.swift */,
 				4F7593731D4F2B5B000C305E /* Map_ViewController.swift */,
 				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
+				4F57E7271DB6A37700CE696C /* CollectionViewController.swift */,
 				4F7593711D4F2010000C305E /* Mile_ViewController.swift */,
 				4FD192881CEC470900B835E4 /* Assets.xcassets */,
 				4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */,
@@ -222,6 +228,7 @@
 				TargetAttributes = {
 					4FD1927D1CEC470900B835E4 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 7XVM6Z3VZ7;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -326,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F57E7281DB6A37700CE696C /* CollectionViewController.swift in Sources */,
 				4F8C4D2E1DACCE7900716A05 /* TableViewCell2.swift in Sources */,
 				4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */,
 				4F8A472E1DAD4E40002D7E56 /* TableViewController.swift in Sources */,
@@ -336,6 +344,7 @@
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
 				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
+				4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */,
 				4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */,
 				4F7593721D4F2010000C305E /* Mile_ViewController.swift in Sources */,
 				4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */,
@@ -405,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -444,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -460,7 +469,7 @@
 				CODE_SIGN_ENTITLEMENTS = Umotor/Umotor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7XVM6Z3VZ7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -489,7 +498,7 @@
 				CODE_SIGN_ENTITLEMENTS = Umotor/Umotor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7XVM6Z3VZ7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
