@@ -17,7 +17,7 @@ class Mile_ViewController: UIViewController {
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
-            Button.action = "revealToggle:"
+            Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         // Do any additional setup after loading the view.

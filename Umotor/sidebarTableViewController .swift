@@ -40,7 +40,7 @@ class sidebarTableViewController: UITableViewController {
             let storage = FIRStorage.storage()
             
             let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
-            var profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
+            let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
             
             
             let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
@@ -70,7 +70,7 @@ class sidebarTableViewController: UITableViewController {
             
             if(self.User_profile_pic.image == nil)
             {
-                profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
+                _ = profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
             
                 if(error == nil){
                     let dictionary = result as? NSDictionary

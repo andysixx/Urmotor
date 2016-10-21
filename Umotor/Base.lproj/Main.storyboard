@@ -361,7 +361,20 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ku-be-xJA">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="設定乘車位置"/>
+                                <connections>
+                                    <action selector="Call_car_now:" destination="saN-Wl-u32" eventType="touchUpInside" id="HOw-bG-PAQ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9M-bb-S8R">
+                                <frame key="frameInset" minX="16" minY="629" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="確認叫車"/>
+                                <connections>
+                                    <action selector="Check_call_car:" destination="saN-Wl-u32" eventType="touchUpInside" id="P4H-m0-eax"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -387,6 +400,8 @@
                         <outlet property="Adress" destination="DYy-zE-EYD" id="BdG-cy-LFt"/>
                         <outlet property="Button" destination="swk-Ju-7Hp" id="A1T-Zm-T53"/>
                         <outlet property="MapV" destination="vqX-gN-B3x" id="wfF-jj-cJH"/>
+                        <outlet property="checkdouble" destination="Q9M-bb-S8R" id="GSk-ff-1wc"/>
+                        <outlet property="set_location" destination="5ku-be-xJA" id="rWQ-Za-wC9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQc-Rk-dhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -743,15 +758,10 @@
                                 <connections>
                                     <outlet property="DriverName" destination="gGD-zR-nze" id="Gqo-7a-nWU"/>
                                     <outlet property="driverImage" destination="IjH-Un-rtk" id="RZd-00-ccr"/>
-                                    <segue destination="qyQ-Qo-C6x" kind="presentation" identifier="Chat" id="5AI-Di-uat"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="hrd-Ls-2bu" id="az9-g2-kty"/>
-                            <outlet property="delegate" destination="hrd-Ls-2bu" id="COU-Qu-KIt"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="信用司機" id="Usx-K8-Ds7">
                         <barButtonItem key="leftBarButtonItem" image="Burger" id="89k-Pu-yw2"/>
@@ -759,6 +769,7 @@
                     <connections>
                         <outlet property="Button" destination="89k-Pu-yw2" id="oQr-m9-Igw"/>
                         <outlet property="aivLoading" destination="0bZ-h9-Rvs" id="kl9-dc-ESL"/>
+                        <segue destination="qyQ-Qo-C6x" kind="presentation" identifier="Chat" id="gAt-hW-whu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYk-fV-jLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -818,7 +829,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ee-5p-YB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3023" y="4039"/>
+            <point key="canvasLocation" x="3021.5999999999999" y="4038.530734632684"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Mq-NF-mrb">

@@ -1,4 +1,4 @@
-//
+ //
 //  Credit_Driver_TableViewController.swift
 //  Umotor
 //
@@ -33,6 +33,7 @@ class Credit_Driver_TableViewController: UITableViewController{
             (snapshot) in
         print(snapshot)
             self.userDict = snapshot.value as? NSDictionary
+            print(self.userDict)
             self.usersArray = [AnyObject]()
             for(userID,details) in self.userDict!{
                 print(userID)
@@ -82,7 +83,7 @@ class Credit_Driver_TableViewController: UITableViewController{
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
-            Button.action = "revealToggle:"
+            Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         // Uncomment the following line to preserve selection between presentations
@@ -142,22 +143,28 @@ class Credit_Driver_TableViewController: UITableViewController{
         let firstName = (self.usersArray[indexPath.row]["name"] as? String)!.components(separatedBy: " ")[0]
         cell.DriverName.text = firstName
 //    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+//    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
         return cell
     }
-    
+//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//       
+//        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+//        return 0
+//    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                 super.prepare(for: segue, sender: sender)
+//        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
          print(sender)
                 let navVC = segue.destination as! UINavigationController
                 let chatVc = navVC.viewControllers.first as! ChatViewController
                 chatVc.senderId = self.loggedInUser?.uid // 3
                 chatVc.receiverData = sender as AnyObject?
             print(sender)
-                chatVc.senderDisplayName = "\((sender as AnyObject).object(forKey: "name") as? String)" // 4
-        print("fumcfdgdg")
+                chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
+        print(chatVc.senderDisplayName)
         
             }
 

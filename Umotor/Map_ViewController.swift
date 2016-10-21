@@ -15,17 +15,28 @@ import FirebaseDatabase
 class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewDelegate{
 //   CLLocationManagerDelegate
     @IBOutlet weak var MapV: MKMapView!
+    @IBOutlet weak var checkdouble: UIButton!
     @IBOutlet var Button: UIBarButtonItem!
     @IBOutlet weak var Adress: UITextField!
+    @IBOutlet weak var set_location: UIButton!
     var geoCoder: CLGeocoder!
     var locationManager = CLLocationManager()
     var previousAddress: String!
     var didFindMyLocation = false
-    
+    var ref = FIRDatabase.database().reference()
+    var user = FIRAuth.auth()?.currentUser
+    @IBAction func Call_car_now(_ sender: AnyObject) {
+        self.set_location.isHidden = true
+        self.checkdouble.isHidden = false
+        
+    }
+    @IBAction func Check_call_car(_ sender: AnyObject) {
+        ref.child("user_profile").child((user?.uid)!).child("call_motor_record").child("Riding_Position").setValue(Adress.text)
+        ref.child("Calling_motor").child("Waiting").child((user?.uid)!).child("call_motor").child("Riding_Position").setValue(Adress.text)
+            }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()

@@ -17,7 +17,6 @@ class Driver_TableViewCell: UITableViewCell {
         self.makeItRound()
         
     }
-   
     func makeItRound(){
 //    
 //        self.driverImage.layer.masksToBounds = true
