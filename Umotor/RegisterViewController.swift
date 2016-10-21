@@ -75,7 +75,7 @@ class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
                 if(error == nil){
                     let storage = FIRStorage.storage()
                     
-                    let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+                    let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
                     let profilePicRef = storageRef.child(user!.uid + "profile_pic_small.jpg")
                     
                     
@@ -110,6 +110,9 @@ class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
                             databaseRef.child("user_profile").child("\(user!.uid)/gender").setValue("")
                             databaseRef.child("user_profile").child("\(user!.uid)/school_area").setValue("")
                             databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
+                                databaseRef.child("user_profile").child("\(user!.uid)/friends").setValue("")
+                                databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue("")
+                                databaseRef.child("user_profile").child("\(user!.uid)/call_motor").setValue("")
                             } 
                         }else{
                             print("User has logged in earlier")

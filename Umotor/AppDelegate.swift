@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import GoogleMaps
 import Firebase
 import MapKit
+import FirebaseMessaging
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
@@ -21,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       FIRApp.configure()
+        
+//        let notificationTypes : UIUserNotificationType = [UIUserNotificationType.alert,UIUserNotificationType.badge,UIUserNotificationType.sound]
+//        let notificationSetting = UIUserNotificationSettings(types : notificationTypes, categories: nil)
+//        application.registerForRemoteNotifications()
+//        application.registerUserNotificationSettings(notificationSetting)
              // Override point for customization after application launch.
         GMSServices.provideAPIKey(googleMapsApiKey)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -58,7 +64,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        print("messageID: \(userInfo["gcm_message_ID"]!)")
+//        print(userInfo)
+//    }
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()

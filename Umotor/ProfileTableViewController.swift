@@ -64,7 +64,7 @@ class ProfileTableViewController: UITableViewController {
         self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         if revealViewController() != nil{
             Button.target = revealViewController()
-            Button.action = "revealToggle:"
+            Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             
             

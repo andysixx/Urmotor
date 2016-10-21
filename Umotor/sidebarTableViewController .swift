@@ -39,7 +39,7 @@ class sidebarTableViewController: UITableViewController {
             
             let storage = FIRStorage.storage()
             
-            let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+            let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
             let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
             
             

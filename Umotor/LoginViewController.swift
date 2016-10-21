@@ -73,7 +73,7 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
                 if(error == nil){
                     let storage = FIRStorage.storage()
                 
-                    let storageRef = storage.reference(forURL: "gs://umotor-68385.appspot.com")
+                    let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
                     let profilePicRef = storageRef.child(user!.uid + "profile_pic_small.jpg")
                     
                     

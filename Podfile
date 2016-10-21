@@ -11,6 +11,7 @@ target ‘Umotor’ do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod ‘Firebase/Database’
+  pod ‘Firebase/Messaging’
   pod 'SwiftyJSON'
   pod 'GoogleMaps'
   pod ‘FBSDKCoreKit’

@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>1039345092127-6lqihrggb6csrr1c5idsd6deg1nhjd0f.apps.googleusercontent.com</string>
+	<string>384779877737-1dl74esdod6cjcjgoqodkgtu5e76kngu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1039345092127-6lqihrggb6csrr1c5idsd6deg1nhjd0f</string>
+	<string>com.googleusercontent.apps.384779877737-1dl74esdod6cjcjgoqodkgtu5e76kngu</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDwHvd_PhNx7LjDBT6TWUXZwJHC2c2XU80</string>
+	<string>AIzaSyD4MgJth96a_KqIxnEr-JZ3J8HFdXB6ukc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1039345092127</string>
+	<string>384779877737</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>six.Umotor</string>
+	<string>com.six.Umotor</string>
 	<key>PROJECT_ID</key>
-	<string>umotor-68385</string>
+	<string>umotor-7f3dd</string>
 	<key>STORAGE_BUCKET</key>
-	<string>umotor-68385.appspot.com</string>
+	<string>umotor-7f3dd.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1039345092127:ios:96ac79b19edab9bd</string>
+	<string>1:384779877737:ios:2ad8de7705b54fd4</string>
 	<key>DATABASE_URL</key>
-	<string>https://umotor-68385.firebaseio.com</string>
+	<string>https://umotor-7f3dd.firebaseio.com</string>
 </dict>
 </plist>
