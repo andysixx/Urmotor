@@ -17,8 +17,8 @@ class Credit_Driver_TableViewController: UITableViewController{
     @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     let databaseRef = FIRDatabase.database().reference()
     var userDict : NSDictionary? = NSDictionary()
-//    var userNameArray = [String]()
-//    var userImagesArray = [String]()
+    //    var userNameArray = [String]()
+    //    var userImagesArray = [String]()
     
     var usersArray = [AnyObject]()
     var loggedInUser: AnyObject?
@@ -31,7 +31,7 @@ class Credit_Driver_TableViewController: UITableViewController{
         
         self.databaseRef.child("user_profile").observe(.value, with: {
             (snapshot) in
-        print(snapshot)
+            print(snapshot)
             self.userDict = snapshot.value as? NSDictionary
             print(self.userDict)
             self.usersArray = [AnyObject]()
@@ -60,9 +60,9 @@ class Credit_Driver_TableViewController: UITableViewController{
                             
                             (details as AnyObject).setValue(false, forKey:"online")
                         }
-                    
+                        
                     }
-                
+                    
                 }
                 if(self.loggedInUser?.uid != userID as? String){
                     (details as AnyObject).setValue(userID, forKey:"uid")
@@ -70,14 +70,14 @@ class Credit_Driver_TableViewController: UITableViewController{
                 }
                 
                 print(firstName)
-//                self.userNameArray.append(firstName)
-//                self.userImagesArray.append(img)
+                //                self.userNameArray.append(firstName)
+                //                self.userImagesArray.append(img)
                 self.tableView?.reloadData()
                 self.aivLoading.stopAnimating()
                 self.aivLoading.isHidden = true
-            
+                
             }
-        
+            
         })
         
         // burger side bar menu
@@ -88,129 +88,127 @@ class Credit_Driver_TableViewController: UITableViewController{
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//        self.performSegue(withIdentifier: "LoginToChat", sender: self.usersArray[indexPath.item])
+        //        self.performSegue(withIdentifier: "LoginToChat", sender: self.usersArray[indexPath.item])
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     
     override public func numberOfSections(in tableView: UITableView) -> Int{ // Default is 1 if not {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.usersArray.count
     }
-   
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
- {
-
+    {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! Driver_TableViewCell
-//        let imageUrl = NSURL(string: userImagesArray[indexPath.row])
-//        let imageData = NSData(contentsOf : imageUrl! as URL)
-//        cell.driverImage.image = UIImage(data: imageData! as Data)
-//        cell.DriverName.text = userNameArray[indexPath.row]
+        //        let imageUrl = NSURL(string: userImagesArray[indexPath.row])
+        //        let imageData = NSData(contentsOf : imageUrl! as URL)
+        //        cell.driverImage.image = UIImage(data: imageData! as Data)
+        //        cell.DriverName.text = userNameArray[indexPath.row]
         tableView.delegate = self
         tableView.dataSource = self
         let imageUrl = NSURL(string: self.usersArray[indexPath.row]["profile_pic_small"] as! String)
-        let imageData = NSData(contentsOf: imageUrl as! URL)
+        print(self.usersArray[indexPath.row]["profile_pic_small"] as! String)
+        let imageData = NSData(contentsOf: imageUrl! as URL)
         cell.driverImage.image = UIImage(data:imageData! as Data)
-//        cell.layoutIfNeeded()
+        //        cell.layoutIfNeeded()
         
         
-//         Configure the cell...
+        //         Configure the cell...
         cell.driverImage.layer.borderWidth = 2.5
         if(self.usersArray[indexPath.row]["online"] as! Bool  ==  true){
-        
+            
             
             cell.driverImage.layer.borderColor = UIColor.green.cgColor
         }
         else{
-        
+            
             cell.driverImage.layer.borderColor = UIColor.red.cgColor
         }
-
+        
         let firstName = (self.usersArray[indexPath.row]["name"] as? String)!.components(separatedBy: " ")[0]
         cell.DriverName.text = firstName
-//    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-//    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+        //    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+        //    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
         return cell
     }
-//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//       
-//        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-//        return 0
-//    }
+    //    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    //
+    //        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+    //        return 0
+    //    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                super.prepare(for: segue, sender: sender)
-//        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-         print(sender)
-                let navVC = segue.destination as! UINavigationController
-                let chatVc = navVC.viewControllers.first as! ChatViewController
-                chatVc.senderId = self.loggedInUser?.uid // 3
-                chatVc.receiverData = sender as AnyObject?
-            print(sender)
-                chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
+        super.prepare(for: segue, sender: sender)
+        //        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+        print(sender)
+        let navVC = segue.destination as! UINavigationController
+        let chatVc = navVC.viewControllers.first as! ChatViewController
+        chatVc.senderId = self.loggedInUser?.uid // 3
+        chatVc.receiverData = sender as AnyObject?
+        print(sender)
+        chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
         print(chatVc.senderDisplayName)
         
-            }
-
+    }
+    
     /*
      Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+     if editingStyle == .Delete {
+     // Delete the row from the data source
+     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+     } else if editingStyle == .Insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }

@@ -31,7 +31,9 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
         
     }
     @IBAction func Check_call_car(_ sender: AnyObject) {
-        ref.child("user_profile").child((user?.uid)!).child("call_motor_record").child("Riding_Position").setValue(Adress.text)
+        ref.child("user_profile").child((user?.uid)!).child("call_motor_record").child("Riding_Position").child("wait").setValue(Adress.text)
+        ref.child("user_profile").child((user?.uid)!).child("call_motor_record").child("Riding_Position").child("all").childByAutoId().setValue(Adress.text)
+        ref.child("Calling_motor").child("Waiting").child((user?.uid)!).child("call_motor").child("Riding_Position").setValue(Adress.text)
         ref.child("Calling_motor").child("Waiting").child((user?.uid)!).child("call_motor").child("Riding_Position").setValue(Adress.text)
             }
     
@@ -48,7 +50,7 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
-            Button.action = "revealToggle:"
+            Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())    
         }
         // Do any additional setup after loading the view.

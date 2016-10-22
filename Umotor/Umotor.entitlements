@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)six.Umotor</string>
+		<string>$(AppIdentifierPrefix)com.six.Umotor</string>
 	</array>
 </dict>
 </plist>

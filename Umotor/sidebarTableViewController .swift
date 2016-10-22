@@ -15,12 +15,14 @@ import FirebaseDatabase
 class sidebarTableViewController: UITableViewController {
     @IBOutlet weak var User_profile_pic: UIImageView!
 //    @IBOutlet weak var User_profile_pic: UIImageView!
+    @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var User_name: UILabel!
-    
+    var pickerVisible = false
     let deviceID = UIDevice.current.identifierForVendor?.uuidString
     override func viewDidLoad() {
        
         super.viewDidLoad()
+//        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         self.tableView.tableFooterView = UIView(frame:CGRect.zero)
         self.tableView.separatorColor = UIColor.white
         self.view.layoutIfNeeded()
@@ -140,6 +142,28 @@ class sidebarTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 7
     }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 7 && toggle.isOn == false {
+//            return 0.0
+//        }
+//        if indexPath.row == 1 {
+//            if toggle.isOn == false || pickerVisible == false {
+//                return 0.0
+//            }
+//            return 117.0
+//        }
+//        return 44.0
+//    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row == 6 {
+//            pickerVisible = !pickerVisible
+//            tableView.reloadData()
+//        }
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 200.0
+//    }
     func manageConnections(userID: String){
         
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(userID)/connection/\(self.deviceID!)")
@@ -159,6 +183,9 @@ class sidebarTableViewController: UITableViewController {
         
     }
 
+    @IBAction func toggleValueChanged(_ sender: AnyObject) {
+        self.tableView.reloadData()
+    }
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
