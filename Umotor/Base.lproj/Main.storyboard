@@ -81,8 +81,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="帳號" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YNX-Ow-ttR">
-                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="電子郵件" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YNX-Ow-ttR">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -91,10 +90,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="密碼" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T3s-Yt-GV2">
-                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T3s-Yt-GV2">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ry-pL-htw" customClass="FBSDKLoginButton">
                                 <color key="backgroundColor" red="1" green="0.1054526261383123" blue="0.29339469193820988" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -171,22 +169,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="電子郵件" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BXT-gf-zfW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="電子郵件" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BXT-gf-zfW">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="yDE-0A-iEB"/>
                                 </constraints>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="設定密碼" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqQ-dk-s5Y">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="設定密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqQ-dk-s5Y">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="520" id="9Ug-v7-xua"/>
                                     <constraint firstAttribute="width" constant="520" id="Kl5-0v-7J6"/>
                                 </constraints>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="9Ug-v7-xua"/>
@@ -194,14 +190,13 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="確認密碼" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N9f-fs-bwG">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="確認密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N9f-fs-bwG">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ABi-kd-HFR"/>
                                     <constraint firstAttribute="width" constant="520" id="lJZ-sj-IhF"/>
                                 </constraints>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="lJZ-sj-IhF"/>
@@ -478,7 +473,7 @@
                             <tableViewSection id="OfP-Bh-4Jq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="117" id="VLG-hr-JKm">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                                        <rect key="frame" x="0.0" y="64" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VLG-hr-JKm" id="OzV-eM-6Jc">
                                             <frame key="frameInset" width="375" height="116"/>
@@ -511,7 +506,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="fXS-5v-SPP">
-                                        <rect key="frame" x="0.0" y="117" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="181" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fXS-5v-SPP" id="iiA-bp-FOU">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -536,7 +531,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eLS-Cg-7cX">
-                                        <rect key="frame" x="0.0" y="161" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="225" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLS-Cg-7cX" id="iFS-st-ng5">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -562,7 +557,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="57U-aC-Luo">
-                                        <rect key="frame" x="0.0" y="205" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="269" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="57U-aC-Luo" id="xTL-AO-WNu">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -584,7 +579,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Z2M-pD-YQ4">
-                                        <rect key="frame" x="0.0" y="249" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="313" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2M-pD-YQ4" id="qLT-Nd-4td">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -613,7 +608,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="aYY-3y-dEn">
-                                        <rect key="frame" x="0.0" y="293" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="357" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aYY-3y-dEn" id="bWH-18-QLJ">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -638,7 +633,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2pm-fU-JyI">
-                                        <rect key="frame" x="0.0" y="337" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="401" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2pm-fU-JyI" id="zTe-0q-4Zv">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -703,10 +698,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="JDX-Qc-1CQ">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JDX-Qc-1CQ" id="kRD-VA-dbd">
-                                            <frame key="frameInset" width="375" height="199"/>
+                                            <frame key="frameInset" width="1000" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J55-sS-0x7">
@@ -787,7 +782,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qSN-d3-lPZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="23a-VT-Ys8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="23a-VT-Ys8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -891,7 +886,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Ae-PK-Yen" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Z6q-TM-eAu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z6q-TM-eAu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
