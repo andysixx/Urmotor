@@ -162,6 +162,7 @@ class ChatViewController: JSQMessagesViewController {
 //        let messagesQuery = messageRef.queryLimitedToLast(25)
 
         let messagesQuery = rootRef.child("messages/\(self.convoID!)").queryLimited(toLast: 25)
+        print(messagesQuery)
         // 2
         messagesQuery.observe( .childAdded , with: { (snapshot) in
             // 3

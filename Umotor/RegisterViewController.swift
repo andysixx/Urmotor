@@ -112,7 +112,6 @@ class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
                             databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
                                 databaseRef.child("user_profile").child("\(user!.uid)/friends").setValue("")
                                 databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue("")
-                                databaseRef.child("user_profile").child("\(user!.uid)/call_motor").setValue("")
                             } 
                         }else{
                             print("User has logged in earlier")

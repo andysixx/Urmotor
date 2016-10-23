@@ -26,7 +26,7 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if let user = user {
+            if let The_user = user {
                 // User is signed in.
                 // Move to user view
                 let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
@@ -109,7 +109,6 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
                             databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
                             databaseRef.child("user_profile").child("\(user!.uid)/friends").setValue("")
                             databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue("")
-                            databaseRef.child("user_profile").child("\(user!.uid)/call_motor").setValue("")
                         }else{
                             print("User has logged in earlier")
                         }
