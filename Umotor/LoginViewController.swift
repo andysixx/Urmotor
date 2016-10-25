@@ -29,6 +29,8 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
             if let The_user = user {
                 // User is signed in.
                 // Move to user view
+//                let DownloadUrl = metadata!.downloadURL
+//                databaseRef.child("user_profile").child("\(user!.uid)/profile_pic_small").setValue(DownloadUrl()!.absoluteString)
                 let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
                 let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 self.present(homeviewcontroller, animated: true, completion: nil)
@@ -51,6 +53,7 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
         LAB.isHidden = true
         self.LoginButton.isHidden = true
         aivLoadingSpinner.startAnimating()
+//        print(error)
         if(error != nil)
         {
             print(error.localizedDescription)
@@ -80,8 +83,9 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
                     //store the user ID
                     let userID = user?.uid
                     let databaseRef = FIRDatabase.database().reference()
-                    databaseRef.child("user_profile").child("profile_pic_small").observeSingleEvent(of: .value, with: {(snapshot) in
-                        let profilePic = snapshot.value as? String?
+                    databaseRef.child("user_profile").child(userID!).child("profile_pic_small").observeSingleEvent(of: .value, with: {
+                        (snapshot) in
+                        var profilePic = snapshot.value as? String?
                         
                         if(profilePic == nil){
                             if let imageData = NSData(contentsOf: user!.photoURL!){
@@ -114,7 +118,9 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
                         }
                     
                     })
-                    
+//                    let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
+//                    let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+//                    self.present(homeviewcontroller, animated: true, completion: nil)
                     
                 
                 }

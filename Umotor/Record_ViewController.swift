@@ -32,14 +32,10 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.loggedInUser = FIRAuth.auth()?.currentUser
         self.databaseCallCarRef.child("Call_Moto").child((self.loggedInUser?.uid)!).observeSingleEvent(of: .value, with: {(snapshot) in
-
                 print(snapshot)
                 self.userDict = snapshot.value as? NSDictionary
-            
-//            let Call_car_type = self.userDict?.object(forKey: "all")
             for(Type,details) in self.userDict!{
                 if(Type as! String == "all"){
                     let alldetails = self.userDict?.object(forKey: "all") as? NSDictionary
@@ -57,27 +53,36 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
                     }
                     
                 }
+                if(Type as! String == "ing"){
+                    let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
+                    print(alldetails!)
+                    for(_, detail_wait) in alldetails!{
+                        self.UserIngrecordArray.append(detail_wait as AnyObject)
+                    }
+                    
+                }
+                if(Type as! String == "finish"){
+                    let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
+                    print(alldetails!)
+                    for(_, detail_wait) in alldetails!{
+                        self.UserWaitrecordArray.append(detail_wait as AnyObject)
+                    }
+                    
+                }
+                if(Type as! String == "cancel"){
+                    let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
+                    print(alldetails!)
+                    for(_, detail_wait) in alldetails!{
+                        self.UserWaitrecordArray.append(detail_wait as AnyObject)
+                    }
+                    
+                }
 
                 print(Type)
                 print(details)
             }
-            
-//                    self.UserWaitrecordArray.append(details as AnyObject)
-//                    print(details)
-//                    let waitcarorder = (details as? NSDictionary)?.object(forKey: "wait")
-//                    let allcarorder = (details as? NSDictionary)?.object(forKey: "all")
-
-            
-                self.MyTableView?.reloadData()
-            
-            
-            })
-      
-
-
-        
-
-
+            self.MyTableView?.reloadData()
+        })
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
@@ -119,17 +124,41 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "mycell", for: indexPath) as! RecordTableViewCell
         switch (RecordOfCallCarSeg.selectedSegmentIndex) {
         case 0:
-            let all = (self.UserAllrecordArray[indexPath.row] as? String)
-            print(all)
-            cell.LocationFirst.text = all
+            let allstart_point = (self.UserAllrecordArray[indexPath.row]["startpoint"] as? String)
+            let allend_point = (self.UserAllrecordArray[indexPath.row]["endpoint"] as? String)
+            let all_mode = (self.UserAllrecordArray[indexPath.row]["mode"] as? String)
+            print(allstart_point)
+            cell.LocationFirst.text = allstart_point
+            cell.Locationend.text = allend_point
+            cell.State_mode.text = all_mode
+            
             break
+            
         case 1:
-            let all = (self.UserWaitrecordArray[indexPath.row] as? String)
-            cell.LocationFirst.text = all
+            let waitstart_point = (self.UserWaitrecordArray[indexPath.row]["startpoint"] as? String)
+            let waitend_point = (self.UserWaitrecordArray[indexPath.row]["endpoint"] as? String)
+            let wait_mode = (self.UserWaitrecordArray[indexPath.row]["mode"] as? String)
+            let timInterval = (self.UserWaitrecordArray[indexPath.row]["time"] as? String)
+		
+//            let date = NSDate(NSTimeIntervalSince1970:timInterval)
+            let dateFormatter = DateFormatter()
+            cell.LocationFirst.text = waitstart_point
+            cell.Locationend.text = waitend_point
+            cell.State_mode.text = wait_mode
+//            cell.time_lab =
 //            returnValue = UserWaitrecordArray.count
             break
         case 2:
-//            returnValue = 6
+            //            let waitstart_point = (self.UserWaitrecordArray[indexPath.row]["startpoint"] as? String)
+            let waitend_point = (self.UserIngrecordArray[indexPath.row]["endpoint"] as? String)
+            let wait_mode = (self.UserIngrecordArray[indexPath.row]["mode"] as? String)
+            let timInterval = (self.UserIngrecordArray[indexPath.row]["time"] as? String)
+            
+            //            let date = NSDate(NSTimeIntervalSince1970:timInterval)
+            let dateFormatter = DateFormatter()
+            cell.LocationFirst.text = waitend_point
+            cell.Locationend.text = waitend_point
+            cell.State_mode.text = wait_mode
             break
         case 3:
 //            returnValue = 4

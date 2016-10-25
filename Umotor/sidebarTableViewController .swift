@@ -118,7 +118,6 @@ class sidebarTableViewController: UITableViewController {
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(user!.uid)/connection/\(self.deviceID!)")
         myConnectionsRef.child("online").setValue(false)
         myConnectionsRef.child("last_online").setValue(NSDate().timeIntervalSince1970)
-        
         try!FIRAuth.auth()!.signOut()
         FBSDKAccessToken.setCurrent(nil)
         let ViewControl = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController

@@ -39,6 +39,7 @@ class Credit_Driver_TableViewController: UITableViewController{
                 print(userID)
                 print(details)
                 let img = (details as? NSDictionary)?.object(forKey: "profile_pic_small") as! String
+                print(img)
                 let name = (details as? NSDictionary)?.object(forKey: "name") as! String
                 let firstName = name.components(separatedBy: " ")[0]
                 print(firstName)
