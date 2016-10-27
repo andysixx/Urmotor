@@ -76,13 +76,14 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
         MapV.showsUserLocation = true
         //Setup our Map View
         geoCoder = CLGeocoder()
+        
+        self.MapV.delegate = self
         if revealViewController() != nil{
             Button.target = revealViewController()
             Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
 
-        self.MapV.delegate = self
         // burger side bar menu
         self.ref.child("user_profile").child((user?.uid)!).child("profile_pic_small").observe( .value, with:{
             (snapshot) in

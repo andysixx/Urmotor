@@ -351,18 +351,18 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <segue destination="9GU-he-WWH" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="qVN-TZ-s13"/>
-                        <segue destination="bv2-Ni-dSl" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="igQ-Ms-Qdb"/>
+                        <segue destination="gci-vC-IQ0" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="WUB-Ug-RaT"/>
+                        <segue destination="9GU-he-WWH" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Ih9-m1-7V8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BsV-aW-Ceq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5351.1999999999998" y="-473.6131934032984"/>
+            <point key="canvasLocation" x="5646" y="-108"/>
         </scene>
         <!--請選擇上車地點-->
         <scene sceneID="dO6-rx-ln6">
             <objects>
-                <viewController storyboardIdentifier="Map_ViewController" title="請選擇上車地點" id="saN-Wl-u32" customClass="Map_ViewController" customModule="Umotor" customModuleProvider="target" colorLabel="IBBuiltInLabel-Red" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map_ViewController" title="請選擇上車地點" id="saN-Wl-u32" customClass="GoogleMap_EXMPLE_ViewController" customModule="Umotor" customModuleProvider="target" colorLabel="IBBuiltInLabel-Red" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sAZ-qq-EN4"/>
                         <viewControllerLayoutGuide type="bottom" id="IyK-LB-gwS"/>
@@ -371,32 +371,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vqX-gN-B3x"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92y-Zi-39Z" customClass="GMSMapView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入上車地址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DYy-zE-EYD">
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter" translatesAutoresizingMaskIntoConstraints="NO" id="s90-I2-RvN">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="mOv-0C-JKF"/>
-                                    <constraint firstAttribute="width" constant="30" id="ylf-cE-Bco"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ku-be-xJA">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="設定乘車位置"/>
                                 <connections>
-                                    <action selector="Call_car_now:" destination="saN-Wl-u32" eventType="touchUpInside" id="HOw-bG-PAQ"/>
+                                    <action selector="set_Start_Position:" destination="saN-Wl-u32" eventType="touchUpInside" id="ysq-Qh-kHe"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9M-bb-S8R">
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="確認叫車"/>
                                 <connections>
-                                    <action selector="Check_call_car:" destination="saN-Wl-u32" eventType="touchUpInside" id="P4H-m0-eax"/>
+                                    <action selector="Check_Call_Motor:" destination="saN-Wl-u32" eventType="touchUpInside" id="yc1-xt-IaH"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google-location-icon-Location_marker_pin_map_gps" translatesAutoresizingMaskIntoConstraints="NO" id="s90-I2-RvN"/>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入下車地址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fpI-ky-haz">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="Alh-bk-NRF"/>
@@ -410,52 +407,53 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name=".PingFangTC-Regular" family=".PingFang TC" pointSize="11"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="saN-Wl-u32" id="Bp8-Kk-FWU"/>
-                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Ul-N0-w4F" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leadingMargin" id="2BW-1y-QXU"/>
                             <constraint firstItem="DYy-zE-EYD" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leadingMargin" id="4W8-pW-acV"/>
-                            <constraint firstItem="s90-I2-RvN" firstAttribute="centerX" secondItem="BCq-b9-qCX" secondAttribute="centerX" id="9GK-1F-XV7"/>
-                            <constraint firstItem="vqX-gN-B3x" firstAttribute="top" secondItem="sAZ-qq-EN4" secondAttribute="bottom" id="Bun-oI-WfR"/>
-                            <constraint firstItem="s90-I2-RvN" firstAttribute="centerY" secondItem="vqX-gN-B3x" secondAttribute="centerY" id="FiH-1R-cQ2"/>
+                            <constraint firstItem="s90-I2-RvN" firstAttribute="centerY" secondItem="BCq-b9-qCX" secondAttribute="centerY" constant="-41" id="HTU-KH-m6V"/>
+                            <constraint firstItem="92y-Zi-39Z" firstAttribute="top" secondItem="BCq-b9-qCX" secondAttribute="top" id="L9J-MM-geb"/>
+                            <constraint firstAttribute="trailing" secondItem="92y-Zi-39Z" secondAttribute="trailing" id="MQt-Dq-Q2B"/>
+                            <constraint firstItem="92y-Zi-39Z" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leading" id="O6c-EZ-YOO"/>
                             <constraint firstItem="fpI-ky-haz" firstAttribute="trailing" secondItem="BCq-b9-qCX" secondAttribute="trailingMargin" id="Ojk-8I-wyj"/>
-                            <constraint firstItem="vqX-gN-B3x" firstAttribute="bottom" secondItem="IyK-LB-gwS" secondAttribute="top" id="Oph-0Y-5zf"/>
-                            <constraint firstItem="IyK-LB-gwS" firstAttribute="top" secondItem="5ku-be-xJA" secondAttribute="bottom" id="QEP-et-mHc"/>
-                            <constraint firstItem="vqX-gN-B3x" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leading" id="WCY-xg-20r"/>
+                            <constraint firstItem="IyK-LB-gwS" firstAttribute="top" secondItem="92y-Zi-39Z" secondAttribute="bottom" constant="30" id="RjQ-rp-XT4"/>
+                            <constraint firstItem="s90-I2-RvN" firstAttribute="centerX" secondItem="BCq-b9-qCX" secondAttribute="centerX" id="SNv-WL-zyI"/>
                             <constraint firstItem="fpI-ky-haz" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leadingMargin" id="X2d-Qg-mr2"/>
                             <constraint firstItem="Q9M-bb-S8R" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leadingMargin" id="XnI-Nl-03b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DYy-zE-EYD" secondAttribute="trailing" id="YxC-Xu-KfL"/>
+                            <constraint firstItem="IyK-LB-gwS" firstAttribute="top" secondItem="92y-Zi-39Z" secondAttribute="bottom" constant="30" id="dCd-R3-dPn"/>
                             <constraint firstItem="fpI-ky-haz" firstAttribute="top" secondItem="DYy-zE-EYD" secondAttribute="bottom" id="e0i-tl-ODw"/>
                             <constraint firstItem="6Ul-N0-w4F" firstAttribute="top" secondItem="fpI-ky-haz" secondAttribute="bottom" id="ep9-JM-62d"/>
+                            <constraint firstItem="IyK-LB-gwS" firstAttribute="top" secondItem="5ku-be-xJA" secondAttribute="bottom" id="i8U-6k-EVf"/>
                             <constraint firstItem="6Ul-N0-w4F" firstAttribute="trailing" secondItem="BCq-b9-qCX" secondAttribute="trailingMargin" id="jgg-9f-7Tk"/>
                             <constraint firstItem="5ku-be-xJA" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leading" id="plv-Q0-GrZ"/>
                             <constraint firstAttribute="trailing" secondItem="5ku-be-xJA" secondAttribute="trailing" id="rcX-HK-sG7"/>
-                            <constraint firstItem="IyK-LB-gwS" firstAttribute="top" secondItem="Q9M-bb-S8R" secondAttribute="bottom" constant="8" id="sqs-SF-Dlb"/>
+                            <constraint firstAttribute="trailing" secondItem="92y-Zi-39Z" secondAttribute="trailing" id="s8K-oq-wdy"/>
+                            <constraint firstItem="92y-Zi-39Z" firstAttribute="top" secondItem="BCq-b9-qCX" secondAttribute="top" id="sYc-Ht-ptg"/>
                             <constraint firstItem="Q9M-bb-S8R" firstAttribute="trailing" secondItem="BCq-b9-qCX" secondAttribute="trailingMargin" id="t64-FC-emT"/>
-                            <constraint firstItem="DYy-zE-EYD" firstAttribute="top" secondItem="sAZ-qq-EN4" secondAttribute="bottom" constant="30" id="uxh-ew-5m1"/>
-                            <constraint firstItem="vqX-gN-B3x" firstAttribute="centerX" secondItem="DYy-zE-EYD" secondAttribute="centerX" id="v15-X0-wpf"/>
+                            <constraint firstItem="IyK-LB-gwS" firstAttribute="top" secondItem="Q9M-bb-S8R" secondAttribute="bottom" constant="8" id="u47-l6-w4D"/>
+                            <constraint firstItem="92y-Zi-39Z" firstAttribute="leading" secondItem="BCq-b9-qCX" secondAttribute="leading" id="vcg-Xp-8Ex"/>
+                            <constraint firstItem="DYy-zE-EYD" firstAttribute="top" secondItem="sAZ-qq-EN4" secondAttribute="bottom" constant="30" id="z91-Rq-cce"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="請選擇上車地點" id="bAD-lf-9mm">
-                        <barButtonItem key="leftBarButtonItem" image="Burger" id="swk-Ju-7Hp"/>
+                    <navigationItem key="navigationItem" id="uDt-dp-cap">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="1dt-wd-bYE"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="Adress" destination="DYy-zE-EYD" id="BdG-cy-LFt"/>
-                        <outlet property="Button" destination="swk-Ju-7Hp" id="A1T-Zm-T53"/>
-                        <outlet property="MapV" destination="vqX-gN-B3x" id="wfF-jj-cJH"/>
-                        <outlet property="checkdouble" destination="Q9M-bb-S8R" id="GSk-ff-1wc"/>
-                        <outlet property="commition" destination="6Ul-N0-w4F" id="e8I-bn-t0G"/>
-                        <outlet property="end_adress" destination="fpI-ky-haz" id="3KP-1d-bYO"/>
-                        <outlet property="set_location" destination="5ku-be-xJA" id="rWQ-Za-wC9"/>
+                        <outlet property="ButtonBar" destination="1dt-wd-bYE" id="L92-VD-NfJ"/>
+                        <outlet property="Check_Call" destination="Q9M-bb-S8R" id="4E9-Tb-ojx"/>
+                        <outlet property="End_position" destination="fpI-ky-haz" id="UTM-gr-sKn"/>
+                        <outlet property="GMapView" destination="92y-Zi-39Z" id="KPS-YQ-HoM"/>
+                        <outlet property="Start_position" destination="DYy-zE-EYD" id="qCw-kp-UXw"/>
+                        <outlet property="commit" destination="6Ul-N0-w4F" id="1TS-9y-1AX"/>
+                        <outlet property="set_location" destination="5ku-be-xJA" id="asv-LX-qlN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQc-Rk-dhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8818.3999999999996" y="1351.5742128935533"/>
+            <point key="canvasLocation" x="8463.2000000000007" y="636.4317841079461"/>
         </scene>
         <!--個人資料-->
         <scene sceneID="JgX-nX-mcz">
@@ -579,7 +577,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="bv2-Ni-dSl" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="kQk-al-9e7"/>
+                                            <segue destination="gci-vC-IQ0" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="suw-QO-pkm"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eLS-Cg-7cX">
@@ -711,6 +709,7 @@
                         </sections>
                     </tableView>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cs2-60-Tia"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="User_name" destination="4JA-vz-Y2m" id="ypG-Bd-4VR"/>
@@ -721,7 +720,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFq-Ev-nRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5831.1999999999998" y="762.36881559220399"/>
+            <point key="canvasLocation" x="6770.3999999999996" y="762.36881559220399"/>
         </scene>
         <!--Ordertable Table View Controller-->
         <scene sceneID="I0Y-xJ-3CT">
@@ -1074,24 +1073,6 @@
             <point key="canvasLocation" x="5013.6000000000004" y="347.67616191904051"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="1dG-QT-sjo">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bv2-Ni-dSl" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="rYf-u6-HRi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="saN-Wl-u32" kind="relationship" relationship="rootViewController" id="6uK-HI-L9J"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vAI-20-jOw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7458" y="762"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="3Te-OC-VP4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XrF-5G-PJw" sceneMemberID="viewController">
@@ -1206,7 +1187,7 @@
                                 <action selector="refreshPlaces:" destination="bpr-G1-17m" id="Mrq-T8-HWV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="filter" id="Hq6-AH-e31"/>
+                        <barButtonItem key="rightBarButtonItem" image="google-location-icon-Location_marker_pin_map_gps" id="Hq6-AH-e31"/>
                     </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="h90-ML-ad0" id="2Eo-Ny-Yi2"/>
@@ -1219,14 +1200,32 @@
             </objects>
             <point key="canvasLocation" x="-900" y="275"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gRj-Xm-TSl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gci-vC-IQ0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Y9f-n6-7nb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="saN-Wl-u32" kind="relationship" relationship="rootViewController" id="b3Y-tR-dx6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mei-NE-ISm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7524" y="636.4317841079461"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Burger" width="25" height="25"/>
         <image name="Image" width="118" height="120"/>
-        <image name="filter" width="30" height="55"/>
+        <image name="google-location-icon-Location_marker_pin_map_gps" width="50" height="50"/>
         <image name="icon_me" width="30" height="55"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kQk-al-9e7"/>
+        <segue reference="WUB-Ug-RaT"/>
     </inferredMetricsTieBreakers>
 </document>
