@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1FFFA6046A18CAF45C431EE8 /* Pods_Umotor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F637F3F187ABE84D49207B /* Pods_Umotor.framework */; };
 		4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */; };
+		4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */; };
+		4F4B1F381DC0DA1200286D87 /* Video_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B1F371DC0DA1200286D87 /* Video_ViewController.swift */; };
 		4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */; };
 		4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */; };
 		4F57E7241DB2A13300CE696C /* umotor.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E7231DB2A13300CE696C /* umotor.mov */; };
@@ -47,6 +49,8 @@
 		06F637F3F187ABE84D49207B /* Pods_Umotor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umotor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37024A7C1B7BDC079191F5 /* Pods-Umotor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umotor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Umotor/Pods-Umotor.release.xcconfig"; sourceTree = "<group>"; };
 		4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMap_EXMPLE_ViewController.swift; sourceTree = "<group>"; };
+		4F4B1F371DC0DA1200286D87 /* Video_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video_ViewController.swift; sourceTree = "<group>"; };
 		4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Umotor-Bridging-Header.h"; sourceTree = "<group>"; };
 		4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableView.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */,
 				4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */,
 				4F8C4D261DACB4A700716A05 /* ViewController.swift */,
+				4F4B1F371DC0DA1200286D87 /* Video_ViewController.swift */,
 				4F7593731D4F2B5B000C305E /* Map_ViewController.swift */,
 				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
@@ -185,6 +190,7 @@
 				4F57E7231DB2A13300CE696C /* umotor.mov */,
 				4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */,
 				4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */,
+				4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */,
 			);
 			name = te;
 			path = Umotor;
@@ -352,9 +358,11 @@
 				4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
 				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
+				4F4B1F381DC0DA1200286D87 /* Video_ViewController.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
 				4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */,
 				4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */,
+				4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */,
 				4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */,
 				4F7B71F41D291F82004A7B20 /* SWRevealViewController.m in Sources */,
 				4F8C4D2A1DACCCB700716A05 /* TableViewCell1.swift in Sources */,

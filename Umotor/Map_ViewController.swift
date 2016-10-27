@@ -13,7 +13,6 @@ import CoreLocation
 import FirebaseAuth
 import FirebaseDatabase
 class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewDelegate,UITextFieldDelegate{
-//   CLLocationManagerDelegate
     @IBOutlet weak var MapV: MKMapView!
     @IBOutlet weak var checkdouble: UIButton!
     @IBOutlet var Button: UIBarButtonItem!
@@ -93,48 +92,6 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
             
                 print("wait for pic")
             }else{
-//            let storage = FIRStorage.storage()
-//            
-//            let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
-//            let profilePicRef = storageRef.child(self.user!.uid + "profile_pic_small.jpg")
-//            
-//            
-//            //store the user ID
-//            let userID = self.user?.uid
-//            let databaseRef = FIRDatabase.database().reference()
-//            databaseRef.child("user_profile").child((user?.uid)!).child("profile_pic_small").observe( .value, with: {
-//                (snapshot) in
-//                var profilePic = snapshot.value as? String?
-//                var pictake = snapshot.value as? NSDictionary
-////                print(profilePic as? NSDictionary)
-//                if(profilePic == nil){
-//                    if let imageData = NSData(contentsOf: self.user!.photoURL!){
-//                        let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
-//                            metadata,error in
-//                            if(error == nil){
-//                                
-//                                let DownloadUrl = metadata!.downloadURL
-//                                databaseRef.child("user_profile").child("\(self.user!.uid)/profile_pic_small").setValue(DownloadUrl()!.absoluteString)
-//                                
-//                            }
-//                            else{
-//                                
-//                                
-//                                print("error in download image")
-//                                
-//                            }
-//                        }
-//                    }
-//                }
-//                else{
-//                    
-//                    let small_pic = pictake as String
-//                    
-//
-//                    print(small_pic)
-//
-//                
-//                }
                 let Diction = snapshot.value as! String
                 let small_pic = Diction
                 print(small_pic)
@@ -143,19 +100,7 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
             }
 
             })
-            
-            
-                        //            return userpicsm
-//        })
-                // Do any additional setup after loading the view.
-    
-    
     }
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        
-//        textBox.resignFirstResponder()
-//        
-//    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -168,16 +113,6 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
 //        geoCode(location: location)
         
     }
-//    private func textFieldShouldReturn(_ textField: commition) -> Bool {
-//        
-//        self.view.endEditing(true)
-//        
-//        return true
-//        
-//    }
-//    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-//        self.view.endEditing(true)
-//    }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
@@ -196,7 +131,6 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
             let loc : CLPlacemark = placeMarks[0]
             let addressDict : [NSString : NSObject] = loc.addressDictionary as! [NSString : NSObject]
             let addrList = addressDict["FormattedAddressLines"] as! [String]
-//            print(addrList)
             let address = addrList.joined(separator: ", ")
             print(address)
             self.Adress.text = address
@@ -223,5 +157,19 @@ class Map_ViewController: UIViewController, CLLocationManagerDelegate,MKMapViewD
     
     
     }
-   
+    public static func GetDistance_Google(pointA:CLLocationCoordinate2D , pointB:CLLocationCoordinate2D) -> Double
+    {
+        let EARTH_RADIUS:Double = 6378.137;
+        
+        let radlng1:Double = pointA.longitude * M_PI / 180.0;
+        let radlng2:Double = pointB.longitude * M_PI / 180.0;
+        
+        let a:Double = radlng1 - radlng2;
+        let b:Double = (pointA.latitude - pointB.latitude) * M_PI / 180;
+        var s:Double = 2 * asin(sqrt(pow(sin(a/2), 2) + cos(radlng1) * cos(radlng2) * pow(sin(b/2), 2)));
+        
+        s = s * EARTH_RADIUS;
+        s = (round(s * 10000) / 10000);
+        return s;
+    }
 }
