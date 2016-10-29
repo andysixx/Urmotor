@@ -41,6 +41,10 @@
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
+    <array>
+        <string>googlechromes</string>
+        <string>comgooglemaps</string>
+    </array>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -94,10 +98,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-<!--    <key>LSApplicationQueriesSchemes</key>-->
-<!--    <array>-->
-<!--        <string>googlechromes</string>-->
-<!--        <string>comgooglemaps</string>-->
-<!--    </array>-->
 </dict>
 </plist>

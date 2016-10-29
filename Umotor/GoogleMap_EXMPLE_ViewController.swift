@@ -20,7 +20,10 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     @IBOutlet weak var GMapView: GMSMapView!
     @IBOutlet weak var ButtonBar: UIBarButtonItem!
     @IBOutlet weak var End_position: UITextField!
+    @IBOutlet weak var Price_label: UILabel!
     
+    @IBOutlet weak var Check: UIButton!
+    @IBOutlet weak var Center_icon: UIImageView!
     @IBOutlet weak var commit: UITextField!
     @IBOutlet weak var set_location: UIButton!
     @IBOutlet weak var Check_Call: UIButton!
@@ -28,7 +31,10 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     var locationManager = CLLocationManager()
     var previous_Address : String!
     var geoCoder: GMSGeocoder!
-    
+    var Start_latitude: AnyObject?
+    var Start_longitude: AnyObject?
+    var End_latitude: AnyObject?
+    var End_longitude: AnyObject?
     var ref = FIRDatabase.database().reference()
     var user = FIRAuth.auth()?.currentUser
     var user_small_pic: String?
@@ -43,13 +49,19 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         locationManager.startUpdatingLocation()
         GMapView.isMyLocationEnabled = true
         GMapView.settings.myLocationButton = true
-//        locationManager.startUpdatingLocation()
         geoCoder = GMSGeocoder()
         
         GMapView.delegate = self
-        
-        
-        
+//        let path = GMSMutablePath()
+//        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
+//        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.0))
+//        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.2))
+//        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.2))
+//        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
+//        
+//        let rectangle = GMSPolyline(path: path)
+//        rectangle.strokeWidth = 20
+//        rectangle.map = GMapView
         if revealViewController() != nil{
             ButtonBar.target = revealViewController()
             ButtonBar.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -81,14 +93,30 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         self.Check_Call.isHidden = false
         self.End_position.isHidden = false
         self.commit.isHidden = false
-//        let positionMark = CLLocationCoordinate2D(GMSC)
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(121, 100)
-        marker.title = "Hello World"
-        marker.map = GMapView
+        marker.position = GMapView.camera.target
+        marker.title = "Srart_Point"
+        marker.icon = UIImage(named: "google-location-icon-Location_marker_pin_map_gps")
+        marker.map = self.GMapView
+        Start_latitude = GMapView.camera.target.latitude as AnyObject?
+        Start_longitude = GMapView.camera.target.longitude as AnyObject?
+        Center_icon.image = UIImage(named: "End_point_icon")
         
     }
     @IBAction func Check_Call_Motor(_ sender: AnyObject) {
+        let marker = GMSMarker()
+        marker.position = GMapView.camera.target
+        marker.title = "End_Point"
+        marker.icon = UIImage(named: "End_point_icon")
+        marker.map = self.GMapView
+        End_latitude = GMapView.camera.target.latitude as AnyObject?
+        End_longitude = GMapView.camera.target.longitude as AnyObject?
+        Check_Call.isHidden = true
+        Price_label.isHidden = false
+        Check.isHidden = false
+        Center_icon.isHidden = true
+    }
+    @IBAction func Check_to_Call(_ sender: AnyObject) {
         let NowInterval = NSDate().timeIntervalSince1970
         print(NowInterval)
         let dateFormatter = DateFormatter()
@@ -99,13 +127,16 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
         print("对应的日期时间：\(dformatter.string(from: date as Date))")
         let nowString = dateFormatter.string(from: date as Date)
-        //                nowString = dateFormatter.date(from: nowString)! as NSDate
         print(nowString)
         
         let dateString = DateFormatter.localizedString(from: Date() , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.short)
         print("formatted date is =  \(dateString)")
         let MapMotorPoint = [ // 2
             "startpoint": (Start_position.text)! as String,
+            "startlatitude":Start_latitude!,
+            "startlongitude":Start_longitude!,
+            "endlatitude":End_latitude!,
+            "endlongitude":End_longitude!,
             "endpoint":(End_position.text)! as String,
             "commit":(commit.text)! as String,
             "mode":"配對中",
@@ -115,7 +146,9 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
             ] as [String : Any]
         ref.child("Call_Moto").child((user?.uid)!).child("all").childByAutoId().setValue(MapMotorPoint)
         ref.child("Call_Moto").child((user?.uid)!).child("wait").childByAutoId().setValue(MapMotorPoint)
+    
     }
+    
     func  locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude, zoom: 20)
@@ -127,13 +160,11 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition){
         reverseGeocodeCoordinate(coordinate: position.target)
+//        print(position.target.latitude)
+//        print(position.target.longitude)
             }
     
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
-        // 1
-//        let geoCoder = GMSGeocoder()
-
-//        geoCoder.
         if(self.set_location.isHidden == false)
         {
             

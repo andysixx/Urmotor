@@ -15,8 +15,6 @@
 		4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */; };
 		4F57E7241DB2A13300CE696C /* umotor.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E7231DB2A13300CE696C /* umotor.mov */; };
 		4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */; };
-		4F57E7281DB6A37700CE696C /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E7271DB6A37700CE696C /* CollectionViewController.swift */; };
-		4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */; };
 		4F61EA541D5B2AD9005EC828 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */; };
 		4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192831CEC470900B835E4 /* LoginViewController.swift */; };
 		4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */; };
@@ -30,12 +28,10 @@
 		4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */; };
 		4F8A472E1DAD4E40002D7E56 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */; };
 		4F8C4D271DACB4A700716A05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D261DACB4A700716A05 /* ViewController.swift */; };
-		4F8C4D2A1DACCCB700716A05 /* TableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */; };
-		4F8C4D2B1DACCCB700716A05 /* TableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */; };
-		4F8C4D2E1DACCE7900716A05 /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */; };
-		4F8C4D2F1DACCE7900716A05 /* TableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */; };
 		4F94FE761DBA874000553B61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F94FE751DBA874000553B61 /* GoogleService-Info.plist */; };
+		4FBA4C5A1DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA4C591DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift */; };
 		4FC065121DBC9AE900D7A931 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */; };
+		4FC6FE8E1DC269F700ACAC0F /* exampleROUTE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6FE8D1DC269F700ACAC0F /* exampleROUTE.swift */; };
 		4FD192821CEC470900B835E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192811CEC470900B835E4 /* AppDelegate.swift */; };
 		4FD192871CEC470900B835E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD192851CEC470900B835E4 /* Main.storyboard */; };
 		4FD192891CEC470900B835E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD192881CEC470900B835E4 /* Assets.xcassets */; };
@@ -56,8 +52,6 @@
 		4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableView.swift; sourceTree = "<group>"; };
 		4F57E7231DB2A13300CE696C /* umotor.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = umotor.mov; sourceTree = "<group>"; };
 		4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver_TableViewCell.swift; sourceTree = "<group>"; };
-		4F57E7271DB6A37700CE696C /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_ViewController.swift; sourceTree = "<group>"; };
 		4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credit_Driver_TableViewController.swift; sourceTree = "<group>"; };
@@ -72,12 +66,10 @@
 		4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4F8C4D261DACB4A700716A05 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell1.swift; sourceTree = "<group>"; };
-		4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell1.xib; sourceTree = "<group>"; };
-		4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
-		4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell2.xib; sourceTree = "<group>"; };
 		4F94FE751DBA874000553B61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4FBA4C591DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order_Map_LocationViewController.swift; sourceTree = "<group>"; };
 		4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		4FC6FE8D1DC269F700ACAC0F /* exampleROUTE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = exampleROUTE.swift; sourceTree = "<group>"; };
 		4FD1927E1CEC470900B835E4 /* Umotor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umotor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD192811CEC470900B835E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FD192831CEC470900B835E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +115,6 @@
 				4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */,
 				4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */,
 				4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */,
-				4F61EA511D5B1EC5005EC828 /* SelectTableViewController.swift */,
 				4FFC9E4B1DBF370700DC93A7 /* Order_TableViewCell.swift */,
 				4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController .swift */,
 			);
@@ -168,6 +159,7 @@
 				4FD192831CEC470900B835E4 /* LoginViewController.swift */,
 				4FD192851CEC470900B835E4 /* Main.storyboard */,
 				4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */,
+				4FC6FE8D1DC269F700ACAC0F /* exampleROUTE.swift */,
 				4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */,
 				4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */,
 				4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */,
@@ -176,9 +168,9 @@
 				4F4B1F371DC0DA1200286D87 /* Video_ViewController.swift */,
 				4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */,
 				4F7593731D4F2B5B000C305E /* Map_ViewController.swift */,
+				4FBA4C591DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift */,
 				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
-				4F57E7271DB6A37700CE696C /* CollectionViewController.swift */,
 				4FD192881CEC470900B835E4 /* Assets.xcassets */,
 				4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */,
 				4F7B71F21D291F82004A7B20 /* SWRevealViewController.h */,
@@ -186,11 +178,7 @@
 				4F94FE751DBA874000553B61 /* GoogleService-Info.plist */,
 				4FD1928D1CEC470900B835E4 /* Info.plist */,
 				4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */,
-				4F8C4D281DACCCB700716A05 /* TableViewCell1.swift */,
-				4F8C4D291DACCCB700716A05 /* TableViewCell1.xib */,
 				4F57E7231DB2A13300CE696C /* umotor.mov */,
-				4F8C4D2C1DACCE7900716A05 /* TableViewCell2.swift */,
-				4F8C4D2D1DACCE7900716A05 /* TableViewCell2.xib */,
 			);
 			name = te;
 			path = Umotor;
@@ -284,11 +272,9 @@
 			files = (
 				4F57E7241DB2A13300CE696C /* umotor.mov in Resources */,
 				4F94FE761DBA874000553B61 /* GoogleService-Info.plist in Resources */,
-				4F8C4D2B1DACCCB700716A05 /* TableViewCell1.xib in Resources */,
 				4FD1928C1CEC470900B835E4 /* LaunchScreen.storyboard in Resources */,
 				4FEECDCB1DAD6905001B324A /* Podfile in Resources */,
 				4FD192891CEC470900B835E4 /* Assets.xcassets in Resources */,
-				4F8C4D2F1DACCE7900716A05 /* TableViewCell2.xib in Resources */,
 				4FD192871CEC470900B835E4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,24 +334,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F57E7281DB6A37700CE696C /* CollectionViewController.swift in Sources */,
-				4F8C4D2E1DACCE7900716A05 /* TableViewCell2.swift in Sources */,
 				4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */,
 				4F8A472E1DAD4E40002D7E56 /* TableViewController.swift in Sources */,
 				4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */,
 				4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController .swift in Sources */,
 				4FD192821CEC470900B835E4 /* AppDelegate.swift in Sources */,
 				4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */,
+				4FC6FE8E1DC269F700ACAC0F /* exampleROUTE.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
 				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
 				4F4B1F381DC0DA1200286D87 /* Video_ViewController.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
 				4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */,
-				4F61EA521D5B1EC5005EC828 /* SelectTableViewController.swift in Sources */,
 				4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */,
+				4FBA4C5A1DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift in Sources */,
 				4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */,
 				4F7B71F41D291F82004A7B20 /* SWRevealViewController.m in Sources */,
-				4F8C4D2A1DACCCB700716A05 /* TableViewCell1.swift in Sources */,
 				4F7593741D4F2B5B000C305E /* Map_ViewController.swift in Sources */,
 				4FFC9E4A1DBF28EB00DC93A7 /* Ordertable_TableViewController.swift in Sources */,
 				4FFC9E4C1DBF370700DC93A7 /* Order_TableViewCell.swift in Sources */,

@@ -17,9 +17,6 @@ class Credit_Driver_TableViewController: UITableViewController{
     @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     let databaseRef = FIRDatabase.database().reference()
     var userDict : NSDictionary? = NSDictionary()
-    //    var userNameArray = [String]()
-    //    var userImagesArray = [String]()
-    
     var usersArray = [AnyObject]()
     var loggedInUser: AnyObject?
     
@@ -28,29 +25,18 @@ class Credit_Driver_TableViewController: UITableViewController{
         super.viewDidLoad()
         self.aivLoading.startAnimating()
         self.loggedInUser = FIRAuth.auth()?.currentUser
-        
         self.databaseRef.child("user_profile").observe(.value, with: {
             (snapshot) in
             print(snapshot)
             self.userDict = snapshot.value as? NSDictionary
-            print(self.userDict)
+            print(self.userDict!)
             self.usersArray = [AnyObject]()
             for(userID,details) in self.userDict!{
-                print(userID)
-                print(details)
-                let img = (details as? NSDictionary)?.object(forKey: "profile_pic_small") as! String
-                print(img)
-                let name = (details as? NSDictionary)?.object(forKey: "name") as! String
-                let firstName = name.components(separatedBy: " ")[0]
-                print(firstName)
                 let connections = (details as? NSDictionary)?.object(forKey: "connection") as? NSDictionary
-                print(connections)
                 
-                for(deviceID, connection) in connections!{
-                    let prpr = (connection as AnyObject).object(forKey: "online")
-                    print(prpr as! Bool)
-                    let pppp = (details as AnyObject).object(forKey: "online")
-                    print(pppp)
+                for(_, connection) in connections!{
+//                    let prpr = (connection as AnyObject).object(forKey: "online")
+//                    let pppp = (details as AnyObject).object(forKey: "online")
                     if((connection as AnyObject).object(forKey: "online") as! Bool)
                     {
                         (details as AnyObject).setValue(true, forKey:"online")
@@ -63,36 +49,23 @@ class Credit_Driver_TableViewController: UITableViewController{
                         }
                         
                     }
-                    
                 }
                 if(self.loggedInUser?.uid != userID as? String){
                     (details as AnyObject).setValue(userID, forKey:"uid")
                     self.usersArray.append(details as AnyObject)
                 }
-                
-                print(firstName)
-                //                self.userNameArray.append(firstName)
-                //                self.userImagesArray.append(img)
-                self.tableView?.reloadData()
+//                self.tableView?.reloadData()
                 self.aivLoading.stopAnimating()
                 self.aivLoading.isHidden = true
-                
+                self.tableView?.reloadData()
             }
-            
         })
-        
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
             Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //        self.performSegue(withIdentifier: "LoginToChat", sender: self.usersArray[indexPath.item])
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
@@ -115,56 +88,34 @@ class Credit_Driver_TableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! Driver_TableViewCell
-        //        let imageUrl = NSURL(string: userImagesArray[indexPath.row])
-        //        let imageData = NSData(contentsOf : imageUrl! as URL)
-        //        cell.driverImage.image = UIImage(data: imageData! as Data)
-        //        cell.DriverName.text = userNameArray[indexPath.row]
         tableView.delegate = self
         tableView.dataSource = self
         let imageUrl = NSURL(string: self.usersArray[indexPath.row]["profile_pic_small"] as! String)
         print(self.usersArray[indexPath.row]["profile_pic_small"] as! String)
         let imageData = NSData(contentsOf: imageUrl! as URL)
         cell.driverImage.image = UIImage(data:imageData! as Data)
-        //        cell.layoutIfNeeded()
-        
-        
-        //         Configure the cell...
         cell.driverImage.layer.borderWidth = 2.5
         if(self.usersArray[indexPath.row]["online"] as! Bool  ==  true){
-            
-            
             cell.driverImage.layer.borderColor = UIColor.green.cgColor
         }
         else{
-            
             cell.driverImage.layer.borderColor = UIColor.red.cgColor
         }
-        
         let firstName = (self.usersArray[indexPath.row]["name"] as? String)!.components(separatedBy: " ")[0]
         cell.DriverName.text = firstName
-        //    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-        //    self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+//        self.tableView?.reloadData()
         return cell
     }
-    //    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-    //
-    //        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-    //        return 0
-    //    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        //        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-        print(sender)
         let navVC = segue.destination as! UINavigationController
         let chatVc = navVC.viewControllers.first as! ChatViewController
         chatVc.senderId = self.loggedInUser?.uid // 3
         chatVc.receiverData = sender as AnyObject?
-        print(sender)
         chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
         print(chatVc.senderDisplayName)
         
