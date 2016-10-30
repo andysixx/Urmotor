@@ -23,6 +23,7 @@ class sidebarTableViewController: UITableViewController {
        
         super.viewDidLoad()
 //        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        self.toggle.isOn = false
         self.tableView.tableFooterView = UIView(frame:CGRect.zero)
         self.tableView.separatorColor = UIColor.white
         self.view.layoutIfNeeded()

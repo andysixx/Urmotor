@@ -108,16 +108,26 @@ class Credit_Driver_TableViewController: UITableViewController{
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+//        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        let navVC = segue.destination as! UINavigationController
-        let chatVc = navVC.viewControllers.first as! ChatViewController
-        chatVc.senderId = self.loggedInUser?.uid // 3
-        chatVc.receiverData = sender as AnyObject?
-        chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
-        print(chatVc.senderDisplayName)
+//        super.prepare(for: segue, sender: sender)
+//        let navVC = segue.destination as! UINavigationController
+//        let chatVc = navVC.viewControllers.first as! ChatViewController
+//        chatVc.senderId = self.loggedInUser?.uid // 3
+//        chatVc.receiverData = sender as AnyObject?
+//        chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
+//        print(chatVc.senderDisplayName)
+        if segue.identifier == "Chat"{
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let navVC = segue.destination as! ChatViewController
+                navVC.senderId = self.loggedInUser?.uid
+                navVC.receiverData = self.usersArray[indexPath.row] as AnyObject?
+                navVC.senderDisplayName = self.usersArray[indexPath.row]["name"] as! String
+                
+            }
+        }
+
         
     }
     

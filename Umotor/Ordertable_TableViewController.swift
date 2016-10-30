@@ -94,29 +94,17 @@ class Ordertable_TableViewController: UITableViewController {
         return cell
     }
  
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "Map_detail", sender: self.OrderList[indexPath.row])
-//        let viewControllerMap = storyboard?.instantiateViewController(withIdentifier: "order")
-//        self.navigationController?.pushViewController(viewControllerMap!, animated: true)
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
         if segue.identifier == "Map_detail"{
             if let indxPath = tableView.indexPathForSelectedRow{
-        let navVC = segue.destination as! Order_Map_LocationViewController
-//        let chatVc = navVC.viewControllers.first as! Order_Map_LocationViewController
-//        navVC.Start_latitude = "\((sender as? NSDictionary)?.object(forKey: "startlatitude") as AnyObject)" as AnyObject?// 3;
-//        navVC.Start_longitude = (sender as? NSDictionary)?.object(forKey: "startlongitude") as AnyObject
-//        navVC.End_latitude = (sender as? NSDictionary)?.object(forKey: "endlatitude") as AnyObject
-//        navVC.End_longitude = (sender as? NSDictionary)?.object(forKey: "endlongitude") as AnyObject
-//        navVC.regandata = sender as AnyObject?
+                let navVC = segue.destination as! Order_Map_LocationViewController
                 navVC.Start_latitude = self.OrderList[indxPath.row]["startlatitude"] as AnyObject?// 3;
-                        navVC.Start_longitude = self.OrderList[indxPath.row]["startlongitude"] as AnyObject?
-                        navVC.End_latitude = self.OrderList[indxPath.row]["endlatitude"] as AnyObject?
-                        navVC.End_longitude = self.OrderList[indxPath.row]["endlongitude"] as AnyObject?
-                        navVC.regandata = self.OrderList[indxPath.row] as AnyObject?
+                navVC.Start_longitude = self.OrderList[indxPath.row]["startlongitude"] as AnyObject?
+                navVC.End_latitude = self.OrderList[indxPath.row]["endlatitude"] as AnyObject?
+                navVC.End_longitude = self.OrderList[indxPath.row]["endlongitude"] as AnyObject?
+                navVC.regandata = self.OrderList[indxPath.row] as AnyObject?
 
-        }
+            }
         }
     }
 
