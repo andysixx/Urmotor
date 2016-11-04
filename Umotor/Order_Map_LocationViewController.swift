@@ -13,15 +13,10 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
 class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelegate {
-
-  
-
     @IBOutlet weak var Commition: UILabel!
-//    @IBOutlet weak var end_order: UIButton!
-//    @IBOutlet weak var start_order_: UIButton!
     @IBOutlet weak var TimeLAB: UILabel!
-//    @IBOutlet weak var Check_Button: UIButton!
     @IBOutlet weak var arrival_destination: UIButton!
+    @IBOutlet weak var Go_to_Custom: UIButton!
     @IBOutlet weak var arrival_customer: UIButton!
     @IBOutlet weak var check_order_button: UIButton!
     @IBOutlet weak var Custom_Start: UILabel!
@@ -32,9 +27,30 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
     var End_latitude: AnyObject?
     var End_longitude: AnyObject?
     var regandata: AnyObject?
+    var User_ID: AnyObject?
+    var Order_ID: AnyObject?
+    var loggedInUser = FIRAuth.auth()?.currentUser
+    var ref = FIRDatabase.database().reference()
+//    var MapMotorPoint : NSDictionary?
+//        "useruid" : User_ID! ,
+//        "startpoint": regandata?.object(forKey: "startpoint") as! String,
+//        "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
+//        "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
+//        "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
+//        "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
+//        "endpoint":regandata?.object(forKey: "endpoint") as! String,
+//        "commit":regandata?.object(forKey: "commit") as! String,
+//        "mode":"配對中",
+//        "time": (regandata?.object(forKey: "time"))! ,
+//        "distance":"無",
+//        "thedriver": loggedInUser?.uid,
+//        "picture": regandata?.object(forKey: "picture") as! String
+//        ] as [String : Any]
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plane, target: nil, action: nil)
+        self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
+        print(User_ID!)
+        print(Order_ID!)
         let Time_point_value = regandata?.object(forKey: "time") as? Double
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -57,15 +73,63 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         let EndMark = GMSMarker(position: Endposition)
         EndMark.title = "乘客目的位置"
         EndMark.map = MapView
-        
         // Do any additional setup after loading the view.
+    }
+    @IBAction func cancel() {
+        // your code
+        self.navigationItem.hidesBackButton = false
+        self.navigationItem.rightBarButtonItem = nil
+        self.check_order_button.isHidden = false
+        self.Go_to_Custom.isHidden = true
+        self.arrival_destination.isHidden = true
+        self.arrival_customer.isHidden = true
+        let MapMotorPoint = [
+            "useruid" : User_ID! ,
+            "startpoint": regandata?.object(forKey: "startpoint") as! String,
+            "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
+            "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
+            "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
+            "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
+            "endpoint":regandata?.object(forKey: "endpoint") as! String,
+            "commit":regandata?.object(forKey: "commit") as! String,
+            "mode":"配對中",
+            "time": (regandata?.object(forKey: "time"))! ,
+            "distance":"無",
+            "thedriver": loggedInUser?.uid,
+            "picture": regandata?.object(forKey: "picture") as! String
+            ] as [String : Any]
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("wait").child(self.Order_ID! as! String).setValue(MapMotorPoint)
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).removeValue()
+        let newUserData = ["mode":"配對中"]
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
+        
     }
     
     @IBAction func Checking_Order(_ sender: Any) {
-        
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"取消載客", style: UIBarButtonItemStyle.plain, target: self , action: #selector(FIRStorageTaskManagement.cancel))
         self.check_order_button.isHidden = true
-        self.arrival_customer.isHidden = false
-    
+        self.Go_to_Custom.isHidden = false
+        let MapMotorPoint = [
+            "useruid" : User_ID! ,
+            "startpoint": regandata?.object(forKey: "startpoint") as! String,
+            "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
+            "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
+            "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
+            "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
+            "endpoint":regandata?.object(forKey: "endpoint") as! String,
+            "commit":regandata?.object(forKey: "commit") as! String,
+            "mode":"進行中",
+            "time": (regandata?.object(forKey: "time"))! ,
+            "distance":"無",
+            "thedriver": loggedInUser?.uid,
+            "picture": regandata?.object(forKey: "picture") as! String
+            ] as [String : Any]
+        let newUserData = ["mode":"進行中"]
+
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).setValue(MapMotorPoint)
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("wait").child(self.Order_ID! as! String).removeValue()
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
     }
     
     
@@ -75,21 +139,35 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         self.arrival_destination.isHidden = false
     }
     @IBAction func Arrivied_Dest(_ sender: Any) {
-        
+        let MapMotorPoint = [
+            "useruid" : User_ID! ,
+            "startpoint": regandata?.object(forKey: "startpoint") as! String,
+            "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
+            "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
+            "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
+            "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
+            "endpoint":regandata?.object(forKey: "endpoint") as! String,
+            "commit":regandata?.object(forKey: "commit") as! String,
+            "mode":"已完成",
+            "time": (regandata?.object(forKey: "time"))! ,
+            "distance":"無",
+            "thedriver": loggedInUser?.uid,
+            "picture": regandata?.object(forKey: "picture") as! String
+            ] as [String : Any]
+        let newUserData = ["mode":"已完成"]
+
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("finished").child(self.Order_ID! as! String).setValue(MapMotorPoint)
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).removeValue()
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
+        self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func Go_take_custom(_ sender: Any) {
+  self.Go_to_Custom.isHidden = true
+    self.arrival_customer.isHidden = false
     }
     
-//    @IBAction func Order_Check_and_Doing(_ sender: Any) {
-//        self.Check_Button.isHidden = true
-//        self.start_order_.isHidden = false
-//    }
-//    @IBAction func To_the_Customer(_ sender: Any) {
-//        self.start_order_.isHidden = true
-//        self.end_order.isHidden = false
-//    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let camera = GMSCameraPosition.camera(withLatitude: Start_latitude as! CLLocationDegrees , longitude: Start_longitude as! CLLocationDegrees, zoom: 15)
-//        GMapView.camera =  camera
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

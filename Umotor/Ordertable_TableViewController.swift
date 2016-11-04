@@ -17,6 +17,8 @@ class Ordertable_TableViewController: UITableViewController {
 //    var CustommerPic = [AnyObject]()
     var loggedInUser: AnyObject?
     var OrderDict : NSDictionary?
+    var UID_ID = [AnyObject]()
+    var ORD_DI = [AnyObject]()
     let databaseDriverOrderRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,20 +32,21 @@ class Ordertable_TableViewController: UITableViewController {
         self.loggedInUser = FIRAuth.auth()?.currentUser
         self.databaseDriverOrderRef.child("Call_Moto").observe( .value, with: {(snapshot) in
             self.OrderList = [AnyObject]()
+           self.ORD_DI = [AnyObject]()
             self.OrderDict = snapshot.value as? NSDictionary
             for(UserID, orderdetails) in self.OrderDict!{
                 print(UserID)
                 print(orderdetails)
                 if(self.loggedInUser?.uid != UserID as? String)
-                {
+                {       self.UID_ID.append(UserID as AnyObject)
                         let waittdetails = (orderdetails as AnyObject).object(forKey: "wait") as? NSDictionary
-                    
-                            for(_,CustomOrder) in waittdetails!{
-                                
-                                let UserCallpic = (CustomOrder as! NSDictionary).object(forKey: "callcaruser")
+                    if(waittdetails != nil){
+                            for(OrderID ,CustomOrder) in waittdetails!{
                                 self.OrderList.append(CustomOrder as AnyObject)
+                                 self.ORD_DI.append(OrderID as AnyObject)
 
                             }
+                    }
                 }
             self.tableView?.reloadData()
             }
@@ -103,6 +106,7 @@ class Ordertable_TableViewController: UITableViewController {
                 navVC.End_latitude = self.OrderList[indxPath.row]["endlatitude"] as AnyObject?
                 navVC.End_longitude = self.OrderList[indxPath.row]["endlongitude"] as AnyObject?
                 navVC.regandata = self.OrderList[indxPath.row] as AnyObject?
+                navVC.Order_ID = self.ORD_DI[indxPath.row] as AnyObject?
 
             }
         }

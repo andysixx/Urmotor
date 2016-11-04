@@ -38,7 +38,9 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     var ref = FIRDatabase.database().reference()
     var user = FIRAuth.auth()?.currentUser
     var user_small_pic: String?
-
+    var finishCAll = 0
+    var PA: CLLocationCoordinate2D?
+    var PB: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,16 +54,6 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         geoCoder = GMSGeocoder()
         
         GMapView.delegate = self
-//        let path = GMSMutablePath()
-//        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-//        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.0))
-//        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.2))
-//        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.2))
-//        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-//        
-//        let rectangle = GMSPolyline(path: path)
-//        rectangle.strokeWidth = 20
-//        rectangle.map = GMapView
         if revealViewController() != nil{
             ButtonBar.target = revealViewController()
             ButtonBar.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -115,6 +107,7 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         Price_label.isHidden = false
         Check.isHidden = false
         Center_icon.isHidden = true
+        self.finishCAll = 1
     }
     @IBAction func Check_to_Call(_ sender: AnyObject) {
         let NowInterval = NSDate().timeIntervalSince1970
@@ -131,7 +124,8 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         
         let dateString = DateFormatter.localizedString(from: Date() , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.short)
         print("formatted date is =  \(dateString)")
-        let MapMotorPoint = [ // 2
+        let MapMotorPoint = [
+            "useruid" : ((user?.uid)!),
             "startpoint": (Start_position.text)! as String,
             "startlatitude":Start_latitude!,
             "startlongitude":Start_longitude!,
@@ -142,13 +136,15 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
             "mode":"配對中",
             "time": NowInterval ,
             "distance":"無",
+            "thedriver":"無",
             "picture": user_small_pic!
             ] as [String : Any]
-        ref.child("Call_Moto").child((user?.uid)!).child("all").childByAutoId().setValue(MapMotorPoint)
-        ref.child("Call_Moto").child((user?.uid)!).child("wait").childByAutoId().setValue(MapMotorPoint)
+        let OrderUID = ref.child("Call_Moto").child((user?.uid)!).child("all").childByAutoId().key
+        ref.child("Call_Moto").child((user?.uid)!).child("all").child(OrderUID).setValue(MapMotorPoint)
+        
+        ref.child("Call_Moto").child((user?.uid)!).child("wait").child(OrderUID).setValue(MapMotorPoint)
     
     }
-    
     func  locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude, zoom: 20)
@@ -159,9 +155,9 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition){
-        reverseGeocodeCoordinate(coordinate: position.target)
-//        print(position.target.latitude)
-//        print(position.target.longitude)
+        if(self.finishCAll == 0){
+            reverseGeocodeCoordinate(coordinate: position.target)
+        }
             }
     
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {

@@ -19,8 +19,8 @@ class sidebarTableViewController: UITableViewController {
     @IBOutlet weak var User_name: UILabel!
     var pickerVisible = false
     let deviceID = UIDevice.current.identifierForVendor?.uuidString
+    let databaseRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
-       
         super.viewDidLoad()
 //        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         self.toggle.isOn = false
@@ -29,48 +29,27 @@ class sidebarTableViewController: UITableViewController {
         self.view.layoutIfNeeded()
         self.User_profile_pic.layer.cornerRadius = self.User_profile_pic.frame.size.width/2
         self.User_profile_pic.clipsToBounds = true
-        
         if let user = FIRAuth.auth()?.currentUser {
             let name = user.displayName
             let email = user.email
             let photoUrl = user.photoURL
             let uid = user.uid
             User_name.text = "Hi!~"+name!
-            
-            
             manageConnections(userID: uid)
-            
             let storage = FIRStorage.storage()
-            
             let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
             let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
-            
-            
             let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
-            
-            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
             profilePicRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
                 if (error != nil) {
-                    
                     print("Uable to download image")
-                    
-                    // Uh-oh, an error occurred!
-                } else {
-                    
-                    
-                    if(data != nil)
-                    {
+                }else{
+                    if(data != nil){
                         print("User already has an Image Not need to Download from facebook")
                         self.User_profile_pic.image = UIImage(data : data!)
                     }
-                    
-                    // Data for "images/island.jpg" is returned
-                    // ... let islandImage: UIImage! = UIImage(data: data!)
                 }
             }
-            
-            
-            
             if(self.User_profile_pic.image == nil)
             {
                 _ = profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
@@ -113,9 +92,7 @@ class sidebarTableViewController: UITableViewController {
     
 
     @IBAction func logout(_ sender: AnyObject) {
-        
         let user = FIRAuth.auth()?.currentUser
-        
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(user!.uid)/connection/\(self.deviceID!)")
         myConnectionsRef.child("online").setValue(false)
         myConnectionsRef.child("last_online").setValue(NSDate().timeIntervalSince1970)

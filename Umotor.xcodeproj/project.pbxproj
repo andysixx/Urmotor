@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1FFFA6046A18CAF45C431EE8 /* Pods_Umotor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F637F3F187ABE84D49207B /* Pods_Umotor.framework */; };
+		4F01768F1DCC849C006FFADC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F01768E1DCC849C006FFADC /* UserNotifications.framework */; };
+		4F0176911DCC84A7006FFADC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176901DCC84A7006FFADC /* NotificationCenter.framework */; };
+		4F0176931DCC84AD006FFADC /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */; };
 		4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */; };
 		4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */; };
 		4F4B1F381DC0DA1200286D87 /* Video_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B1F371DC0DA1200286D87 /* Video_ViewController.swift */; };
@@ -44,6 +47,9 @@
 /* Begin PBXFileReference section */
 		06F637F3F187ABE84D49207B /* Pods_Umotor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umotor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37024A7C1B7BDC079191F5 /* Pods-Umotor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umotor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Umotor/Pods-Umotor.release.xcconfig"; sourceTree = "<group>"; };
+		4F01768E1DCC849C006FFADC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		4F0176901DCC84A7006FFADC /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMap_EXMPLE_ViewController.swift; sourceTree = "<group>"; };
 		4F4B1F371DC0DA1200286D87 /* Video_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video_ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +94,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F0176931DCC84AD006FFADC /* UserNotificationsUI.framework in Frameworks */,
+				4F0176911DCC84A7006FFADC /* NotificationCenter.framework in Frameworks */,
+				4F01768F1DCC849C006FFADC /* UserNotifications.framework in Frameworks */,
 				4F88CF341DAE6FF200B7B2AC /* FBSDKCoreKit.framework in Frameworks */,
 				4F88CF351DAE6FF200B7B2AC /* FBSDKLoginKit.framework in Frameworks */,
 				4F61EA541D5B2AD9005EC828 /* CoreLocation.framework in Frameworks */,
@@ -102,6 +111,9 @@
 		46D71EB6C4ECBC0421352699 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */,
+				4F0176901DCC84A7006FFADC /* NotificationCenter.framework */,
+				4F01768E1DCC849C006FFADC /* UserNotifications.framework */,
 				4F88CF311DAE6FF200B7B2AC /* FBSDKCoreKit.framework */,
 				4F88CF321DAE6FF200B7B2AC /* FBSDKLoginKit.framework */,
 				06F637F3F187ABE84D49207B /* Pods_Umotor.framework */,

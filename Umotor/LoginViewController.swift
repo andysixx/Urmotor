@@ -27,10 +27,6 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
         super.viewDidLoad()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if let The_user = user {
-                // User is signed in.
-                // Move to user view
-//                let DownloadUrl = metadata!.downloadURL
-//                databaseRef.child("user_profile").child("\(user!.uid)/profile_pic_small").setValue(DownloadUrl()!.absoluteString)
                 let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
                 let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 self.present(homeviewcontroller, animated: true, completion: nil)
@@ -41,8 +37,6 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
                 self.LoginButton.delegate = self
                 self.view!.addSubview(self.LoginButton)
             }
-        
-        
         }
     }
     
@@ -53,7 +47,6 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
         LAB.isHidden = true
         self.LoginButton.isHidden = true
         aivLoadingSpinner.startAnimating()
-//        print(error)
         if(error != nil)
         {
             print(error.localizedDescription)
@@ -68,19 +61,12 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
         else
         {
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                // ...
-               
                 print("user logged in Firebase App")
                 if(error == nil){
                     let storage = FIRStorage.storage()
-                
                     let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
                     let profilePicRef = storageRef.child(user!.uid + "profile_pic_small.jpg")
-                    
-                    
-                    //store the user ID
                     let userID = user?.uid
                     let databaseRef = FIRDatabase.database().reference()
                     databaseRef.child("user_profile").child(userID!).child("profile_pic_small").observeSingleEvent(of: .value, with: {

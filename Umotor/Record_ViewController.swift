@@ -32,10 +32,12 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.loggedInUser = FIRAuth.auth()?.currentUser
         self.databaseCallCarRef.child("Call_Moto").child((self.loggedInUser?.uid)!).observeSingleEvent(of: .value, with: {(snapshot) in
                 print(snapshot)
                 self.userDict = snapshot.value as? NSDictionary
+            if(self.userDict != nil){
             for(Type,details) in self.userDict!{
                 if(Type as! String == "all"){
                     let alldetails = self.userDict?.object(forKey: "all") as? NSDictionary
@@ -54,15 +56,17 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
                     
                 }
                 if(Type as! String == "ing"){
-                    let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
+                    let alldetails = self.userDict?.object(forKey: "ing") as? NSDictionary
                     print(alldetails!)
                     for(_, detail_wait) in alldetails!{
+                        print(detail_wait)
+                        print(Type)
                         self.UserIngrecordArray.append(detail_wait as AnyObject)
                     }
                     
                 }
                 if(Type as! String == "finish"){
-                    let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
+                    let alldetails = self.userDict?.object(forKey: "finish") as? NSDictionary
                     print(alldetails!)
                     for(_, detail_wait) in alldetails!{
                         self.UserWaitrecordArray.append(detail_wait as AnyObject)
@@ -70,7 +74,7 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
                     
                 }
                 if(Type as! String == "cancel"){
-                    let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
+                    let alldetails = self.userDict?.object(forKey: "cancel") as? NSDictionary
                     print(alldetails!)
                     for(_, detail_wait) in alldetails!{
                         self.UserWaitrecordArray.append(detail_wait as AnyObject)
@@ -80,6 +84,7 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
 
                 print(Type)
                 print(details)
+            }
             }
             self.MyTableView?.reloadData()
         })
@@ -149,12 +154,9 @@ class Record_ViewController: UIViewController,UITableViewDataSource,URLSessionDa
 //            returnValue = UserWaitrecordArray.count
             break
         case 2:
-            //            let waitstart_point = (self.UserWaitrecordArray[indexPath.row]["startpoint"] as? String)
             let waitend_point = (self.UserIngrecordArray[indexPath.row]["endpoint"] as? String)
             let wait_mode = (self.UserIngrecordArray[indexPath.row]["mode"] as? String)
             let timInterval = (self.UserIngrecordArray[indexPath.row]["time"] as? String)
-            
-            //            let date = NSDate(NSTimeIntervalSince1970:timInterval)
             let dateFormatter = DateFormatter()
             cell.LocationFirst.text = waitend_point
             cell.Locationend.text = waitend_point
