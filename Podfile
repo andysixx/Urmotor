@@ -20,4 +20,5 @@ target ‘Umotor’ do
   pod ‘JSQMessagesViewController’
   pod ’Alamofire’
   pod 'AFNetworking'
+  pod ‘Cosmos’
 end
