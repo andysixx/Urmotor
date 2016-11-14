@@ -14,7 +14,6 @@ class Ordertable_TableViewController: UITableViewController {
 
     @IBOutlet weak var Button: UIBarButtonItem!
     var OrderList = [AnyObject]()
-//    var CustommerPic = [AnyObject]()
     var loggedInUser: AnyObject?
     var OrderDict : NSDictionary?
     var UID_ID = [AnyObject]()
@@ -22,18 +21,17 @@ class Ordertable_TableViewController: UITableViewController {
     let databaseDriverOrderRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
-
         if revealViewController() != nil{
             Button.target = revealViewController()
             Button.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }// burger side bar menu
-        
         self.loggedInUser = FIRAuth.auth()?.currentUser
         self.databaseDriverOrderRef.child("Call_Moto").observe( .value, with: {(snapshot) in
             self.OrderList = [AnyObject]()
            self.ORD_DI = [AnyObject]()
             self.OrderDict = snapshot.value as? NSDictionary
+            if(self.OrderDict != nil){
             for(UserID, orderdetails) in self.OrderDict!{
                 print(UserID)
                 print(orderdetails)
@@ -43,18 +41,19 @@ class Ordertable_TableViewController: UITableViewController {
                     if(waittdetails != nil){
                             for(OrderID ,CustomOrder) in waittdetails!{
                                 self.OrderList.append(CustomOrder as AnyObject)
-                                 self.ORD_DI.append(OrderID as AnyObject)
-
-                            }
+                                 //self.ORD_DI.append(OrderID as AnyObject)
+                                let _ = self.OrderList.sort { (obj1, obj2) -> Bool in
+                                    return (obj1["time"] as! Double) > (obj2["time"] as! Double)
+                                }
+                        }
                     }
                 }
             self.tableView?.reloadData()
             }
-            
-        
-        
-        
+            }
         })
+        
+        
         
     }
 
@@ -66,7 +65,7 @@ class Ordertable_TableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // #warn9ing Incomplete implementation, return the number of sections
         return 1
     }
 
@@ -74,7 +73,6 @@ class Ordertable_TableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return self.OrderList.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Order_List", for: indexPath) as! Order_TableViewCell
@@ -106,7 +104,7 @@ class Ordertable_TableViewController: UITableViewController {
                 navVC.End_latitude = self.OrderList[indxPath.row]["endlatitude"] as AnyObject?
                 navVC.End_longitude = self.OrderList[indxPath.row]["endlongitude"] as AnyObject?
                 navVC.regandata = self.OrderList[indxPath.row] as AnyObject?
-                navVC.Order_ID = self.ORD_DI[indxPath.row] as AnyObject?
+               // navVC.Order_ID = self.ORD_DI[indxPath.row] as AnyObject?
 
             }
         }

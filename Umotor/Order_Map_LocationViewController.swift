@@ -12,6 +12,8 @@ import CoreLocation
 import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
+import SwiftyJSON
+import Alamofire
 class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var Commition: UILabel!
     @IBOutlet weak var TimeLAB: UILabel!
@@ -31,26 +33,11 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
     var Order_ID: AnyObject?
     var loggedInUser = FIRAuth.auth()?.currentUser
     var ref = FIRDatabase.database().reference()
-//    var MapMotorPoint : NSDictionary?
-//        "useruid" : User_ID! ,
-//        "startpoint": regandata?.object(forKey: "startpoint") as! String,
-//        "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
-//        "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
-//        "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
-//        "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
-//        "endpoint":regandata?.object(forKey: "endpoint") as! String,
-//        "commit":regandata?.object(forKey: "commit") as! String,
-//        "mode":"配對中",
-//        "time": (regandata?.object(forKey: "time"))! ,
-//        "distance":"無",
-//        "thedriver": loggedInUser?.uid,
-//        "picture": regandata?.object(forKey: "picture") as! String
-//        ] as [String : Any]
+    let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     override func viewDidLoad() {
         super.viewDidLoad()
         self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
-        print(User_ID!)
-        print(Order_ID!)
+        self.Order_ID = regandata?.object(forKey: "orderid") as AnyObject
         let Time_point_value = regandata?.object(forKey: "time") as? Double
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -73,6 +60,14 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         let EndMark = GMSMarker(position: Endposition)
         EndMark.title = "乘客目的位置"
         EndMark.map = MapView
+        let stlat :String = String(format:"%f", Start_latitude!.doubleValue)
+        let stlng :String = String(format:"%f", Start_longitude!.doubleValue)
+        let orginal = stlat + "," + stlng
+        let edlat :String = String(format:"%f", End_latitude!.doubleValue)
+        let edlng :String = String(format:"%f", End_longitude!.doubleValue)
+        let destinal = edlat + "," + edlng
+
+        directionAPITest(origin: orginal, destination: destinal)
         // Do any additional setup after loading the view.
     }
     @IBAction func cancel() {
@@ -95,13 +90,16 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
             "mode":"配對中",
             "time": (regandata?.object(forKey: "time"))! ,
             "distance":"無",
-            "thedriver": loggedInUser?.uid,
+            "thedriver":"無",
+            "orderid": Order_ID,
             "picture": regandata?.object(forKey: "picture") as! String
             ] as [String : Any]
         ref.child("Call_Moto").child(self.User_ID! as! String).child("wait").child(self.Order_ID! as! String).setValue(MapMotorPoint)
         ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).removeValue()
         let newUserData = ["mode":"配對中"]
+         let driver_id = ["thedriver":"無"]
         ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(driver_id)
         
     }
     
@@ -122,14 +120,34 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
             "mode":"進行中",
             "time": (regandata?.object(forKey: "time"))! ,
             "distance":"無",
-            "thedriver": loggedInUser?.uid,
+            "thedriver": (loggedInUser?.uid)!,
+            "orderid": Order_ID!,
             "picture": regandata?.object(forKey: "picture") as! String
             ] as [String : Any]
         let newUserData = ["mode":"進行中"]
-
+        let driver_id = ["thedriver":(loggedInUser?.uid)!]
         ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).setValue(MapMotorPoint)
         ref.child("Call_Moto").child(self.User_ID! as! String).child("wait").child(self.Order_ID! as! String).removeValue()
         ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
+        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(driver_id)
+//        let 
+        ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            let dict = snapshot.value as? NSDictionary
+            for(_, friendUID) in dict!{
+                print(friendUID as! String)
+                print(self.User_ID! as! String)
+                if(friendUID as! String == self.User_ID! as! String){
+                    break
+                }
+                else{
+                    self.ref.child("user_profile").child(self.User_ID! as! String).child("friends").childByAutoId().setValue((self.loggedInUser?.uid)!)
+                    self.ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").childByAutoId().setValue(self.User_ID! as! String)
+                
+                }
+            }
+        })
+        
     }
     
     
@@ -151,7 +169,8 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
             "mode":"已完成",
             "time": (regandata?.object(forKey: "time"))! ,
             "distance":"無",
-            "thedriver": loggedInUser?.uid,
+            "thedriver": (loggedInUser?.uid)!,
+            "orderid": Order_ID,
             "picture": regandata?.object(forKey: "picture") as! String
             ] as [String : Any]
         let newUserData = ["mode":"已完成"]
@@ -191,6 +210,37 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         })
     }
 
+    func directionAPITest(origin: String!, destination: String!) {
+        var directionsURLString = baseURLDirections + "origin=" + origin + "&destination=" + destination
+        
+        directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        Alamofire.request(directionsURLString).responseJSON
+            { response in
+                print(response.request)  // original URL request
+                print(response.response) // HTTP URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                if let dictionary: NSDictionary = response.result.value  as? NSDictionary {
+                    print("JSON: \(dictionary)")
+                    let parsedData = JSON(response.result.value!)
+                    let status = dictionary["status"] as! String
+                    if status == "OK" {
+                        let routes = dictionary["routes"] as! [NSDictionary]
+                        print(routes)
+                        let path = GMSPath.init(fromEncodedPath: (parsedData["routes"][0]["overview_polyline"]["points"].string)!)
+                        let distance = (parsedData["routes"][0]["legs"][0]["distance"]["value"].intValue)
+                        print(distance)
+                        let singleLine = GMSPolyline.init(path: path)
+                        singleLine.strokeWidth = 5
+                        singleLine.geodesic = true
+                        singleLine.map = self.MapView
+                    }
+                }
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+    }
     /*
     // MARK: - Navigation
 

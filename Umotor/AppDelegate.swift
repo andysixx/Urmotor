@@ -44,8 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                                                          selector: #selector(self.tokenRefreshNotification),
                                                          name: NSNotification.Name.firInstanceIDTokenRefresh,
                                                          object: nil)
-//        let nc = NotificationCenter()
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)),object: nil)
         application.registerForRemoteNotifications()
         GMSServices.provideAPIKey(googleMapsApiKey)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

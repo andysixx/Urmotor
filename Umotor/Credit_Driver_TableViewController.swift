@@ -18,6 +18,7 @@ class Credit_Driver_TableViewController: UITableViewController{
     let databaseRef = FIRDatabase.database().reference()
     var userDict : NSDictionary? = NSDictionary()
     var usersArray = [AnyObject]()
+    var friendArray = [AnyObject]()
     var loggedInUser: AnyObject?
     
     @IBOutlet var Button: UIBarButtonItem!
@@ -25,41 +26,65 @@ class Credit_Driver_TableViewController: UITableViewController{
         super.viewDidLoad()
         self.aivLoading.startAnimating()
         self.loggedInUser = FIRAuth.auth()?.currentUser
-        self.databaseRef.child("user_profile").observe(.value, with: {
+        self.databaseRef.child("user_profile").child((loggedInUser?.uid)!).observe(.value, with: {
             (snapshot) in
             print(snapshot)
             self.userDict = snapshot.value as? NSDictionary
             print(self.userDict!)
             self.usersArray = [AnyObject]()
-            for(userID,details) in self.userDict!{
-                let connections = (details as? NSDictionary)?.object(forKey: "connection") as? NSDictionary
-                
-                for(_, connection) in connections!{
-//                    let prpr = (connection as AnyObject).object(forKey: "online")
-//                    let pppp = (details as AnyObject).object(forKey: "online")
-                    if((connection as AnyObject).object(forKey: "online") as! Bool)
-                    {
-                        (details as AnyObject).setValue(true, forKey:"online")
-                        
-                    }
-                    else{
-                        if((details as AnyObject).object(forKey: "online") == nil){
-                            
-                            (details as AnyObject).setValue(false, forKey:"online")
+            self.friendArray = [AnyObject]()
+            for(Cla,details) in self.userDict!{
+                print(Cla as! String)
+                if(Cla as! String == "friends"){
+                  let friendic = details as? NSDictionary
+                    print(friendic)
+                    if(friendic != nil){
+                    for(_, friendsID) in friendic!{
+                        print(friendsID)
+                        self.friendArray.append(friendsID as AnyObject)
                         }
-                        
                     }
                 }
-                if(self.loggedInUser?.uid != userID as? String){
-                    (details as AnyObject).setValue(userID, forKey:"uid")
-                    self.usersArray.append(details as AnyObject)
-                }
-//                self.tableView?.reloadData()
-                self.aivLoading.stopAnimating()
-                self.aivLoading.isHidden = true
-                self.tableView?.reloadData()
             }
         })
+        self.databaseRef.child("user_profile").observeSingleEvent(of: .value, with: {
+                                        (snapshot1) in
+//                                        var idex = 0
+                                        let fir = snapshot1.value as? NSDictionary
+                                        print(fir!)
+            for fridIDD in  self.friendArray{
+                for(fid,fdel) in fir!{
+                                            
+                                            if(fridIDD as! String == fid as! String){
+//                                                print(self.friendArray[idex] as! String)
+//                                                idex = idex + 1
+                                                let connections = (fdel as? NSDictionary)?.object(forKey: "connection") as? NSDictionary
+                                                for(_, connection) in connections!{
+                                                    if((connection as AnyObject).object(forKey: "online") as! Bool)
+                                                    {
+                                                        (fdel as AnyObject).setValue(true, forKey:"online")
+                                                        
+                                                    }
+                                                    else{
+                                                        if((fdel as AnyObject).object(forKey: "online") == nil){
+                                                            
+                                                            (fdel as AnyObject).setValue(false, forKey:"online")
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                                 (fdel as AnyObject).setValue(fid, forKey:"uid")
+                                        self.usersArray.append(fdel as AnyObject)
+                                                
+                                            }
+                                        }
+            }
+            self.tableView?.reloadData()
+            self.aivLoading.stopAnimating()
+            self.aivLoading.isHidden = true
+            self.tableView?.reloadData()
+                                    })
+
         // burger side bar menu
         if revealViewController() != nil{
             Button.target = revealViewController()
@@ -111,13 +136,6 @@ class Credit_Driver_TableViewController: UITableViewController{
 //        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//        let navVC = segue.destination as! UINavigationController
-//        let chatVc = navVC.viewControllers.first as! ChatViewController
-//        chatVc.senderId = self.loggedInUser?.uid // 3
-//        chatVc.receiverData = sender as AnyObject?
-//        chatVc.senderDisplayName = "\((sender as? NSDictionary)?.object(forKey: "name") as! String)" // 4
-//        print(chatVc.senderDisplayName)
         if segue.identifier == "Chat"{
             if let indexPath = tableView.indexPathForSelectedRow{
                 let navVC = segue.destination as! ChatViewController

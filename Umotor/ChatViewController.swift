@@ -15,14 +15,11 @@ class ChatViewController: JSQMessagesViewController {
     
     // MARK: Properties
     var messages = [JSQMessage]()
-
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
-    
     var convoID : String? = String()
     var receiverData : AnyObject?
     var rootRef = FIRDatabase.database().reference()
-    
     var userIsTypingRef: AnyObject? // 1
     private var localTyping = false // 2
     var isTyping: Bool {
@@ -171,8 +168,6 @@ class ChatViewController: JSQMessagesViewController {
             if(id?.object(forKey: "senderId") != nil){
                 let usided = id?.object(forKey: "senderId") as! String
                 let chat_text = id?.object(forKey: "text") as! String
-            //            let id = snapshot.value["senderId"] as! String
-//            let text = snapshot.value(forKey: "text") as! String
             
             // 4
                 self.addMessage(id: usided, text: chat_text)

@@ -15,6 +15,7 @@ class RecordTableViewCell: UITableViewCell {
     @IBOutlet weak var Locationend: UILabel!
     @IBOutlet weak var State_mode: UILabel!
     @IBOutlet weak var time_lab: UILabel!
+    @IBOutlet weak var priceLab: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

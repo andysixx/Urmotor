@@ -22,8 +22,6 @@ class sidebarTableViewController: UITableViewController {
     let databaseRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
-        self.toggle.isOn = false
         self.tableView.tableFooterView = UIView(frame:CGRect.zero)
         self.tableView.separatorColor = UIColor.white
         self.view.layoutIfNeeded()
@@ -34,6 +32,15 @@ class sidebarTableViewController: UITableViewController {
             let email = user.email
             let photoUrl = user.photoURL
             let uid = user.uid
+            databaseRef.child(user.uid).child("driver_mode").observe(.value, with: { (snapshot) in
+             //   let mode_check = snapshot.value as? AnyObject
+               // if(mode_check as! Bool == true){
+                 //self.toggle.isOn = true
+                //}
+                //else{
+                //self.toggle.isOn = false
+               // }
+            })
             User_name.text = "Hi!~"+name!
             manageConnections(userID: uid)
             let storage = FIRStorage.storage()

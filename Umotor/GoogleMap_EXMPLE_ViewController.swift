@@ -14,8 +14,15 @@ import CoreLocation
 import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseMessaging
+import SwiftyJSON
+import NetworkExtension
+import FirebaseInstanceID
+import AFNetworking
+//import CFNetwork
+import Alamofire
 
-class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate{
+class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,UITextFieldDelegate{
     @IBOutlet weak var Start_position: UITextField!
     @IBOutlet weak var GMapView: GMSMapView!
     @IBOutlet weak var ButtonBar: UIBarButtonItem!
@@ -41,10 +48,51 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     var finishCAll = 0
     var PA: CLLocationCoordinate2D?
     var PB: CLLocationCoordinate2D?
-    
+    var regional: String!
+    var destional: String!
+    let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
+  
+
+    func directionAPITest(origin: String!, destination: String!) {
+        var directionsURLString = baseURLDirections + "origin=" + origin + "&destination=" + destination
+        
+        directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        Alamofire.request(directionsURLString).responseJSON
+            { response in
+                print(response.request)  // original URL request
+                print(response.response) // HTTP URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                if let dictionary: NSDictionary = response.result.value  as? NSDictionary {
+                    print("JSON: \(dictionary)")
+                    let parsedData = JSON(response.result.value!)
+                    let status = dictionary["status"] as! String
+                    if status == "OK" {
+                    let routes = dictionary["routes"] as! [NSDictionary]
+                        print(routes)
+                        let path = GMSPath.init(fromEncodedPath: (parsedData["routes"][0]["overview_polyline"]["points"].string)!)
+                        let distance = (parsedData["routes"][0]["legs"][0]["distance"]["value"].intValue)
+                        print(distance)
+                        self.count_price(meter: distance)
+                        let singleLine = GMSPolyline.init(path: path)
+                        singleLine.strokeWidth = 5
+                        singleLine.geodesic = true
+                        singleLine.map = self.GMapView
+                    }
+                }
+        }
+    }
+    func dismissKeyboard(){
+        commit.resignFirstResponder()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        commit.resignFirstResponder()
+        return true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+//        directionAPITest(origin: "25.01653154862608,121.4991931244731", destination: "25.00676509081214,121.5099792927504")
+        commit.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -52,19 +100,19 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         GMapView.isMyLocationEnabled = true
         GMapView.settings.myLocationButton = true
         geoCoder = GMSGeocoder()
-        
         GMapView.delegate = self
         if revealViewController() != nil{
             ButtonBar.target = revealViewController()
             ButtonBar.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        
         // burger side bar menu
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GoogleMap_EXMPLE_ViewController.dismissKeyboard)))
+            
         self.ref.child("user_profile").child((user?.uid)!).child("profile_pic_small").observe( .value, with:{
             (snapshot) in
             let Dict = snapshot.value as? String?
-            print(Dict)
+            print(Dict!)
             if(Dict == nil){
                 
                 print("wait for pic")
@@ -92,7 +140,12 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         marker.map = self.GMapView
         Start_latitude = GMapView.camera.target.latitude as AnyObject?
         Start_longitude = GMapView.camera.target.longitude as AnyObject?
+        let sltatitude :String = String(format:"%f", GMapView.camera.target.latitude)
+        let slongitude :String = String(format:"%f", GMapView.camera.target.longitude)
+        regional = sltatitude + "," + slongitude
         Center_icon.image = UIImage(named: "End_point_icon")
+    
+        
         
     }
     @IBAction func Check_Call_Motor(_ sender: AnyObject) {
@@ -107,7 +160,11 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         Price_label.isHidden = false
         Check.isHidden = false
         Center_icon.isHidden = true
+        let eltatitude :String = String(format:"%f", GMapView.camera.target.latitude)
+        let elongitude :String = String(format:"%f", GMapView.camera.target.longitude)
+        destional = eltatitude + "," + elongitude
         self.finishCAll = 1
+        directionAPITest(origin:  regional , destination: destional)
     }
     @IBAction func Check_to_Call(_ sender: AnyObject) {
         let NowInterval = NSDate().timeIntervalSince1970
@@ -124,6 +181,7 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         
         let dateString = DateFormatter.localizedString(from: Date() , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.short)
         print("formatted date is =  \(dateString)")
+        let OrderUID = ref.child("Call_Moto").child((user?.uid)!).child("all").childByAutoId().key
         let MapMotorPoint = [
             "useruid" : ((user?.uid)!),
             "startpoint": (Start_position.text)! as String,
@@ -135,15 +193,13 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
             "commit":(commit.text)! as String,
             "mode":"配對中",
             "time": NowInterval ,
-            "distance":"無",
+            "distance": Price_label.text!,
             "thedriver":"無",
+            "orderid": OrderUID,
             "picture": user_small_pic!
             ] as [String : Any]
-        let OrderUID = ref.child("Call_Moto").child((user?.uid)!).child("all").childByAutoId().key
         ref.child("Call_Moto").child((user?.uid)!).child("all").child(OrderUID).setValue(MapMotorPoint)
-        
         ref.child("Call_Moto").child((user?.uid)!).child("wait").child(OrderUID).setValue(MapMotorPoint)
-    
     }
     func  locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
@@ -152,7 +208,6 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         GMapView.settings.myLocationButton = true
         GMapView.camera = camera
         locationManager.stopUpdatingLocation()
-        
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition){
         if(self.finishCAll == 0){
@@ -200,6 +255,20 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         
         }
     }
+    func count_price(meter: Int){
+        var TatalPrice: Int?
+        if(meter <= 500){
+            TatalPrice = 35
+            self.Price_label.text = "NT:" + String(describing: TatalPrice!)
+        }
+        else{
+            TatalPrice = 35 + (meter - 500) / 250 * 5
+            self.Price_label.text =  "NT:" + String(describing: TatalPrice!)
+        
+        }
+    
+    }
+
        /*
     // MARK: - Navigation
 

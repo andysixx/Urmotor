@@ -18,4 +18,6 @@ target ‘Umotor’ do
   pod ‘FBSDKShareKit’
   pod ‘FBSDKLoginKit’
   pod ‘JSQMessagesViewController’
+  pod ’Alamofire’
+  pod 'AFNetworking'
 end
