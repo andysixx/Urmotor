@@ -36,10 +36,13 @@ class Record_Map_ViewController: UIViewController {
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(regandata!)
+//        print(regandata!)
+        
         self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
         self.Order_ID = regandata?.object(forKey: "orderid") as AnyObject
         let Time_point_value = regandata?.object(forKey: "time") as? Double
+        regandata?.setValue(self.User_ID, forKey: "uid")
+//        print(regandata!)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
@@ -123,7 +126,17 @@ class Record_Map_ViewController: UIViewController {
                 }
         }
     }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Chat_to_driver"{
+//            if let indexPath = tableView.indexPathForSelectedRow{
+                let navVC = segue.destination as! ChatViewController
+                navVC.senderId = self.loggedInUser?.uid
+                navVC.receiverData = regandata
+                navVC.senderDisplayName = "聯絡司機"
+                
+//            }
+        }
+    }
     /*
     // MARK: - Navigation
 
