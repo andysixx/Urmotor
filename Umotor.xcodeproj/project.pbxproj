@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1FFFA6046A18CAF45C431EE8 /* Pods_Umotor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F637F3F187ABE84D49207B /* Pods_Umotor.framework */; };
 		4F01768F1DCC849C006FFADC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F01768E1DCC849C006FFADC /* UserNotifications.framework */; };
 		4F0176911DCC84A7006FFADC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176901DCC84A7006FFADC /* NotificationCenter.framework */; };
 		4F0176931DCC84AD006FFADC /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */; };
@@ -47,8 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06F637F3F187ABE84D49207B /* Pods_Umotor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umotor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C37024A7C1B7BDC079191F5 /* Pods-Umotor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umotor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Umotor/Pods-Umotor.release.xcconfig"; sourceTree = "<group>"; };
 		4F01768E1DCC849C006FFADC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		4F0176901DCC84A7006FFADC /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -90,7 +87,6 @@
 		4FF40EBB1DD7B2830010B7BE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordertable_TableViewController.swift; sourceTree = "<group>"; };
 		4FFC9E4B1DBF370700DC93A7 /* Order_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order_TableViewCell.swift; sourceTree = "<group>"; };
-		7B1ED7E55C413D52A2A88DE1 /* Pods-Umotor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umotor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Umotor/Pods-Umotor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +103,6 @@
 				4F88CF351DAE6FF200B7B2AC /* FBSDKLoginKit.framework in Frameworks */,
 				4F61EA541D5B2AD9005EC828 /* CoreLocation.framework in Frameworks */,
 				4F7593761D51C1B3000C305E /* MapKit.framework in Frameworks */,
-				1FFFA6046A18CAF45C431EE8 /* Pods_Umotor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +119,6 @@
 				4F01768E1DCC849C006FFADC /* UserNotifications.framework */,
 				4F88CF311DAE6FF200B7B2AC /* FBSDKCoreKit.framework */,
 				4F88CF321DAE6FF200B7B2AC /* FBSDKLoginKit.framework */,
-				06F637F3F187ABE84D49207B /* Pods_Umotor.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,7 +153,6 @@
 				4FD192801CEC470900B835E4 /* te */,
 				4FD1927F1CEC470900B835E4 /* Products */,
 				46D71EB6C4ECBC0421352699 /* Frameworks */,
-				E769C4B7CD6CF8EEFD160896 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -204,15 +197,6 @@
 			path = Umotor;
 			sourceTree = "<group>";
 		};
-		E769C4B7CD6CF8EEFD160896 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7B1ED7E55C413D52A2A88DE1 /* Pods-Umotor.debug.xcconfig */,
-				0C37024A7C1B7BDC079191F5 /* Pods-Umotor.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -220,12 +204,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FD192901CEC470900B835E4 /* Build configuration list for PBXNativeTarget "Umotor" */;
 			buildPhases = (
-				3AEB7876A0EFDD1A92C6424B /* [CP] Check Pods Manifest.lock */,
 				4FD1927A1CEC470900B835E4 /* Sources */,
 				4FD1927B1CEC470900B835E4 /* Frameworks */,
 				4FD1927C1CEC470900B835E4 /* Resources */,
-				DDC90F3B2AD18B55BABA8266 /* [CP] Embed Pods Frameworks */,
-				98BFA67A89E8A9B0A9E37447 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -300,54 +281,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3AEB7876A0EFDD1A92C6424B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		98BFA67A89E8A9B0A9E37447 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Umotor/Pods-Umotor-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DDC90F3B2AD18B55BABA8266 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Umotor/Pods-Umotor-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4FD1927A1CEC470900B835E4 /* Sources */ = {
@@ -490,7 +423,6 @@
 		};
 		4FD192911CEC470900B835E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B1ED7E55C413D52A2A88DE1 /* Pods-Umotor.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -520,7 +452,6 @@
 		};
 		4FD192921CEC470900B835E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C37024A7C1B7BDC079191F5 /* Pods-Umotor.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

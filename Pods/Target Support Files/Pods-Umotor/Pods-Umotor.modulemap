@@ -1,6 +1,0 @@
-framework module Pods_Umotor {
-  umbrella header "Pods-Umotor-umbrella.h"
-
-  export *
-  module * { export * }
-}
