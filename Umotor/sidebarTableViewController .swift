@@ -20,6 +20,7 @@ class sidebarTableViewController: UITableViewController {
     var pickerVisible = false
     let deviceID = UIDevice.current.identifierForVendor?.uuidString
     let databaseRef = FIRDatabase.database().reference()
+    var uidofuser: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame:CGRect.zero)
@@ -27,19 +28,25 @@ class sidebarTableViewController: UITableViewController {
         self.view.layoutIfNeeded()
         self.User_profile_pic.layer.cornerRadius = self.User_profile_pic.frame.size.width/2
         self.User_profile_pic.clipsToBounds = true
+        
         if let user = FIRAuth.auth()?.currentUser {
             let name = user.displayName
             let email = user.email
             let photoUrl = user.photoURL
             let uid = user.uid
-            databaseRef.child(user.uid).child("driver_mode").observe(.value, with: { (snapshot) in
-             //   let mode_check = snapshot.value as? AnyObject
-               // if(mode_check as! Bool == true){
-                 //self.toggle.isOn = true
-                //}
-                //else{
-                //self.toggle.isOn = false
-               // }
+            self.uidofuser = user.uid
+            self.databaseRef.child("user_profile").child(user.uid).child("driver_mode").observeSingleEvent(of: .value, with:{ (snapshot) in
+                let mode_check = snapshot.value as? AnyObject
+                print(user.uid)
+//                child("driver_mode").
+                print(mode_check!)
+//                let switchCange = mode_check?.object(forKey: "")
+                if(mode_check as! Bool == true){
+                 self.toggle.isOn = true
+                }
+                else{
+                self.toggle.isOn = false
+                }
             })
             User_name.text = "Hi!~"+name!
             manageConnections(userID: uid)
@@ -95,6 +102,7 @@ class sidebarTableViewController: UITableViewController {
             // No user is signed in.
         }
         
+        
     }
     
 
@@ -126,28 +134,6 @@ class sidebarTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 7
     }
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 7 && toggle.isOn == false {
-//            return 0.0
-//        }
-//        if indexPath.row == 1 {
-//            if toggle.isOn == false || pickerVisible == false {
-//                return 0.0
-//            }
-//            return 117.0
-//        }
-//        return 44.0
-//    }
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row == 6 {
-//            pickerVisible = !pickerVisible
-//            tableView.reloadData()
-//        }
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 200.0
-//    }
     func manageConnections(userID: String){
         
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(userID)/connection/\(self.deviceID!)")
@@ -168,8 +154,40 @@ class sidebarTableViewController: UITableViewController {
     }
 
     @IBAction func toggleValueChanged(_ sender: AnyObject) {
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
+        if toggle.isOn == true{
+            self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").setValue(true)
+            let storyboard2: UIStoryboard = UIStoryboard(name:"Main" , bundle: nil)
+            let vc: UINavigationController = storyboard2.instantiateViewController(withIdentifier: "DriverInfoNavigation") as! UINavigationController
+            self.present(vc, animated: true, completion: nil)
+        }
+        else{
+            self.databaseRef.child("user_profile").child(uidofuser!).child("driver_mode").setValue(false)
+        }
     }
+//    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+//        return 2.5
+//    }
+//    
+//    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+//        
+//        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+//        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+//        let finalFrameForVC = transitionContext.finalFrameForViewController(toViewController)
+//        let containerView = transitionContext.containerView()
+//        let bounds = UIScreen.mainScreen().bounds
+//        toViewController.view.frame = CGRectOffset(finalFrameForVC, 0, bounds.size.height)
+//        containerView.addSubview(toViewController.view)
+//        
+//        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .CurveLinear, animations: {
+//            fromViewController.view.alpha = 0.5
+//            toViewController.view.frame = finalFrameForVC
+//        }, completion: {
+//            finished in
+//            transitionContext.completeTransition(true)
+//            fromViewController.view.alpha = 1.0
+//        })
+//    }
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)

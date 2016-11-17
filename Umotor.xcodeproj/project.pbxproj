@@ -40,6 +40,9 @@
 		4FD1928C1CEC470900B835E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */; };
 		4FE8AEE01DCF7B4E00E8AA39 /* Record_Map_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */; };
 		4FEECDCB1DAD6905001B324A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4FEECDCA1DAD6905001B324A /* Podfile */; };
+		4FEEDFE91DDC21F600EC53C5 /* DirverInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEEDFE81DDC21F600EC53C5 /* DirverInformationViewController.swift */; };
+		4FEEDFEF1DDC454700EC53C5 /* DriverInformation+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */; };
+		4FEEDFF31DDC951300EC53C5 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */; };
 		4FF40EBA1DD747C30010B7BE /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF40EB91DD747C30010B7BE /* AFNetworking.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		4FF40EBC1DD7B2830010B7BE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF40EBB1DD7B2830010B7BE /* QuartzCore.framework */; };
 		4FFC9E4A1DBF28EB00DC93A7 /* Ordertable_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */; };
@@ -87,6 +90,9 @@
 		4FD1928D1CEC470900B835E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_Map_ViewController.swift; sourceTree = "<group>"; };
 		4FEECDCA1DAD6905001B324A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4FEEDFE81DDC21F600EC53C5 /* DirverInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirverInformationViewController.swift; sourceTree = "<group>"; };
+		4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriverInformation+handler.swift"; sourceTree = "<group>"; };
+		4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		4FF40EB91DD747C30010B7BE /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../Library/Developer/Xcode/DerivedData/Umotor-fwqqmkwpgmoqddchndwwaztynodg/Build/Products/Debug-iphonesimulator/AFNetworking/AFNetworking.framework"; sourceTree = "<group>"; };
 		4FF40EBB1DD7B2830010B7BE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordertable_TableViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +157,7 @@
 		4FD192751CEC470900B835E4 = {
 			isa = PBXGroup;
 			children = (
+				4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */,
 				4F88CF371DAE761500B7B2AC /* Umotor.entitlements */,
 				4FEECDCA1DAD6905001B324A /* Podfile */,
 				4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */,
@@ -178,6 +185,7 @@
 				4FD192811CEC470900B835E4 /* AppDelegate.swift */,
 				4FD192831CEC470900B835E4 /* LoginViewController.swift */,
 				4FD192851CEC470900B835E4 /* Main.storyboard */,
+				4FEEDFE81DDC21F600EC53C5 /* DirverInformationViewController.swift */,
 				4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */,
 				4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
@@ -191,6 +199,7 @@
 				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
 				4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */,
 				4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */,
+				4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */,
 				4FD192881CEC470900B835E4 /* Assets.xcassets */,
 				4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */,
 				4F7B71F21D291F82004A7B20 /* SWRevealViewController.h */,
@@ -291,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F57E7241DB2A13300CE696C /* umotor.mov in Resources */,
+				4FEEDFF31DDC951300EC53C5 /* AirshipConfig.plist in Resources */,
 				4F94FE761DBA874000553B61 /* GoogleService-Info.plist in Resources */,
 				4FD1928C1CEC470900B835E4 /* LaunchScreen.storyboard in Resources */,
 				4FEECDCB1DAD6905001B324A /* Podfile in Resources */,
@@ -363,7 +373,9 @@
 				4FE8AEE01DCF7B4E00E8AA39 /* Record_Map_ViewController.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
 				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
+				4FEEDFE91DDC21F600EC53C5 /* DirverInformationViewController.swift in Sources */,
 				4F4B1F381DC0DA1200286D87 /* Video_ViewController.swift in Sources */,
+				4FEEDFEF1DDC454700EC53C5 /* DriverInformation+handler.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
 				4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */,
 				4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */,

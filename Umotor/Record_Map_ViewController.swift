@@ -41,8 +41,9 @@ class Record_Map_ViewController: UIViewController {
         self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
         self.Order_ID = regandata?.object(forKey: "orderid") as AnyObject
         let Time_point_value = regandata?.object(forKey: "time") as? Double
-        regandata?.setValue(self.User_ID, forKey: "uid")
-//        print(regandata!)
+        let driveridsend = regandata?.object(forKey: "thedriver") as AnyObject
+        regandata?.setValue(driveridsend, forKey: "uid")
+        print(regandata!)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
@@ -60,6 +61,9 @@ class Record_Map_ViewController: UIViewController {
         let destinal = edlat + "," + edlng
         
         directionAPITest(origin: orginal , destination: destinal)
+        print((self.User_ID)! as! String)
+        print(self.tableMode!)
+        print((self.Order_ID)! as! String)
     self.ref.child("Call_Moto").child((self.User_ID)! as! String).child(self.tableMode!).child((self.Order_ID)! as! String).observe(.value, with: {(snapshot) in
             self.userDict = snapshot.value as? NSDictionary
         for(Type,details) in self.userDict!{

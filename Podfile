@@ -21,4 +21,5 @@ target ‘Umotor’ do
   pod ’Alamofire’
   pod 'AFNetworking'
   pod ‘Cosmos’
+  pod 'UrbanAirship-iOS-SDK'
 end
