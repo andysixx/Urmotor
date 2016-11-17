@@ -24,13 +24,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="yId-8P-7wE">
-                                <rect key="frame" x="168" y="315" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8G-MW-nGn">
-                                <rect key="frame" x="0.0" y="637" width="188" height="30"/>
+                                <rect key="frame" x="0.0" y="632" width="187.5" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="2vg-US-ztk"/>
+                                </constraints>
                                 <state key="normal" title="登入">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -40,10 +39,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vd9-6H-3FW">
-                                <rect key="frame" x="188" y="637" width="188" height="30"/>
+                                <rect key="frame" x="187.5" y="632" width="187.5" height="35"/>
                                 <color key="backgroundColor" red="1" green="0.8724502435659538" blue="0.33848554499581818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="188" id="zQ7-6k-7PQ"/>
+                                    <constraint firstAttribute="height" constant="35" id="8Az-Gk-GMh"/>
                                 </constraints>
                                 <state key="normal" title="註冊">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -52,29 +51,34 @@
                                     <segue destination="btT-6u-ckr" kind="show" id="Wia-Kx-Yu8"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tb5-P5-UHq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="637"/>
-                            </containerView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Umotor.inc" translatesAutoresizingMaskIntoConstraints="NO" id="0NX-yZ-LkC">
+                                <rect key="frame" x="127" y="139" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="3HG-X7-up4"/>
+                                    <constraint firstAttribute="width" constant="120" id="ftC-Jq-wAX"/>
+                                </constraints>
+                            </imageView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" currentPage="2" translatesAutoresizingMaskIntoConstraints="NO" id="yId-8P-7wE">
+                                <rect key="frame" x="16" y="533" width="343" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="vd9-6H-3FW" firstAttribute="leading" secondItem="m8G-MW-nGn" secondAttribute="trailing" id="1W4-Nm-GC0"/>
-                            <constraint firstItem="m8G-MW-nGn" firstAttribute="height" secondItem="vd9-6H-3FW" secondAttribute="height" id="2Nw-PZ-eRm"/>
-                            <constraint firstAttribute="trailing" secondItem="Tb5-P5-UHq" secondAttribute="trailing" id="B47-NY-aZ2"/>
-                            <constraint firstItem="Tb5-P5-UHq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JeQ-lP-kA1"/>
-                            <constraint firstItem="vd9-6H-3FW" firstAttribute="baseline" secondItem="m8G-MW-nGn" secondAttribute="baseline" id="KOo-e9-mqf"/>
-                            <constraint firstItem="vd9-6H-3FW" firstAttribute="top" secondItem="Tb5-P5-UHq" secondAttribute="bottom" id="REN-bX-5Ti"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vd9-6H-3FW" secondAttribute="trailing" constant="-17" id="XRy-DI-Vdw"/>
-                            <constraint firstItem="vd9-6H-3FW" firstAttribute="leading" secondItem="m8G-MW-nGn" secondAttribute="trailing" id="Xj1-0O-7Th"/>
-                            <constraint firstItem="Tb5-P5-UHq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="f9M-wj-vgx"/>
-                            <constraint firstItem="vd9-6H-3FW" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="hHp-bU-vWr"/>
-                            <constraint firstItem="vd9-6H-3FW" firstAttribute="width" secondItem="m8G-MW-nGn" secondAttribute="width" id="lPm-sS-owV"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="m8G-MW-nGn" secondAttribute="bottom" id="t2p-V8-MaH"/>
-                            <constraint firstItem="m8G-MW-nGn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="wfC-YE-agd"/>
+                            <constraint firstItem="0NX-yZ-LkC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="75" id="D9h-bj-5pQ"/>
+                            <constraint firstItem="0NX-yZ-LkC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ope-gO-tqp"/>
+                            <constraint firstItem="m8G-MW-nGn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Tht-5q-LZw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vd9-6H-3FW" secondAttribute="bottom" id="f3r-yp-3OA"/>
+                            <constraint firstAttribute="trailing" secondItem="vd9-6H-3FW" secondAttribute="trailing" id="hDD-su-LSw"/>
+                            <constraint firstItem="vd9-6H-3FW" firstAttribute="leading" secondItem="m8G-MW-nGn" secondAttribute="trailing" id="mVx-Vn-Eyk"/>
+                            <constraint firstItem="m8G-MW-nGn" firstAttribute="width" secondItem="vd9-6H-3FW" secondAttribute="width" id="p2V-4Q-jL6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="m8G-MW-nGn" secondAttribute="bottom" id="vld-Qe-luD"/>
+                            <constraint firstItem="vd9-6H-3FW" firstAttribute="leading" secondItem="m8G-MW-nGn" secondAttribute="trailing" id="wW0-zP-7id"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TOL-LT-59Z"/>
                     <connections>
+                        <outlet property="Umotor_inc" destination="0NX-yZ-LkC" id="ScT-f5-dbW"/>
                         <outlet property="loginButton" destination="m8G-MW-nGn" id="xat-c3-gsb"/>
                         <outlet property="nav" destination="TOL-LT-59Z" id="91M-Pg-u4h"/>
                         <outlet property="registerButton" destination="vd9-6H-3FW" id="R9O-xV-HeJ"/>
@@ -1844,6 +1848,7 @@
         <!--Navigation Controller-->
         <scene sceneID="3Te-OC-VP4">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a8u-IZ-ePv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XrF-5G-PJw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eyp-8o-lLh">
@@ -1855,7 +1860,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ykh-Sb-0Ah"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a8u-IZ-ePv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="696.79999999999995" y="124.58770614692655"/>
         </scene>
@@ -1917,6 +1921,7 @@
     <resources>
         <image name="240380-15100PHR210" width="1000" height="1000"/>
         <image name="Burger" width="25" height="25"/>
+        <image name="Umotor.inc" width="432" height="432"/>
         <image name="car-steering-wheel" width="64" height="64"/>
         <image name="chat-speech-bubble-icon_23-2147501656" width="129" height="79"/>
         <image name="driver" width="64" height="64"/>

@@ -16,6 +16,7 @@ class sidebarTableViewController: UITableViewController {
     @IBOutlet weak var User_profile_pic: UIImageView!
 //    @IBOutlet weak var User_profile_pic: UIImageView!
     @IBOutlet weak var toggle: UISwitch!
+    @IBOutlet weak var NewOrderCell: UITableViewCell!
     @IBOutlet weak var User_name: UILabel!
     var pickerVisible = false
     let deviceID = UIDevice.current.identifierForVendor?.uuidString
@@ -23,6 +24,7 @@ class sidebarTableViewController: UITableViewController {
     var uidofuser: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.tableFooterView = UIView(frame:CGRect.zero)
         self.tableView.separatorColor = UIColor.white
         self.view.layoutIfNeeded()
@@ -42,10 +44,12 @@ class sidebarTableViewController: UITableViewController {
                 print(mode_check!)
 //                let switchCange = mode_check?.object(forKey: "")
                 if(mode_check as! Bool == true){
-                 self.toggle.isOn = true
+                    self.toggle.isOn = true
+                    self.tableView.reloadData()
                 }
                 else{
-                self.toggle.isOn = false
+                    self.toggle.isOn = false
+                    self.tableView.reloadData()
                 }
             })
             User_name.text = "Hi!~"+name!
@@ -122,18 +126,20 @@ class sidebarTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+////        return 14.0
+//    }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 7
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 7
+//    }
     func manageConnections(userID: String){
         
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(userID)/connection/\(self.deviceID!)")
@@ -154,16 +160,33 @@ class sidebarTableViewController: UITableViewController {
     }
 
     @IBAction func toggleValueChanged(_ sender: AnyObject) {
-//        self.tableView.reloadData()
+        
         if toggle.isOn == true{
             self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").setValue(true)
             let storyboard2: UIStoryboard = UIStoryboard(name:"Main" , bundle: nil)
             let vc: UINavigationController = storyboard2.instantiateViewController(withIdentifier: "DriverInfoNavigation") as! UINavigationController
             self.present(vc, animated: true, completion: nil)
+            self.tableView.reloadData()
         }
         else{
             self.databaseRef.child("user_profile").child(uidofuser!).child("driver_mode").setValue(false)
+            self.tableView.reloadData()
         }
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return 117.0
+        }
+        if indexPath.row == 5 && toggle.isOn == false {
+            return 0.0
+        }
+        if indexPath.row == 6 {
+            if toggle.isOn == false || pickerVisible == false {
+                return 45.0
+            }
+            return 45.0
+        }
+        return 45.0
     }
 //    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
 //        return 2.5
