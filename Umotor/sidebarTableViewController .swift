@@ -40,9 +40,7 @@ class sidebarTableViewController: UITableViewController {
             self.databaseRef.child("user_profile").child(user.uid).child("driver_mode").observeSingleEvent(of: .value, with:{ (snapshot) in
                 let mode_check = snapshot.value as? AnyObject
                 print(user.uid)
-//                child("driver_mode").
                 print(mode_check!)
-//                let switchCange = mode_check?.object(forKey: "")
                 if(mode_check as! Bool == true){
                     self.toggle.isOn = true
                     self.tableView.reloadData()
@@ -109,7 +107,23 @@ class sidebarTableViewController: UITableViewController {
         
     }
     
-
+    override func viewWillDisappear(_ animated: Bool) {
+        self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").observeSingleEvent(of: .value, with:{ (snapshot) in
+            let mode_check = snapshot.value as? AnyObject
+//            print(user.uid)self.uidofuser!
+            //                child("driver_mode").
+            print(mode_check!)
+            //                let switchCange = mode_check?.object(forKey: "")
+            if(mode_check as! Bool == true){
+                self.toggle.isOn = true
+                self.tableView.reloadData()
+            }
+            else{
+                self.toggle.isOn = false
+                self.tableView.reloadData()
+            }
+        })
+    }
     @IBAction func logout(_ sender: AnyObject) {
         let user = FIRAuth.auth()?.currentUser
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(user!.uid)/connection/\(self.deviceID!)")
@@ -126,20 +140,6 @@ class sidebarTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-////        return 14.0
-//    }
-
-    // MARK: - Table view data source
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 1
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 7
-//    }
     func manageConnections(userID: String){
         
         let myConnectionsRef = FIRDatabase.database().reference(withPath: "user_profile/\(userID)/connection/\(self.deviceID!)")
@@ -160,12 +160,19 @@ class sidebarTableViewController: UITableViewController {
     }
 
     @IBAction func toggleValueChanged(_ sender: AnyObject) {
+       
         
         if toggle.isOn == true{
-            self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").setValue(true)
-            let storyboard2: UIStoryboard = UIStoryboard(name:"Main" , bundle: nil)
-            let vc: UINavigationController = storyboard2.instantiateViewController(withIdentifier: "DriverInfoNavigation") as! UINavigationController
-            self.present(vc, animated: true, completion: nil)
+            self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_info").observeSingleEvent(of: .value, with: {(snapshot) in
+             let TorF = snapshot.value as? NSDictionary
+                if TorF == nil{
+                    let storyboard2: UIStoryboard = UIStoryboard(name:"Main" , bundle: nil)
+                    let vc: UINavigationController = storyboard2.instantiateViewController(withIdentifier: "DriverInformationTableViewController") as! UINavigationController
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").setValue(true) }
+            
+                 })
             self.tableView.reloadData()
         }
         else{

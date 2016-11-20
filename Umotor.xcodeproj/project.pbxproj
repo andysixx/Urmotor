@@ -11,6 +11,10 @@
 		4F01768F1DCC849C006FFADC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F01768E1DCC849C006FFADC /* UserNotifications.framework */; };
 		4F0176911DCC84A7006FFADC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176901DCC84A7006FFADC /* NotificationCenter.framework */; };
 		4F0176931DCC84AD006FFADC /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */; };
+		4F0DD7E81DDED6F400A07215 /* Login_TableInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DD7E71DDED6F400A07215 /* Login_TableInputTableViewCell.swift */; };
+		4F0DD7EA1DDF073700A07215 /* login_tableinput2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DD7E91DDF073700A07215 /* login_tableinput2TableViewCell.swift */; };
+		4F0DD7EC1DDF096300A07215 /* login_tableinput3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DD7EB1DDF096300A07215 /* login_tableinput3TableViewCell.swift */; };
+		4F26A90F1DDF86470083DCAD /* Diver_Info_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26A90E1DDF86470083DCAD /* Diver_Info_TableViewController.swift */; };
 		4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */; };
 		4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */; };
 		4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */; };
@@ -21,7 +25,6 @@
 		4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD192831CEC470900B835E4 /* LoginViewController.swift */; };
 		4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */; };
 		4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */; };
-		4F7593741D4F2B5B000C305E /* Map_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7593731D4F2B5B000C305E /* Map_ViewController.swift */; };
 		4F7593761D51C1B3000C305E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7593751D51C1B3000C305E /* MapKit.framework */; };
 		4F7B71F41D291F82004A7B20 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B71F31D291F82004A7B20 /* SWRevealViewController.m */; };
 		4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController .swift */; };
@@ -37,9 +40,11 @@
 		4FD192871CEC470900B835E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD192851CEC470900B835E4 /* Main.storyboard */; };
 		4FD192891CEC470900B835E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD192881CEC470900B835E4 /* Assets.xcassets */; };
 		4FD1928C1CEC470900B835E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */; };
+		4FDD41441DE1735200055079 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDD41431DE1735200055079 /* Order.swift */; };
+		4FDD41461DE1CCA300055079 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDD41451DE1CCA300055079 /* OrderViewController.swift */; };
+		4FDD41481DE1D0D600055079 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDD41471DE1D0D600055079 /* OrderTableViewCell.swift */; };
 		4FE8AEE01DCF7B4E00E8AA39 /* Record_Map_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */; };
 		4FEECDCB1DAD6905001B324A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4FEECDCA1DAD6905001B324A /* Podfile */; };
-		4FEEDFE91DDC21F600EC53C5 /* DirverInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEEDFE81DDC21F600EC53C5 /* DirverInformationViewController.swift */; };
 		4FEEDFEF1DDC454700EC53C5 /* DriverInformation+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */; };
 		4FEEDFF31DDC951300EC53C5 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */; };
 		4FF40EBA1DD747C30010B7BE /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF40EB91DD747C30010B7BE /* AFNetworking.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -55,6 +60,10 @@
 		4F01768E1DCC849C006FFADC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		4F0176901DCC84A7006FFADC /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		4F0DD7E71DDED6F400A07215 /* Login_TableInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login_TableInputTableViewCell.swift; sourceTree = "<group>"; };
+		4F0DD7E91DDF073700A07215 /* login_tableinput2TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = login_tableinput2TableViewCell.swift; sourceTree = "<group>"; };
+		4F0DD7EB1DDF096300A07215 /* login_tableinput3TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = login_tableinput3TableViewCell.swift; sourceTree = "<group>"; };
+		4F26A90E1DDF86470083DCAD /* Diver_Info_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diver_Info_TableViewController.swift; sourceTree = "<group>"; };
 		4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMap_EXMPLE_ViewController.swift; sourceTree = "<group>"; };
 		4F4F88E51D211DF200A15EAD /* Umotor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Umotor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -65,7 +74,6 @@
 		4F61EA531D5B2AD9005EC828 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_ViewController.swift; sourceTree = "<group>"; };
 		4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credit_Driver_TableViewController.swift; sourceTree = "<group>"; };
-		4F7593731D4F2B5B000C305E /* Map_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map_ViewController.swift; sourceTree = "<group>"; };
 		4F7593751D51C1B3000C305E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4F7B71F21D291F82004A7B20 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		4F7B71F31D291F82004A7B20 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -77,6 +85,7 @@
 		4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4F8C4D261DACB4A700716A05 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4F94FE751DBA874000553B61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4FB4D1FA1DE1FFE7004200F8 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = "../../Library/Developer/Xcode/DerivedData/Umotor-fwqqmkwpgmoqddchndwwaztynodg/Build/Products/Debug-iphonesimulator/AlamofireImage/AlamofireImage.framework"; sourceTree = "<group>"; };
 		4FBA4C591DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order_Map_LocationViewController.swift; sourceTree = "<group>"; };
 		4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		4FD1927E1CEC470900B835E4 /* Umotor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umotor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,9 +95,11 @@
 		4FD192881CEC470900B835E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FD1928B1CEC470900B835E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FD1928D1CEC470900B835E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FDD41431DE1735200055079 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		4FDD41451DE1CCA300055079 /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		4FDD41471DE1D0D600055079 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
 		4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_Map_ViewController.swift; sourceTree = "<group>"; };
 		4FEECDCA1DAD6905001B324A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		4FEEDFE81DDC21F600EC53C5 /* DirverInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirverInformationViewController.swift; sourceTree = "<group>"; };
 		4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriverInformation+handler.swift"; sourceTree = "<group>"; };
 		4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		4FF40EB91DD747C30010B7BE /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../Library/Developer/Xcode/DerivedData/Umotor-fwqqmkwpgmoqddchndwwaztynodg/Build/Products/Debug-iphonesimulator/AFNetworking/AFNetworking.framework"; sourceTree = "<group>"; };
@@ -121,6 +132,7 @@
 		46D71EB6C4ECBC0421352699 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FB4D1FA1DE1FFE7004200F8 /* AlamofireImage.framework */,
 				4FF40EBB1DD7B2830010B7BE /* QuartzCore.framework */,
 				4FF40EB91DD747C30010B7BE /* AFNetworking.framework */,
 				4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */,
@@ -133,13 +145,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4F0DD02C1DE20B1400C2E274 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				4FFC9E4B1DBF370700DC93A7 /* Order_TableViewCell.swift */,
+				4FDD41471DE1D0D600055079 /* OrderTableViewCell.swift */,
+				4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */,
+				4FDD41431DE1735200055079 /* Order.swift */,
+				4FDD41451DE1CCA300055079 /* OrderViewController.swift */,
+				4FBA4C591DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		4F0DD02D1DE20B4600C2E274 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
+				4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */,
+				4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */,
+			);
+			name = Record;
+			sourceTree = "<group>";
+		};
+		4F0DD02E1DE20BBE00C2E274 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4FD192831CEC470900B835E4 /* LoginViewController.swift */,
+				4F0DD7EB1DDF096300A07215 /* login_tableinput3TableViewCell.swift */,
+				4F0DD7E91DDF073700A07215 /* login_tableinput2TableViewCell.swift */,
+				4F0DD7E71DDED6F400A07215 /* Login_TableInputTableViewCell.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		4F0DD02F1DE20BDE00C2E274 /* DriverInfo */ = {
+			isa = PBXGroup;
+			children = (
+				4F26A90E1DDF86470083DCAD /* Diver_Info_TableViewController.swift */,
+				4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */,
+			);
+			name = DriverInfo;
+			sourceTree = "<group>";
+		};
 		4F7302D51DB0E5E500BD6CB3 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
 				4F8A472D1DAD4E40002D7E56 /* TableViewController.swift */,
 				4F574A151DB0BDC800C80BF6 /* TextInputTableView.swift */,
 				4F574A131DB0BD1B00C80BF6 /* ProfileTableViewController.swift */,
-				4FFC9E4B1DBF370700DC93A7 /* Order_TableViewCell.swift */,
 				4F7B72141D2E3A1B004A7B20 /* sidebarTableViewController .swift */,
 			);
 			name = TableView;
@@ -180,23 +234,18 @@
 			isa = PBXGroup;
 			children = (
 				4F7302D51DB0E5E500BD6CB3 /* TableView */,
+				4F0DD02E1DE20BBE00C2E274 /* Login */,
+				4F0DD02C1DE20B1400C2E274 /* Order */,
+				4F0DD02D1DE20B4600C2E274 /* Record */,
 				4FD192811CEC470900B835E4 /* AppDelegate.swift */,
-				4FD192831CEC470900B835E4 /* LoginViewController.swift */,
+				4F0DD02F1DE20BDE00C2E274 /* DriverInfo */,
 				4FD192851CEC470900B835E4 /* Main.storyboard */,
-				4FEEDFE81DDC21F600EC53C5 /* DirverInformationViewController.swift */,
-				4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */,
 				4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
 				4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */,
 				4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */,
 				4F8C4D261DACB4A700716A05 /* ViewController.swift */,
 				4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */,
-				4F7593731D4F2B5B000C305E /* Map_ViewController.swift */,
-				4FBA4C591DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift */,
-				4F75936D1D4F0EB5000C305E /* Record_ViewController.swift */,
-				4FE8AEDF1DCF7B4E00E8AA39 /* Record_Map_ViewController.swift */,
-				4FC065111DBC9AE900D7A931 /* RecordTableViewCell.swift */,
-				4FEEDFEE1DDC454700EC53C5 /* DriverInformation+handler.swift */,
 				4FD192881CEC470900B835E4 /* Assets.xcassets */,
 				4FD1928A1CEC470900B835E4 /* LaunchScreen.storyboard */,
 				4F7B71F21D291F82004A7B20 /* SWRevealViewController.h */,
@@ -370,19 +419,24 @@
 				4FE8AEE01DCF7B4E00E8AA39 /* Record_Map_ViewController.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
 				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
-				4FEEDFE91DDC21F600EC53C5 /* DirverInformationViewController.swift in Sources */,
 				4FEEDFEF1DDC454700EC53C5 /* DriverInformation+handler.swift in Sources */,
+				4FDD41481DE1D0D600055079 /* OrderTableViewCell.swift in Sources */,
+				4FDD41441DE1735200055079 /* Order.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
 				4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */,
 				4F4B1F361DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift in Sources */,
 				4FBA4C5A1DC33DEA00DF71B7 /* Order_Map_LocationViewController.swift in Sources */,
 				4F574A161DB0BDC800C80BF6 /* TextInputTableView.swift in Sources */,
 				4F7B71F41D291F82004A7B20 /* SWRevealViewController.m in Sources */,
-				4F7593741D4F2B5B000C305E /* Map_ViewController.swift in Sources */,
+				4F26A90F1DDF86470083DCAD /* Diver_Info_TableViewController.swift in Sources */,
+				4F0DD7E81DDED6F400A07215 /* Login_TableInputTableViewCell.swift in Sources */,
 				4FFC9E4A1DBF28EB00DC93A7 /* Ordertable_TableViewController.swift in Sources */,
+				4F0DD7EA1DDF073700A07215 /* login_tableinput2TableViewCell.swift in Sources */,
 				4FFC9E4C1DBF370700DC93A7 /* Order_TableViewCell.swift in Sources */,
 				4FC065121DBC9AE900D7A931 /* RecordTableViewCell.swift in Sources */,
+				4F0DD7EC1DDF096300A07215 /* login_tableinput3TableViewCell.swift in Sources */,
 				4F8C4D271DACB4A700716A05 /* ViewController.swift in Sources */,
+				4FDD41461DE1CCA300055079 /* OrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

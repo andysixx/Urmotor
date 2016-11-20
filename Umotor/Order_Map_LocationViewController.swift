@@ -20,6 +20,7 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
     @IBOutlet weak var arrival_destination: UIButton!
     @IBOutlet weak var Go_to_Custom: UIButton!
     @IBOutlet weak var arrival_customer: UIButton!
+    @IBOutlet weak var Chat_To_Custom: UIButton!
     @IBOutlet weak var check_order_button: UIButton!
     @IBOutlet weak var Custom_Start: UILabel!
     @IBOutlet weak var Custom_End: UILabel!
@@ -36,9 +37,11 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.Chat_To_Custom.isEnabled = false
         self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
         self.Order_ID = regandata?.object(forKey: "orderid") as AnyObject
         let Time_point_value = regandata?.object(forKey: "time") as? Double
+        self.regandata?.setValue(self.User_ID, forKey: "uid")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
@@ -105,6 +108,8 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
     
     @IBAction func Checking_Order(_ sender: Any) {
         self.navigationItem.hidesBackButton = true
+        self.Chat_To_Custom.isHidden = false
+        self.Chat_To_Custom.isEnabled = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"取消載客", style: UIBarButtonItemStyle.plain, target: self , action: #selector(FIRStorageTaskManagement.cancel))
         self.check_order_button.isHidden = true
         self.Go_to_Custom.isHidden = false
@@ -134,16 +139,18 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").observeSingleEvent(of: .value, with: {
             (snapshot) in
             let dict = snapshot.value as? NSDictionary
-            for(_, friendUID) in dict!{
-                print(friendUID as! String)
-                print(self.User_ID! as! String)
-                if(friendUID as! String == self.User_ID! as! String){
-                    break
-                }
-                else{
-                    self.ref.child("user_profile").child(self.User_ID! as! String).child("friends").childByAutoId().setValue((self.loggedInUser?.uid)!)
-                    self.ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").childByAutoId().setValue(self.User_ID! as! String)
+            if dict != nil{
+                for(_, friendUID) in dict!{
+                    print(friendUID as! String)
+                    print(self.User_ID! as! String)
+                    if(friendUID as! String == self.User_ID! as! String){
+                        break
+                    }
+                    else{
+                        self.ref.child("user_profile").child(self.User_ID! as! String).child("friends").childByAutoId().setValue((self.loggedInUser?.uid)!)
+                        self.ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").childByAutoId().setValue(self.User_ID! as! String)
                 
+                    }
                 }
             }
         })
@@ -239,7 +246,16 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "OrderChatCustom"{
+            //            if let indexPath = tableView.indexPathForSelectedRow{
+            let navVC = segue.destination as! ChatViewController
+            navVC.senderId = self.loggedInUser?.uid
+            navVC.receiverData = regandata
+            navVC.senderDisplayName = "聯絡司機"
+            
+            //            }
+        }
+
     }
     /*
     // MARK: - Navigation

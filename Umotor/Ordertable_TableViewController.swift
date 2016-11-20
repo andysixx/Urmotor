@@ -9,8 +9,9 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+//import AlamofireImage
 
-class Ordertable_TableViewController: UITableViewController {
+class Ordertable_TableViewController: UITableViewController  {
 
     @IBOutlet weak var Button: UIBarButtonItem!
     var OrderList = [AnyObject]()
@@ -18,6 +19,7 @@ class Ordertable_TableViewController: UITableViewController {
     var OrderDict : NSDictionary?
     var UID_ID = [AnyObject]()
     var ORD_DI = [AnyObject]()
+    var orders = [Order]()
     let databaseDriverOrderRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,32 +31,31 @@ class Ordertable_TableViewController: UITableViewController {
         self.loggedInUser = FIRAuth.auth()?.currentUser
         self.databaseDriverOrderRef.child("Call_Moto").observe( .value, with: {(snapshot) in
             self.OrderList = [AnyObject]()
-           self.ORD_DI = [AnyObject]()
+            self.ORD_DI = [AnyObject]()
             self.OrderDict = snapshot.value as? NSDictionary
             if(self.OrderDict != nil){
-            for(UserID, orderdetails) in self.OrderDict!{
-                print(UserID)
-                print(orderdetails)
-                if(self.loggedInUser?.uid != UserID as? String)
-                {       self.UID_ID.append(UserID as AnyObject)
+                for(UserID, orderdetails) in self.OrderDict!{
+                    print(UserID)
+                    print(orderdetails)
+                    if(self.loggedInUser?.uid != UserID as? String)
+                    {       self.UID_ID.append(UserID as AnyObject)
                         let waittdetails = (orderdetails as AnyObject).object(forKey: "wait") as? NSDictionary
-                    if(waittdetails != nil){
+                        if(waittdetails != nil){
                             for(OrderID ,CustomOrder) in waittdetails!{
                                 self.OrderList.append(CustomOrder as AnyObject)
-                                 //self.ORD_DI.append(OrderID as AnyObject)
+                                //self.ORD_DI.append(OrderID as AnyObject)
                                 let _ = self.OrderList.sort { (obj1, obj2) -> Bool in
                                     return (obj1["time"] as! Double) > (obj2["time"] as! Double)
                                 }
+                            }
                         }
                     }
+                    self.tableView?.reloadData()
                 }
+            }
             self.tableView?.reloadData()
-            }
-            }
+
         })
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,11 +64,6 @@ class Ordertable_TableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warn9ing Incomplete implementation, return the number of sections
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -79,22 +75,32 @@ class Ordertable_TableViewController: UITableViewController {
         let Star_point_value = self.OrderList[indexPath.row]["startpoint"] as? String
         let End_point_value = self.OrderList[indexPath.row]["endpoint"] as? String
         let User_picture = self.OrderList[indexPath.row]["picture"] as? String
-        let imageURL = NSURL(string: User_picture!)
-        let imageData = NSData(contentsOf: imageURL as! URL)
         let Time_point_value = self.OrderList[indexPath.row]["time"] as? Double
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
-        cell.Custom_pic.image = UIImage(data: imageData! as Data)
+        if let url = NSURL(string: User_picture!)
+        {
+            print("\nstart download: \(url.lastPathComponent!)")
+            URLSession.shared.dataTask(with: url as URL, completionHandler: { (data, _, error) -> Void in
+                guard let data = data, error == nil else {
+                    print("\nerror on download \(error.debugDescription)")
+                    return
+                }
+                DispatchQueue.main.async {
+                    cell.Custom_pic.image = UIImage(data: data)
+                }
+            }).resume()
+        }
         cell.Start_point.text = Star_point_value
         cell.Time_point.text = dateFormatter.string(from: date as Date)
         cell.End_point.text = End_point_value
+        
         
         // Configure the cell...
 
         return cell
     }
- 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Map_detail"{
             if let indxPath = tableView.indexPathForSelectedRow{
