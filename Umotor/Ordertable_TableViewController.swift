@@ -19,7 +19,8 @@ class Ordertable_TableViewController: UITableViewController  {
     var OrderDict : NSDictionary?
     var UID_ID = [AnyObject]()
     var ORD_DI = [AnyObject]()
-    var orders = [Order]()
+//    var orde\
+//    rs = [Order]()
     let databaseDriverOrderRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()

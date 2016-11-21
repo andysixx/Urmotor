@@ -36,8 +36,6 @@ class Record_Map_ViewController: UIViewController {
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(regandata!)
-        
         self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
         self.Order_ID = regandata?.object(forKey: "orderid") as AnyObject
         let Time_point_value = regandata?.object(forKey: "time") as? Double

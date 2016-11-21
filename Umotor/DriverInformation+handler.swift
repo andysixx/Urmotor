@@ -11,12 +11,26 @@ import UIKit
 
 extension Diver_Info_TableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func handleSelectProfileImageView()  {
+        selectNumber = 0
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
         present(picker, animated: true, completion: nil)
     }
-
+    func handleSelectProfileImageView_one()  {
+        selectNumber = 1
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    func handleSelectProfileImageView_two()  {
+        selectNumber = 2
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
        
         var selectedImageFromPicker: UIImage?
@@ -29,10 +43,18 @@ extension Diver_Info_TableViewController: UIImagePickerControllerDelegate, UINav
         }
         
         if let selectedImage = selectedImageFromPicker{
-//            DriverlicencePic.image =
-            print(selectedImage)
-            DriverlicencePic.image = selectedImage
-            propic += 1
+            if selectNumber == 0{
+                profilePic.image = selectedImage
+                 propic += 1
+            }
+            else if selectNumber == 1{
+                 DriverlicencePic.image = selectedImage
+                 propic += 1
+            }
+            else{
+                MotorPic.image = selectedImage
+                propic += 1
+            }
         }
         dismiss(animated: true, completion: nil)
         

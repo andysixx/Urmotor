@@ -37,6 +37,11 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkFriendIs()
+        BuildMapLoad()
+        // Do any additional setup after loading the view.
+    }
+    func BuildMapLoad(){
         self.Chat_To_Custom.isEnabled = false
         self.User_ID = regandata?.object(forKey: "useruid") as AnyObject
         self.Order_ID = regandata?.object(forKey: "orderid") as AnyObject
@@ -50,7 +55,7 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         self.TimeLAB.text = dateFormatter.string(from: date as Date)
         let comFromFIR = regandata?.object(forKey: "commit") as? String
         if(comFromFIR != ""){
-        self.Custom_Start.text = comFromFIR
+            self.Custom_Start.text = comFromFIR
         }
         let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(Start_latitude!.floatValue) , longitude: CLLocationDegrees(Start_longitude!.floatValue), zoom: 17.5)
         MapView.camera =  camera
@@ -69,9 +74,9 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         let edlat :String = String(format:"%f", End_latitude!.doubleValue)
         let edlng :String = String(format:"%f", End_longitude!.doubleValue)
         let destinal = edlat + "," + edlng
-
+        
         directionAPITest(origin: orginal, destination: destinal)
-        // Do any additional setup after loading the view.
+    
     }
     @IBAction func cancel() {
         // your code
@@ -81,29 +86,24 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         self.Go_to_Custom.isHidden = true
         self.arrival_destination.isHidden = true
         self.arrival_customer.isHidden = true
-        let MapMotorPoint = [
-            "useruid" : User_ID! ,
-            "startpoint": regandata?.object(forKey: "startpoint") as! String,
-            "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
-            "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
-            "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
-            "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
-            "endpoint":regandata?.object(forKey: "endpoint") as! String,
-            "commit":regandata?.object(forKey: "commit") as! String,
-            "mode":"配對中",
-            "time": (regandata?.object(forKey: "time"))! ,
-            "distance":"無",
-            "thedriver":"無",
-            "orderid": Order_ID,
-            "picture": regandata?.object(forKey: "picture") as! String
-            ] as [String : Any]
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("wait").child(self.Order_ID! as! String).setValue(MapMotorPoint)
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).removeValue()
+        let MapMotorPoint = MapMotorInforSet(Mode: "配對中")
+        FirupdateSetValue(set_Value: MapMotorPoint, Child_Type: "wait")
+        FirRemoveValue(Child_Type: "ing")
         let newUserData = ["mode":"配對中"]
          let driver_id = ["thedriver":"無"]
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(driver_id)
+        FirupdateChildValue(UpdateValue: newUserData, Child_Type: "all")
+        FirupdateChildValue(UpdateValue: driver_id, Child_Type: "all")
+    }
+    func FirupdateSetValue(set_Value: [String : Any], Child_Type: String){
+        ref.child("Call_Moto").child(self.User_ID! as! String).child(Child_Type).child(self.Order_ID! as! String).setValue(set_Value)
         
+    }
+    func FirRemoveValue(Child_Type: String){
+        ref.child("Call_Moto").child(self.User_ID! as! String).child(Child_Type).child(self.Order_ID! as! String).removeValue()
+    }
+    func FirupdateChildValue(UpdateValue: [String:String],Child_Type: String){
+        ref.child("Call_Moto").child(self.User_ID! as! String).child(Child_Type).child(self.Order_ID! as! String).updateChildValues(UpdateValue)
+    
     }
     
     @IBAction func Checking_Order(_ sender: Any) {
@@ -113,58 +113,60 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"取消載客", style: UIBarButtonItemStyle.plain, target: self , action: #selector(FIRStorageTaskManagement.cancel))
         self.check_order_button.isHidden = true
         self.Go_to_Custom.isHidden = false
-        let MapMotorPoint = [
-            "useruid" : User_ID! ,
-            "startpoint": regandata?.object(forKey: "startpoint") as! String,
-            "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
-            "startlongitude": (regandata?.object(forKey: "startlongitude"))! ,
-            "endlatitude": (regandata?.object(forKey: "endlatitude"))! ,
-            "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
-            "endpoint":regandata?.object(forKey: "endpoint") as! String,
-            "commit":regandata?.object(forKey: "commit") as! String,
-            "mode":"進行中",
-            "time": (regandata?.object(forKey: "time"))! ,
-            "distance":"無",
-            "thedriver": (loggedInUser?.uid)!,
-            "orderid": Order_ID!,
-            "picture": regandata?.object(forKey: "picture") as! String
-            ] as [String : Any]
+     let MapMotorPoint = MapMotorInforSet(Mode: "進行中")
         let newUserData = ["mode":"進行中"]
-        let driver_id = ["thedriver":(loggedInUser?.uid)!]
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).setValue(MapMotorPoint)
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("wait").child(self.Order_ID! as! String).removeValue()
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(driver_id)
-//        let 
-        ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            let dict = snapshot.value as? NSDictionary
-            if dict != nil{
-                for(_, friendUID) in dict!{
-                    print(friendUID as! String)
-                    print(self.User_ID! as! String)
-                    if(friendUID as! String == self.User_ID! as! String){
-                        break
-                    }
-                    else{
-                        self.ref.child("user_profile").child(self.User_ID! as! String).child("friends").childByAutoId().setValue((self.loggedInUser?.uid)!)
-                        self.ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").childByAutoId().setValue(self.User_ID! as! String)
-                
-                    }
-                }
-            }
-        })
+        let driver_id = ["thedriver":(loggedInUser?.uid)! as String]
+        FirupdateSetValue(set_Value: MapMotorPoint, Child_Type: "ing")
+        FirRemoveValue(Child_Type: "wait")
+        FirupdateChildValue(UpdateValue: newUserData, Child_Type: "all")
+         FirupdateChildValue(UpdateValue: driver_id, Child_Type: "all")
+        checkFriendIs()
         
     }
+    func checkFriendIs(){
+        
+        ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            let dict = snapshot.value as? [String:String]
+            var result = dict?.values.contains { (value) -> Bool in
+                            if value == ""{
+                                return true
+                            }
+                            else {
+                                return false
+                            }
+                        }
+            print(dict)
+            print(result)
+
+//            dict.values.
+        
+//            if dict != nil{
+//                for(_, friendUID) in dict!{
+//                    print(friendUID as! String)
+//                    print(self.User_ID! as! String)
+//                    if(friendUID as! String == self.User_ID! as! String){
+//                        break
+//                    }
+//                    else{
+//                        self.ref.child("user_profile").child(self.User_ID! as! String).child("friends").childByAutoId().setValue((self.loggedInUser?.uid)!)
+//                        self.ref.child("user_profile").child((self.loggedInUser?.uid)!).child("friends").childByAutoId().setValue(self.User_ID! as! String)
+//                        
+//                    }
+//                }
+//            }
+        })
+
     
+    }
     
     
     @IBAction func Arrivied_Custom(_ sender: Any) {
         self.arrival_customer.isHidden = true
         self.arrival_destination.isHidden = false
     }
-    @IBAction func Arrivied_Dest(_ sender: Any) {
-        let MapMotorPoint = [
+    func MapMotorInforSet(Mode: String) -> [String : Any] {
+        let MapMotor_Point = [
             "useruid" : User_ID! ,
             "startpoint": regandata?.object(forKey: "startpoint") as! String,
             "startlatitude": (regandata?.object(forKey: "startlatitude"))! ,
@@ -173,18 +175,21 @@ class Order_Map_LocationViewController: UIViewController,CLLocationManagerDelega
             "endlongitude": (regandata?.object(forKey: "endlongitude"))! ,
             "endpoint":regandata?.object(forKey: "endpoint") as! String,
             "commit":regandata?.object(forKey: "commit") as! String,
-            "mode":"已完成",
+            "mode":Mode,
             "time": (regandata?.object(forKey: "time"))! ,
-            "distance":"無",
+            "distance":regandata?.object(forKey: "distance") as! String,
             "thedriver": (loggedInUser?.uid)!,
-            "orderid": Order_ID,
+            "orderid": Order_ID!,
             "picture": regandata?.object(forKey: "picture") as! String
             ] as [String : Any]
+        return MapMotor_Point
+    }
+    @IBAction func Arrivied_Dest(_ sender: Any) {
+        
+        let MapMotorPoint = MapMotorInforSet(Mode: "已完成")
         let newUserData = ["mode":"已完成"]
-
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("finished").child(self.Order_ID! as! String).setValue(MapMotorPoint)
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("ing").child(self.Order_ID! as! String).removeValue()
-        ref.child("Call_Moto").child(self.User_ID! as! String).child("all").child(self.Order_ID! as! String).updateChildValues(newUserData)
+        FirupdateSetValue(set_Value: MapMotorPoint, Child_Type: "finished")
+        FirRemoveValue(Child_Type: "ing")
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func Go_take_custom(_ sender: Any) {

@@ -13,6 +13,9 @@ import FirebaseStorage
 
 class Diver_Info_TableViewController: UITableViewController {
 
+    
+    var selectNumber = 0
+    
     @IBOutlet weak var nametext: UITextField!
     @IBOutlet weak var sextext: UITextField!
     @IBOutlet weak var phonetext: UITextField!
@@ -43,12 +46,12 @@ class Diver_Info_TableViewController: UITableViewController {
         
         DriverlicencePic.translatesAutoresizingMaskIntoConstraints = false
         DriverlicencePic.contentMode = .scaleAspectFill
-        DriverlicencePic.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(handleSelectProfileImageView)))
+        DriverlicencePic.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(handleSelectProfileImageView_one)))
         DriverlicencePic.isUserInteractionEnabled = true
         
         MotorPic.translatesAutoresizingMaskIntoConstraints = false
         MotorPic.contentMode = .scaleAspectFill
-        MotorPic.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(handleSelectProfileImageView)))
+        MotorPic.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(handleSelectProfileImageView_two)))
         MotorPic.isUserInteractionEnabled = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

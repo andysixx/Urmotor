@@ -191,7 +191,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
             let waitend_point = (self.UserIngrecordArray[indexPath.row]["endpoint"] as? String)
             let wait_mode = (self.UserIngrecordArray[indexPath.row]["mode"] as? String)
             let timInterval = (self.UserIngrecordArray[indexPath.row]["time"] as? Double)
-            let wait_price = (self.UserWaitrecordArray[indexPath.row]["distance"] as? String)
+            let wait_price = (self.UserIngrecordArray[indexPath.row]["distance"] as? String)
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = NSDate(timeIntervalSince1970: timInterval!)
@@ -205,7 +205,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
             let waitend_point = (self.UserFinishrecordArray[indexPath.row]["endpoint"] as? String)
             let wait_mode = (self.UserFinishrecordArray[indexPath.row]["mode"] as? String)
             let timInterval = (self.UserFinishrecordArray[indexPath.row]["time"] as? Double)
-            let wait_price = (self.UserWaitrecordArray[indexPath.row]["distance"] as? String)
+            let wait_price = (self.UserFinishrecordArray[indexPath.row]["distance"] as? String)
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = NSDate(timeIntervalSince1970: timInterval!)
@@ -219,7 +219,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
             let waitend_point = (self.UserCancelrecordArray[indexPath.row]["endpoint"] as? String)
             let wait_mode = (self.UserCancelrecordArray[indexPath.row]["mode"] as? String)
             let timInterval = (self.UserCancelrecordArray[indexPath.row]["time"] as? Double)
-            let wait_price = (self.UserWaitrecordArray[indexPath.row]["distance"] as? String)
+            let wait_price = (self.UserCancelrecordArray[indexPath.row]["distance"] as? String)
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = NSDate(timeIntervalSince1970: timInterval!)
