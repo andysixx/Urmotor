@@ -19,10 +19,11 @@ import SwiftyJSON
 import NetworkExtension
 import FirebaseInstanceID
 import AFNetworking
-//import CFNetwork
 import Alamofire
 
+
 class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,UITextFieldDelegate{
+    var buttonM: HamburgerButton! = nil
     @IBOutlet weak var Start_position: UITextField!
     @IBOutlet weak var GMapView: GMSMapView!
     @IBOutlet weak var ButtonBar: UIBarButtonItem!
@@ -52,16 +53,15 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     var destional: String!
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
   
-
     func directionAPITest(origin: String!, destination: String!) {
         var directionsURLString = baseURLDirections + "origin=" + origin + "&destination=" + destination
         
         directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         Alamofire.request(directionsURLString).responseJSON
             { response in
-                print(response.request)  // original URL request
-                print(response.response) // HTTP URL response
-                print(response.data)     // server data
+                print(response.request!)  // original URL request
+                print(response.response!) // HTTP URL response
+                print(response.data!)     // server data
                 print(response.result)   // result of response serialization
                 if let dictionary: NSDictionary = response.result.value  as? NSDictionary {
                     print("JSON: \(dictionary)")
@@ -89,9 +89,17 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         commit.resignFirstResponder()
         return true
     }
+    //
+    override var preferredStatusBarStyle : UIStatusBarStyle  {
+        return .lightContent
+    }
+    
+    func toggle(_ sender: AnyObject!) {
+        self.buttonM.showsMenu = !self.buttonM.showsMenu
+    }
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-//        directionAPITest(origin: "25.01653154862608,121.4991931244731", destination: "25.00676509081214,121.5099792927504")
         commit.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -101,6 +109,11 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         GMapView.settings.myLocationButton = true
         geoCoder = GMSGeocoder()
         GMapView.delegate = self
+      
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        
         if revealViewController() != nil{
             ButtonBar.target = revealViewController()
             ButtonBar.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -108,11 +121,11 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         }
         // burger side bar menu
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GoogleMap_EXMPLE_ViewController.dismissKeyboard)))
-            
+            print((user?.uid)!)
         self.ref.child("user_profile").child((user?.uid)!).child("profile_pic_small").observe( .value, with:{
             (snapshot) in
             let Dict = snapshot.value as? String?
-            print(Dict!)
+            print((self.user?.uid)!)
             if(Dict == nil){
                 
                 print("wait for pic")
@@ -200,6 +213,7 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
             ] as [String : Any]
         ref.child("Call_Moto").child((user?.uid)!).child("all").child(OrderUID).setValue(MapMotorPoint)
         ref.child("Call_Moto").child((user?.uid)!).child("wait").child(OrderUID).setValue(MapMotorPoint)
+        sendNotificationToUser()
     }
     func  locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
@@ -218,11 +232,9 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
         if(self.set_location.isHidden == false)
         {
-            
         // 2
         geoCoder.reverseGeocodeCoordinate(coordinate) { response, error in
             if let addresss = response?.firstResult() {
-                
                 // 3
                 let lines = addresss.lines
                 let addd = lines?.joined(separator: "\n")
@@ -268,7 +280,32 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         }
     
     }
-
+    func sendNotificationToUser()
+    {//Push notifivation http request
+        let url = URL(string: "https://push.kumulos.com/notifications")
+        var urlRequest = URLRequest(url: url!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let username = "30ef3730-4f04-4af0-9ea0-075bff8d9e97"
+        let password = "dfPdrsuT6r2Dkkh2XKuO/KKghWPa7H+F4aaN"
+        let loginString = "\(username):\(password)"
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
+        urlRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        // -u
+        let dictionary:[String:Any] = ["broadcast": true, "title":"新訂單訊息", "message":"附近有人丟出訂單，開啟您的司機模式接單吧！"]
+        do {
+            let data = try  JSONSerialization.data(withJSONObject: dictionary, options: [])
+            let task = URLSession.shared.uploadTask(with: urlRequest, from: data, completionHandler: { (data, response, err) in
+            
+            
+                })
+                task.resume()
+            }
+        catch {
+        
+        }
+    }
        /*
     // MARK: - Navigation
 

@@ -9,8 +9,15 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
-class ProfileTableViewController: UITableViewController {
+class ProfileTableViewController: UITableViewController, UITextFieldDelegate {
 
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    
+        
+        self.tableView.selectRow(at: IndexPath(row:textField.tag, section:0), animated: false, scrollPosition: .none)
+    }
+    
     var ref = FIRDatabase.database().reference()
     var user = FIRAuth.auth()?.currentUser
     var about = ["姓名","年齡","電話","性別","學校地區","email"]
@@ -145,7 +152,10 @@ class ProfileTableViewController: UITableViewController {
         cell.configure(text: "", placeholder: "\(about[indexPath.row])")
 
         // Configure the cell...
-
+        
+        cell.myTextField.tag = indexPath.row
+        
+        
         return cell
     }
     

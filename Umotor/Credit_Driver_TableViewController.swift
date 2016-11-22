@@ -37,7 +37,6 @@ class Credit_Driver_TableViewController: UITableViewController{
                 print(Cla as! String)
                 if(Cla as! String == "friends"){
                   let friendic = details as? NSDictionary
-                    print(friendic)
                     if(friendic != nil){
                     for(_, friendsID) in friendic!{
                         print(friendsID)
@@ -116,10 +115,11 @@ class Credit_Driver_TableViewController: UITableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! Driver_TableViewCell
         tableView.delegate = self
         tableView.dataSource = self
-        let imageUrl = NSURL(string: self.usersArray[indexPath.row]["profile_pic_small"] as! String)
-        print(self.usersArray[indexPath.row]["profile_pic_small"] as! String)
-        let imageData = NSData(contentsOf: imageUrl! as URL)
-        cell.driverImage.image = UIImage(data:imageData! as Data)
+        let imageUrl = self.usersArray[indexPath.row]["profile_pic_small"] as? String
+//        print(self.usersArray[indexPath.row]["profile_pic_small"] as! String)
+//        let imageData = NSData(contentsOf: imageUrl! as URL)
+//        
+//        cell.driverImage.image = UIImage(data:imageData! as Data)
         cell.driverImage.layer.borderWidth = 2.5
         if(self.usersArray[indexPath.row]["online"] as! Bool  ==  true){
             cell.driverImage.layer.borderColor = UIColor.green.cgColor
@@ -129,6 +129,19 @@ class Credit_Driver_TableViewController: UITableViewController{
         }
         let firstName = (self.usersArray[indexPath.row]["name"] as? String)!.components(separatedBy: " ")[0]
         cell.DriverName.text = firstName
+        if let url = NSURL(string: imageUrl!)
+        {
+            print("\nstart download: \(url.lastPathComponent!)")
+            URLSession.shared.dataTask(with: url as URL, completionHandler: { (data, _, error) -> Void in
+                guard let data = data, error == nil else {
+                    print("\nerror on download \(error.debugDescription)")
+                    return
+                }
+                DispatchQueue.main.async {
+                    cell.driverImage.image = UIImage(data: data)
+                }
+            }).resume()
+        }
 //        self.tableView?.reloadData()
         return cell
     }

@@ -41,10 +41,10 @@
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
-    <array>
-        <string>googlechromes</string>
-        <string>comgooglemaps</string>
-    </array>
+		<array>
+			<string>googlechromes</string>
+			<string>comgooglemaps</string>
+		</array>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -79,6 +79,8 @@
 	<string>I need location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>I need location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>系統將上傳您的相片資訊</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

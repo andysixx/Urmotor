@@ -13,21 +13,16 @@ import  FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
+class RegisterViewController: UIViewController,UITableViewDataSource,FBSDKLoginButtonDelegate {
 
-    @IBOutlet weak var user_passwordch: UITextField!
-    @IBOutlet weak var user_password: UITextField!
-    @IBOutlet weak var user_id: UITextField!
-    @IBOutlet weak var theTitle: UILabel!
-    @IBOutlet weak var aivLoadingSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var Create_account: UIButton!
     @IBOutlet weak var loginButton: FBSDKLoginButton!
-    @IBOutlet weak var createButton: UIButton!
-    @IBOutlet weak var orLB: UILabel!
         override func viewDidLoad() {
         super.viewDidLoad()
-
+            self.myTableView.isScrollEnabled = false
             FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-                if let user = user {
+                if user != nil {
                     // User is signed in.
                     // Move to user view
                     let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
@@ -42,27 +37,70 @@ class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
                 }
             }
     }
-
+    
+    func handleRegister(){
+        
+    
+    
+    }
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{return 6}
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+    
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell", for: indexPath) as! Register_TableViewCell
+            
+            return cell
+        }
+        else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
+            cell.configure(text: "", placeholder: "請輸入電子郵件")
+            cell.email_text.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+        else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
+            cell.configure(text: "", placeholder: "請輸入密碼")
+            cell.email_text.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+        else if indexPath.row == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
+            cell.configure(text: "", placeholder: "請確認密碼")
+            cell.email_text.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+        else if indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
+            cell.configure(text: "", placeholder: "請輸入用戶名稱")
+            cell.email_text.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
+            cell.configure(text: "", placeholder: "請輸入性別")
+            cell.email_text.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+    
+    }
+    
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
     {
-        user_passwordch.isHidden = true
-        user_id.isHidden = true
-        user_password.isHidden = true
-        theTitle.isHidden = true
-        createButton.isHidden = true
-        orLB.isHidden = true
+
         self.loginButton.isHidden = true
-        aivLoadingSpinner.startAnimating()
         if(error != nil)
         {
             print(error.localizedDescription)
             self.loginButton.isHidden = false
-            aivLoadingSpinner.stopAnimating()
         }
         else if (result.isCancelled)
         {
             self.loginButton.isHidden = false
-            aivLoadingSpinner.stopAnimating()
         }
         else
         {
@@ -88,7 +126,7 @@ class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
                         
                         if(profilePic == nil){
                             if let imageData = NSData(contentsOf: user!.photoURL!){
-                                let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+                                _ = profilePicRef.put(imageData as Data, metadata: nil){
                                     metadata,error in
                                     if(error == nil){
                                         
@@ -111,7 +149,7 @@ class RegisterViewController: UIViewController,FBSDKLoginButtonDelegate {
                             databaseRef.child("user_profile").child("\(user!.uid)/school_area").setValue("")
                             databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
                                 databaseRef.child("user_profile").child("\(user!.uid)/friends").setValue("")
-                                databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue("")
+                                databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue(false)
                             } 
                         }else{
                             print("User has logged in earlier")

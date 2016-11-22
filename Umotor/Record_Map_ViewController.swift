@@ -108,9 +108,9 @@ class Record_Map_ViewController: UIViewController {
         directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         Alamofire.request(directionsURLString).responseJSON
             { response in
-                print(response.request)  // original URL request
-                print(response.response) // HTTP URL response
-                print(response.data)     // server data
+                print(response.request!)  // original URL request
+                print(response.response!) // HTTP URL response
+                print(response.data!)     // server data
                 print(response.result)   // result of response serialization
                 if let dictionary: NSDictionary = response.result.value  as? NSDictionary {
                     print("JSON: \(dictionary)")

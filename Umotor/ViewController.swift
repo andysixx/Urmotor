@@ -14,12 +14,23 @@ import AVFoundation
 class ViewController: UIViewController {
 
    
+    
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var Umotor_inc: UIImageView!
+//    @IBOutlet weak var navbar: UINavigationItem!
+    @IBOutlet weak var registerButton: UIButton!
     @IBOutlet var videoVIew: UIView!
     @IBOutlet weak var nav: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         nav.hidesBackButton = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
 //        setupView()
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -28,7 +39,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func setupView() {
-        let path = URL(fileURLWithPath: Bundle.main.path(forResource: "umotor", ofType: "mov")!)
+        let path = URL(fileURLWithPath: Bundle.main.path(forResource: "MotorGP", ofType: "mov")!)
         let player = AVPlayer(url: path as URL)
         let newlayer = AVPlayerLayer(player: player)
         newlayer.frame = videoVIew.frame
@@ -36,15 +47,23 @@ class ViewController: UIViewController {
         newlayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
         player.play()
+        player.isMuted = true
+        
         player.actionAtItemEnd = AVPlayerActionAtItemEnd.none
         
-        NotificationCenter.default.addObserver(self, selector: "playerItemDidReachEnd", name: NSNotification.Name(rawValue: "AVPlayerItemDidPlayToEndTimeNotification"), object: player.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.playerItemDidReachEnd(notifiction:)), name: NSNotification.Name(rawValue: "AVPlayerItemDidPlayToEndTimeNotification"), object: player.currentItem)
         
+        videoVIew.bringSubview(toFront: loginButton)
+        videoVIew.bringSubview(toFront: registerButton)
+        videoVIew.bringSubview(toFront: Umotor_inc)
+        
+    
     }
     func playerItemDidReachEnd(notifiction: NSNotification)
     {
-        let player : AVPlayerItem = notifiction.object as! AVPlayerItem
-        player.seek(to: kCMTimeZero)
+//        let player : AVPlayerItem = notifiction.object as! AVPlayerItem
+//        
+        //player.seek(to: kCMTimeZero)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,10 +71,18 @@ class ViewController: UIViewController {
         {
             let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = revealViewControl
-            
+            appDelegate.window?.rootViewController = revealViewControl      
+        }
+        else{
+            setupView()
         }
     }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        super.prepare(for: segue, sender: sender)
+//        let R_video = segue.destination as! RegisterViewController
+//        let L_video = segue.destination as! LoginViewController
+//    
+//    }
 
     /*
     // MARK: - Navigation

@@ -39,7 +39,6 @@ class ChatViewController: JSQMessagesViewController {
 
         title = senderDisplayName
         setupBubbles()
-        
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
@@ -56,6 +55,9 @@ class ChatViewController: JSQMessagesViewController {
         
         }
         // Do any additional setup after loading the view.
+
+                 observeMessages()
+
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -66,7 +68,7 @@ class ChatViewController: JSQMessagesViewController {
 //        addMessage(id: senderId, text: "I like turtles!")
 //        // animates the receiving of a new message on the view
 //        finishReceivingMessage()
-        observeMessages()
+       
         observeTyping()
     }
 
@@ -153,6 +155,8 @@ class ChatViewController: JSQMessagesViewController {
         isTyping = false
         // 5
         finishSendingMessage()
+    
+    
     }
     private func observeMessages() {
         // 1

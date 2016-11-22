@@ -14,19 +14,23 @@ import AVKit
 import AVFoundation
 import FirebaseStorage
 import FirebaseDatabase
-class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
+class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate,FBSDKLoginButtonDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        
+        self.TableViewCustom.selectRow(at: IndexPath(row: textField.tag , section:0), animated: false, scrollPosition: .none)
+    }
+
    
+    @IBOutlet weak var TableViewCustom: UITableView!
     @IBOutlet weak var aivLoadingSpinner: UIActivityIndicatorView!
-   
     @IBOutlet weak var LoginButton: FBSDKLoginButton!
-  
-    @IBOutlet weak var user_id_field: UITextField!
-    @IBOutlet weak var user_password_field: UITextField!
-    @IBOutlet weak var LAB: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.TableViewCustom.isScrollEnabled = false
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if let The_user = user {
+            if user != nil {
                 let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
                 let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 self.present(homeviewcontroller, animated: true, completion: nil)
@@ -39,13 +43,42 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
             }
         }
     }
-    
-    public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{return 4}
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        if indexPath.row == 0 {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "firstCustomCell", for: indexPath) as! Login_TableInputTableViewCell
+            
+            return cell
+        }
+        else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "secondCustomCell", for: indexPath) as! login_tableinput2TableViewCell
+            cell.configure(text: "", placeholder: "請輸入電子郵件")
+            cell.textfiledCum.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+        else if indexPath.row == 2 {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "secondCustomCell", for: indexPath) as! login_tableinput2TableViewCell
+            cell.configure(text: "", placeholder: "請輸入密碼")
+            cell.textfiledCum.tag = indexPath.row
+            //set the data here
+            return cell
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "buttonveiwcell", for: indexPath) as! login_tableinput3TableViewCell
+           
+            //set the data here
+            return cell
+
+        }
+    }
+       public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
     {
-        user_id_field.isHidden = true
-        user_password_field.isHidden = true
-        LAB.isHidden = true
-        self.LoginButton.isHidden = true
+//        user_id_field.isHidden = true
+//        user_password_field.isHidden = true
+//        LAB.isHidden = true
+//        self.LoginButton.isHidden = true
         aivLoadingSpinner.startAnimating()
         if(error != nil)
         {
@@ -98,16 +131,12 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate{
                             databaseRef.child("user_profile").child("\(user!.uid)/school_area").setValue("")
                             databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
                             databaseRef.child("user_profile").child("\(user!.uid)/friends").setValue("")
-                            databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue("")
+                            databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue(false)
                         }else{
                             print("User has logged in earlier")
                         }
                     
                     })
-//                    let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
-//                    let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
-//                    self.present(homeviewcontroller, animated: true, completion: nil)
-                    
                 
                 }
             }
