@@ -27,7 +27,7 @@ class ProfileTableViewController: UITableViewController, UITextFieldDelegate {
        
         while index<about.count{
             let indePath = IndexPath(row: index, section: 0)
-            let cell: TextInputTableView? = self.tableView.cellForRow(at: indePath) as! TextInputTableView
+            let cell: TextInputTableView? = self.tableView.cellForRow(at: indePath) as? TextInputTableView
             
             if cell?.myTextField.text != ""{
             

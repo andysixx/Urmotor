@@ -10,14 +10,11 @@ import UIKit
 import FBSDKLoginKit
 import AVKit
 import AVFoundation
+import FirebaseAuth
 
 class ViewController: UIViewController {
-
-   
-    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var Umotor_inc: UIImageView!
-//    @IBOutlet weak var navbar: UINavigationItem!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet var videoVIew: UIView!
     @IBOutlet weak var nav: UINavigationItem!
@@ -67,15 +64,13 @@ class ViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if(FBSDKAccessToken.current() != nil)
-        {
+        if FIRAuth.auth()?.currentUser != nil{
+        
             let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = revealViewControl      
-        }
-        else{
-            setupView()
-        }
+                                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                        appDelegate.window?.rootViewController = revealViewControl
+
+        }else{self.setupView()}
     }
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        super.prepare(for: segue, sender: sender)

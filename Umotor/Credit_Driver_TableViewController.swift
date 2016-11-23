@@ -116,10 +116,6 @@ class Credit_Driver_TableViewController: UITableViewController{
         tableView.delegate = self
         tableView.dataSource = self
         let imageUrl = self.usersArray[indexPath.row]["profile_pic_small"] as? String
-//        print(self.usersArray[indexPath.row]["profile_pic_small"] as! String)
-//        let imageData = NSData(contentsOf: imageUrl! as URL)
-//        
-//        cell.driverImage.image = UIImage(data:imageData! as Data)
         cell.driverImage.layer.borderWidth = 2.5
         if(self.usersArray[indexPath.row]["online"] as! Bool  ==  true){
             cell.driverImage.layer.borderColor = UIColor.green.cgColor
@@ -129,20 +125,14 @@ class Credit_Driver_TableViewController: UITableViewController{
         }
         let firstName = (self.usersArray[indexPath.row]["name"] as? String)!.components(separatedBy: " ")[0]
         cell.DriverName.text = firstName
+        
         if let url = NSURL(string: imageUrl!)
         {
-            print("\nstart download: \(url.lastPathComponent!)")
-            URLSession.shared.dataTask(with: url as URL, completionHandler: { (data, _, error) -> Void in
-                guard let data = data, error == nil else {
-                    print("\nerror on download \(error.debugDescription)")
-                    return
-                }
-                DispatchQueue.main.async {
-                    cell.driverImage.image = UIImage(data: data)
-                }
-            }).resume()
+            DispatchQueue.main.async {
+                cell.driverImage.sd_setImage(with: url as URL!)
+                
+            }
         }
-//        self.tableView?.reloadData()
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){

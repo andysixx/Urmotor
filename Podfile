@@ -23,4 +23,5 @@ target ‘Umotor’ do
   pod ‘Cosmos’
   pod 'UrbanAirship-iOS-SDK'
   pod 'Pushbots'
+  pod 'SDWebImage'
 end

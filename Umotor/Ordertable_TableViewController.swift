@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import SDWebImage
 //import AlamofireImage
 
 class Ordertable_TableViewController: UITableViewController  {
@@ -80,18 +81,12 @@ class Ordertable_TableViewController: UITableViewController  {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
-        if let url = NSURL(string: User_picture!)
+        if let url = URL(string: User_picture!)
         {
-            print("\nstart download: \(url.lastPathComponent!)")
-            URLSession.shared.dataTask(with: url as URL, completionHandler: { (data, _, error) -> Void in
-                guard let data = data, error == nil else {
-                    print("\nerror on download \(error.debugDescription)")
-                    return
-                }
                 DispatchQueue.main.async {
-                    cell.Custom_pic.image = UIImage(data: data)
+                    cell.Custom_pic.sd_setImage(with: url)
+
                 }
-            }).resume()
         }
         cell.Start_point.text = Star_point_value
         cell.Time_point.text = dateFormatter.string(from: date as Date)

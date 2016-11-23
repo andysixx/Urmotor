@@ -89,15 +89,29 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         commit.resignFirstResponder()
         return true
     }
-    //
-    override var preferredStatusBarStyle : UIStatusBarStyle  {
-        return .lightContent
-    }
-    
-    func toggle(_ sender: AnyObject!) {
-        self.buttonM.showsMenu = !self.buttonM.showsMenu
-    }
-//
+//    //
+//    override var preferredStatusBarStyle : UIStatusBarStyle  {
+//        return .lightContent
+//    }
+//    
+//    func toggle(_ sender: AnyObject!) {
+//        self.buttonM.showsMenu = !self.buttonM.showsMenu
+//    }
+////
+//    func loginOrNOT()
+//    {
+//        if FIRAuth.auth()?.currentUser?.uid == nil{
+//            
+//        
+//        }
+//    }
+//    func handlelogout(){
+//        do{
+//            try
+//        
+//        }
+//    
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         commit.delegate = self
@@ -109,7 +123,7 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         GMapView.settings.myLocationButton = true
         geoCoder = GMSGeocoder()
         GMapView.delegate = self
-      
+    
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true

@@ -26,6 +26,9 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
     @IBOutlet weak var TableViewCustom: UITableView!
     @IBOutlet weak var aivLoadingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var LoginButton: FBSDKLoginButton!
+    var email_text: String?
+    var password_text: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.TableViewCustom.isScrollEnabled = false
@@ -44,7 +47,31 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
         }
     }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{return 4}
+    func handleLogin(){
+        var index = 1
+        while index<3 {
+            let indePath = IndexPath(row: index, section: 0)
+            let cell: login_tableinput2TableViewCell? = self.TableViewCustom.cellForRow(at: indePath) as? login_tableinput2TableViewCell
+            if index == 1{
+                email_text = (cell?.textfiledCum.text)!
+            }
+            else if index == 2{
+                password_text = (cell?.textfiledCum.text)!
+            }
+            index+=1
 
+        }
+        FIRAuth.auth()?.signIn(withEmail: email_text!, password: password_text!, completion: {(user, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+        })
+    
+    
+    
+    }
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         if indexPath.row == 0 {
            let cell = tableView.dequeueReusableCell(withIdentifier: "firstCustomCell", for: indexPath) as! Login_TableInputTableViewCell
@@ -67,7 +94,7 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "buttonveiwcell", for: indexPath) as! login_tableinput3TableViewCell
-           
+           cell.EmailloginButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
             //set the data here
             return cell
 
@@ -75,10 +102,6 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
     }
        public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
     {
-//        user_id_field.isHidden = true
-//        user_password_field.isHidden = true
-//        LAB.isHidden = true
-//        self.LoginButton.isHidden = true
         aivLoadingSpinner.startAnimating()
         if(error != nil)
         {

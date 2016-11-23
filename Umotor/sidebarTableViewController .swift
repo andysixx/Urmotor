@@ -50,63 +50,132 @@ class sidebarTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             })
-            User_name.text = "Hi!~"+name!
-            manageConnections(userID: uid)
-            let storage = FIRStorage.storage()
-            let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
-            let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
-            let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
-            profilePicRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-                if (error != nil) {
-                    print("Uable to download image")
-                }else{
-                    if(data != nil){
-                        print("User already has an Image Not need to Download from facebook")
-                        self.User_profile_pic.image = UIImage(data : data!)
-                    }
-                }
-            }
-            if(self.User_profile_pic.image == nil)
-            {
-                _ = profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
+            if(FBSDKAccessToken.current() != nil){
+                FBLogin_Prepare(Name: name!, UserID: uid)
             
-                if(error == nil){
-                    let dictionary = result as? NSDictionary
-                    let data = dictionary?.object(forKey: "data") as? NSDictionary
-                    let urlPic = data?.object(forKey: "url") as! String
-                    if let imageData = NSData(contentsOf: URL(string:urlPic)!)
-                    {
-                        let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
-                        let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
-                            metadata,error in
-                            
-                            if(error == nil)
-                            {
-                                let downloadUrl = metadata?.downloadURLs
-                            }
-                            else
-                            {
-                                print("error in download image")
-                            }
-                        }
-                        
-                        self.User_profile_pic.image = UIImage(data: imageData as Data)
-                    }
-                    
-                    
-                }
-            })
+            }else{
+                
             }
+//            User_name.text = "Hi!~"+name!
+//            manageConnections(userID: uid)
+//            let storage = FIRStorage.storage()
+//            let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
+//            let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
+//            let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
+//            profilePicRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
+//                if (error != nil) {
+//                    print("Uable to download image")
+//                }else{
+//                    if(data != nil){
+//                        print("User already has an Image Not need to Download from facebook")
+//                        self.User_profile_pic.image = UIImage(data : data!)
+//                    }
+//                }
+//            }
+//            if(self.User_profile_pic.image == nil)
+//            {
+//                _ = profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
+//            
+//                if(error == nil){
+//                    let dictionary = result as? NSDictionary
+//                    let data = dictionary?.object(forKey: "data") as? NSDictionary
+//                    let urlPic = data?.object(forKey: "url") as! String
+//                    if let imageData = NSData(contentsOf: URL(string:urlPic)!)
+//                    {
+//                        let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
+//                        let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+//                            metadata,error in
+//                            
+//                            if(error == nil)
+//                            {
+//                                let downloadUrl = metadata?.downloadURLs
+//                            }
+//                            else
+//                            {
+//                                print("error in download image")
+//                            }
+//                        }
+//                        
+//                        self.User_profile_pic.image = UIImage(data: imageData as Data)
+//                    }
+//                    
+//                    
+//                }
+//            })
+//            }
             // User is signed in.
         
         }
-            else {
+        else{
             // No user is signed in.
         }
         
         
     }
+    func EmailLogin_Prepare(Name: String,User_ID: String){
+        User_name.text = "Hi!~"+Name
+        FIRDatabase.database().reference().child("user_profile").child(User_ID).child("profile_pic_small").observeSingleEvent(of: .value, with:{ (snapshot) in
+            let pictureURL = snapshot.value as! String
+            if let url = NSURL(string: pictureURL){
+            
+            }
+        
+        })
+    }
+    func FBLogin_Prepare(Name: String, UserID: String){
     
+                    User_name.text = "Hi!~"+Name
+                    manageConnections(userID: UserID)
+                    let storage = FIRStorage.storage()
+                    let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
+                    let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
+                    let profilePicRef = storageRef.child( UserID + "/profile_pic.jpg")
+                    profilePicRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
+                        if (error != nil) {
+                            print("Uable to download image")
+                        }else{
+                            if(data != nil){
+                                print("User already has an Image Not need to Download from facebook")
+                                self.User_profile_pic.image = UIImage(data : data!)
+                            }
+                        }
+                    }
+                    if(self.User_profile_pic.image == nil)
+                    {
+                        _ = profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
+        
+                        if(error == nil){
+                            let dictionary = result as? NSDictionary
+                            let data = dictionary?.object(forKey: "data") as? NSDictionary
+                            let urlPic = data?.object(forKey: "url") as! String
+                            if let imageData = NSData(contentsOf: URL(string:urlPic)!)
+                            {
+                                let profilePicRef = storageRef.child( UserID + "/profile_pic.jpg")
+                                let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+                                    metadata,error in
+        
+                                    if(error == nil)
+                                    {
+                                        let downloadUrl = metadata?.downloadURLs
+                                    }
+                                    else
+                                    {
+                                        print("error in download image")
+                                    }
+                                }
+                                
+                                self.User_profile_pic.image = UIImage(data: imageData as Data)
+                            }
+                            
+                            
+                        }
+                    })
+                    }
+
+    
+    
+    
+    }
     override func viewWillDisappear(_ animated: Bool) {
         self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").observeSingleEvent(of: .value, with:{ (snapshot) in
             let mode_check = snapshot.value as? AnyObject
