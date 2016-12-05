@@ -12,14 +12,17 @@ import FBSDKLoginKit
 import  FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import KumulosSDK
 
 class RegisterViewController: UIViewController,UITableViewDataSource,UITextFieldDelegate,FBSDKLoginButtonDelegate {
+//    @IBOutlet weak var myTableVew: UITableView!
+    @IBOutlet weak var myTableView: UITableView!
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         
         self.myTableView.selectRow(at: IndexPath(row: textField.tag , section:0), animated: false, scrollPosition: .none)
     }
-    @IBOutlet weak var myTableView: UITableView!
+//    @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var Create_account: UIButton!
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     var email_text: String?
@@ -100,7 +103,7 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
     
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell", for: indexPath) as! Register_TableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LRegister_TableViewCell", for: indexPath) as! Register_TableViewCell
             
             return cell
         }
@@ -108,6 +111,7 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
             let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
             cell.configure(text: "", placeholder: "請輸入電子郵件")
             cell.email_text.tag = indexPath.row
+            cell.Email_image.image = UIImage(named: "envelope")
             //set the data here
             return cell
         }
@@ -115,6 +119,7 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
             let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
             cell.configure(text: "", placeholder: "請輸入密碼")
             cell.email_text.tag = indexPath.row
+            cell.Email_image.image = UIImage(named: "Key_Document-512")
             //set the data here
             return cell
         }
@@ -122,6 +127,7 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
             let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
             cell.configure(text: "", placeholder: "請確認密碼")
             cell.email_text.tag = indexPath.row
+            cell.Email_image.image = UIImage(named: "Key_Document-512")
             //set the data here
             return cell
         }
@@ -129,6 +135,7 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
             let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
             cell.configure(text: "", placeholder: "請輸入用戶名稱")
             cell.email_text.tag = indexPath.row
+            cell.Email_image.image = UIImage(named: "delivery-man")
             //set the data here
             return cell
         }
@@ -136,6 +143,7 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
             let cell = tableView.dequeueReusableCell(withIdentifier: "Register_TableViewCell_1", for: indexPath) as! Register_TableViewCell_1
             cell.configure(text: "", placeholder: "請輸入性別")
             cell.email_text.tag = indexPath.row
+            cell.Email_image.image = UIImage(named: "female-and-male-silhouettes-with-a-vertical-line-in-the-middle")
             //set the data here
             return cell
         }
@@ -173,6 +181,9 @@ class RegisterViewController: UIViewController,UITableViewDataSource,UITextField
                     //store the user ID
                     let userID = user?.uid
                     let databaseRef = FIRDatabase.database().reference()
+                    let installId = Kumulos.installId
+                    print("installId: \(installId)")
+                    databaseRef.child("user_profile").child((user?.uid)!).child("install_id").setValue(installId)
                     databaseRef.child("user_profile").child(userID!).child("profile_pic_small").observeSingleEvent(of: .value, with: {(snapshot) in
                         print(snapshot)
                         let profilePic = snapshot.value as? String?

@@ -1,3 +1,4 @@
+
 //
 //  Record_ViewController.swift
 //  Umotor
@@ -9,6 +10,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import SVProgressHUD
 
 class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableViewDataSource {
 
@@ -35,7 +37,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SVProgressHUD.show()
         self.loggedInUser = FIRAuth.auth()?.currentUser
         self.databaseCallCarRef.child("Call_Moto").child((self.loggedInUser?.uid)!).observe(.value, with: {(snapshot) in
                 print(snapshot)
@@ -50,7 +52,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
                 if(Type as! String == "all"){
                     let alldetails = self.userDict?.object(forKey: "all") as? NSDictionary
                     print(alldetails!)
-                    for(OrderID, detail_all) in alldetails!{
+                    for(_, detail_all) in alldetails!{
                         self.UserAllrecordArray.append(detail_all as AnyObject)
                         let _ = self.UserAllrecordArray.sort { (obj1, obj2) -> Bool in
                             return (obj1["time"] as! Double) > (obj2["time"] as! Double)}
@@ -61,7 +63,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
                 if(Type as! String == "wait"){
                     let alldetails = self.userDict?.object(forKey: "wait") as? NSDictionary
                     print(alldetails!)
-                    for(OrderID, detail_wait) in alldetails!{
+                    for(_, detail_wait) in alldetails!{
                         self.UserWaitrecordArray.append(detail_wait as AnyObject)
                         let _ = self.UserWaitrecordArray.sort { (obj1, obj2) -> Bool in
                             return (obj1["time"] as! Double) > (obj2["time"] as! Double)}
@@ -72,7 +74,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
                 if(Type as! String == "ing"){
                     let alldetails = self.userDict?.object(forKey: "ing") as? NSDictionary
                     print(alldetails!)
-                    for(OrderID, detail_wait) in alldetails!{
+                    for(_, detail_wait) in alldetails!{
                         print(detail_wait)
                         print(Type)
                         self.UserIngrecordArray.append(detail_wait as AnyObject)
@@ -85,7 +87,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
                 if(Type as! String == "finished"){
                     let alldetails = self.userDict?.object(forKey: "finished") as? NSDictionary
                     print(alldetails!)
-                    for(OrderID, detail_wait) in alldetails!{
+                    for(_, detail_wait) in alldetails!{
                         self.UserFinishrecordArray.append(detail_wait as AnyObject)
                         let _ = self.UserFinishrecordArray.sort { (obj1, obj2) -> Bool in
                             return (obj1["time"] as! Double) > (obj2["time"] as! Double)}
@@ -96,7 +98,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
                 if(Type as! String == "cancel"){
                     let alldetails = self.userDict?.object(forKey: "cancel") as? NSDictionary
                     print(alldetails!)
-                    for(OrderID, detail_wait) in alldetails!{
+                    for(_, detail_wait) in alldetails!{
                         self.UserCancelrecordArray.append(detail_wait as AnyObject)
                         let _ = self.UserCancelrecordArray.sort { (obj1, obj2) -> Bool in
                             return (obj1["time"] as! Double) > (obj2["time"] as! Double)}
@@ -109,6 +111,7 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
                 print(details)
             }
             }
+            SVProgressHUD.dismiss()
             self.MyTableView?.reloadData()
         })
         // burger side bar menu
@@ -237,7 +240,9 @@ class Record_ViewController: UIViewController, URLSessionDataDelegate, UITableVi
     }
 
     @IBAction func Change_type(_ sender: Any) {
+        SVProgressHUD.show()
         self.MyTableView.reloadData()
+        SVProgressHUD.dismiss()
     }
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

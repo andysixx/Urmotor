@@ -11,6 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import SDWebImage
 //import AlamofireImage
+import SVProgressHUD
 
 class Ordertable_TableViewController: UITableViewController  {
 
@@ -25,6 +26,7 @@ class Ordertable_TableViewController: UITableViewController  {
     let databaseDriverOrderRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.show()
         if revealViewController() != nil{
             Button.target = revealViewController()
             Button.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -43,7 +45,7 @@ class Ordertable_TableViewController: UITableViewController  {
                     {       self.UID_ID.append(UserID as AnyObject)
                         let waittdetails = (orderdetails as AnyObject).object(forKey: "wait") as? NSDictionary
                         if(waittdetails != nil){
-                            for(OrderID ,CustomOrder) in waittdetails!{
+                            for(_ ,CustomOrder) in waittdetails!{
                                 self.OrderList.append(CustomOrder as AnyObject)
                                 //self.ORD_DI.append(OrderID as AnyObject)
                                 let _ = self.OrderList.sort { (obj1, obj2) -> Bool in
@@ -55,8 +57,9 @@ class Ordertable_TableViewController: UITableViewController  {
                     self.tableView?.reloadData()
                 }
             }
+            
             self.tableView?.reloadData()
-
+            SVProgressHUD.dismiss()
         })
     }
 
@@ -81,10 +84,10 @@ class Ordertable_TableViewController: UITableViewController  {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
-        if let url = URL(string: User_picture!)
+        if let url = NSURL(string: User_picture!)
         {
                 DispatchQueue.main.async {
-                    cell.Custom_pic.sd_setImage(with: url)
+                    cell.Custom_pic.sd_setImage(with: url as URL!)
 
                 }
         }

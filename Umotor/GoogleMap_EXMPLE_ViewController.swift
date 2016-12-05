@@ -1,3 +1,4 @@
+
 //
 //  GoogleMap_EXMPLE_ViewController.swift
 //  Umotor
@@ -10,20 +11,22 @@ import UIKit
 import GoogleMapsCore
 import GoogleMaps
 import GoogleMapsBase
+import GooglePlaces
 import CoreLocation
 import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
-import FirebaseMessaging
 import SwiftyJSON
 import NetworkExtension
 import FirebaseInstanceID
 import AFNetworking
 import Alamofire
+import SVProgressHUD
+import KumulosSDK
 
 
-class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,UITextFieldDelegate{
-    var buttonM: HamburgerButton! = nil
+class GoogleMap_EXMPLE_ViewController: UIViewController,UISearchBarDelegate,CLLocationManagerDelegate,GMSMapViewDelegate,UITextFieldDelegate,GMSAutocompleteViewControllerDelegate{
+
     @IBOutlet weak var Start_position: UITextField!
     @IBOutlet weak var GMapView: GMSMapView!
     @IBOutlet weak var ButtonBar: UIBarButtonItem!
@@ -51,69 +54,54 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
     var PB: CLLocationCoordinate2D?
     var regional: String!
     var destional: String!
+    var OrderIDs: String!
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
+    var ModeType : NSDictionary?
+//    var NowInterval: AnyObject?
   
-    func directionAPITest(origin: String!, destination: String!) {
-        var directionsURLString = baseURLDirections + "origin=" + origin + "&destination=" + destination
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 20)
         
-        directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        Alamofire.request(directionsURLString).responseJSON
-            { response in
-                print(response.request!)  // original URL request
-                print(response.response!) // HTTP URL response
-                print(response.data!)     // server data
-                print(response.result)   // result of response serialization
-                if let dictionary: NSDictionary = response.result.value  as? NSDictionary {
-                    print("JSON: \(dictionary)")
-                    let parsedData = JSON(response.result.value!)
-                    let status = dictionary["status"] as! String
-                    if status == "OK" {
-                    let routes = dictionary["routes"] as! [NSDictionary]
-                        print(routes)
-                        let path = GMSPath.init(fromEncodedPath: (parsedData["routes"][0]["overview_polyline"]["points"].string)!)
-                        let distance = (parsedData["routes"][0]["legs"][0]["distance"]["value"].intValue)
-                        print(distance)
-                        self.count_price(meter: distance)
-                        let singleLine = GMSPolyline.init(path: path)
-                        singleLine.strokeWidth = 5
-                        singleLine.geodesic = true
-                        singleLine.map = self.GMapView
-                    }
-                }
-        }
+        self.GMapView.camera = camera
+        self.dismiss(animated: true, completion: nil)
+    }
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("Error Complete \(error)")
+    }
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.dismiss(animated: true, completion: nil)
+        //取消搜尋
     }
     func dismissKeyboard(){
         commit.resignFirstResponder()
+    }
+    @IBAction func SearchGMPlace(_ sender: Any) {
+        let searchController = UISearchController()
+        searchController.searchBar.delegate = self
+        self.present(searchController, animated: true, completion: nil)
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField != commit{
+        let AutosearchController = GMSAutocompleteViewController()
+        AutosearchController.delegate = self
+        self.present(AutosearchController, animated: true, completion: nil)
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         commit.resignFirstResponder()
         return true
     }
-//    //
-//    override var preferredStatusBarStyle : UIStatusBarStyle  {
-//        return .lightContent
-//    }
-//    
-//    func toggle(_ sender: AnyObject!) {
-//        self.buttonM.showsMenu = !self.buttonM.showsMenu
-//    }
-////
-//    func loginOrNOT()
-//    {
-//        if FIRAuth.auth()?.currentUser?.uid == nil{
-//            
-//        
-//        }
-//    }
-//    func handlelogout(){
-//        do{
-//            try
-//        
-//        }
-//    
-//    }
+    @IBAction func CommitEnd(_ sender: Any) {
+        self.view.endEditing(true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+//        SVProgressHUD.show()
+        let installId = Kumulos.installId
+        print("installId: \(installId)")
+        ref.child("user_profile").child((user?.uid)!).child("install_id").setValue(installId)
+        Start_position.delegate = self
+        End_position.delegate = self
         commit.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -123,15 +111,15 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         GMapView.settings.myLocationButton = true
         geoCoder = GMSGeocoder()
         GMapView.delegate = self
+        self.ButtonBar.tintColor = UIColor.black
     
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        
+//        SVProgressHUD.dismiss()
         if revealViewController() != nil{
             ButtonBar.target = revealViewController()
             ButtonBar.action = #selector(SWRevealViewController.revealToggle(_:))
-            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         // burger side bar menu
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GoogleMap_EXMPLE_ViewController.dismissKeyboard)))
@@ -154,6 +142,16 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         })
 
     }
+    func ResetPoint(){
+        self.set_location.isHidden = false
+        self.Check_Call.isHidden = true
+        self.End_position.isHidden = true
+        self.commit.isHidden = true
+        self.navigationItem.rightBarButtonItem = nil
+
+        Center_icon.image = UIImage(named: "google-location-icon-Location_marker_pin_map_gps")
+        GMapView.clear()
+    }
 
     @IBAction func set_Start_Position(_ sender: AnyObject) {
         self.set_location.isHidden = true
@@ -171,7 +169,8 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         let slongitude :String = String(format:"%f", GMapView.camera.target.longitude)
         regional = sltatitude + "," + slongitude
         Center_icon.image = UIImage(named: "End_point_icon")
-    
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"重設", style: UIBarButtonItemStyle.plain, target: self , action: #selector(ResetPoint))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         
     }
@@ -192,8 +191,39 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         destional = eltatitude + "," + elongitude
         self.finishCAll = 1
         directionAPITest(origin:  regional , destination: destional)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"重設", style: UIBarButtonItemStyle.plain, target: self , action: #selector(resetpoint_1))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+
+    }
+    func resetpoint_1(){
+//        Check_Call.isHidden = false
+        self.set_location.isHidden = false
+        Price_label.isHidden = true
+        Check.isHidden = true
+        Center_icon.isHidden = false
+        self.End_position.isHidden = true
+        self.commit.isHidden = true
+        self.finishCAll = 0
+        self.navigationItem.rightBarButtonItem = nil
+        Center_icon.image = UIImage(named: "google-location-icon-Location_marker_pin_map_gps")
+        GMapView.clear()
+        print("123")
+    
+    }
+    func showAlertToComplete(alert: String!){
+        let myAlert = UIAlertController(title: "請設定完整地址訊息！", message: alert, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default){(ACTION) in
+            print("ok")
+        }
+        myAlert.addAction(okAction)
+        self.present(myAlert, animated: true, completion: nil)
     }
     @IBAction func Check_to_Call(_ sender: AnyObject) {
+        if Start_position.text == ""{showAlertToComplete(alert: "請設定乘車位置！")}
+        else if End_position.text == ""{showAlertToComplete(alert: "請設定目的地！")}
+        else {
+        sendNotificationToUser()
+        self.Check.isEnabled = false
         let NowInterval = NSDate().timeIntervalSince1970
         print(NowInterval)
         let dateFormatter = DateFormatter()
@@ -205,10 +235,10 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         print("对应的日期时间：\(dformatter.string(from: date as Date))")
         let nowString = dateFormatter.string(from: date as Date)
         print(nowString)
-        
         let dateString = DateFormatter.localizedString(from: Date() , dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.short)
         print("formatted date is =  \(dateString)")
         let OrderUID = ref.child("Call_Moto").child((user?.uid)!).child("all").childByAutoId().key
+        OrderIDs = OrderUID
         let MapMotorPoint = [
             "useruid" : ((user?.uid)!),
             "startpoint": (Start_position.text)! as String,
@@ -227,7 +257,63 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
             ] as [String : Any]
         ref.child("Call_Moto").child((user?.uid)!).child("all").child(OrderUID).setValue(MapMotorPoint)
         ref.child("Call_Moto").child((user?.uid)!).child("wait").child(OrderUID).setValue(MapMotorPoint)
-        sendNotificationToUser()
+        
+        SVProgressHUD.show(withStatus: "配對中")
+        self.GMapView.isUserInteractionEnabled = false
+        self.ButtonBar.isEnabled = false
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"取消", style: UIBarButtonItemStyle.plain, target: self , action: #selector(stopCall))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+
+        ref.child("Call_Moto").child((user?.uid)!).child("all").child(OrderUID).observe(.value, with: {(snapshot) in
+        self.ModeType = snapshot.value as? NSDictionary
+            if self.ModeType != nil {
+                let call_Mode = self.ModeType?.object(forKey: "mode") as! String
+                if call_Mode != "配對中"{
+                    SVProgressHUD.showSuccess(withStatus: "配對成功")
+                    self.GMapView.isUserInteractionEnabled = true
+                    self.ButtonBar.isEnabled = true
+                
+                    let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = revealViewControl
+                }
+            }
+        
+        })
+        }
+    }
+    func stopCall(){
+        SVProgressHUD.dismiss()
+        self.GMapView.isUserInteractionEnabled = true
+        self.ButtonBar.isEnabled = true
+        self.Check.isEnabled = true
+//         ref.removeAllObservers()
+        let NowInterval = NSDate().timeIntervalSince1970
+        let newUserData = ["mode":"已取消"]
+//      let MapMotorInfo = MapMotorInforSet(Mode: "已取消", Driver_id: "無")
+        let MapMotorPoint = [
+            "useruid" : ((user?.uid)!),
+            "startpoint": (Start_position.text)! as String,
+            "startlatitude":Start_latitude!,
+            "startlongitude":Start_longitude!,
+            "endlatitude":End_latitude!,
+            "endlongitude":End_longitude!,
+            "endpoint":(End_position.text)! as String,
+            "commit":(commit.text)! as String,
+            "mode":"已取消",
+            "time": NowInterval ,
+            "distance": Price_label.text!,
+            "thedriver":"無",
+            "orderid": OrderIDs,
+            "picture": user_small_pic!
+            ] as [String : Any]
+         ref.child("Call_Moto").child((user?.uid)!).child("all").child(OrderIDs).updateChildValues(newUserData)
+         ref.child("Call_Moto").child((user?.uid)!).child("cancel").child(OrderIDs).setValue(MapMotorPoint)
+        self.Check.isEnabled = true
+        ref.child("Call_Moto").child((user?.uid)!).child("wait").child(OrderIDs).removeValue()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"重設", style: UIBarButtonItemStyle.plain, target: self , action: #selector(resetpoint_1))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
     func  locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
@@ -307,11 +393,19 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         let base64LoginString = loginData.base64EncodedString()
         urlRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         // -u
+        
+        //let dictionary:[String:Any] = ["broadcast": true, "title":"新訂單訊息", "message":"附近有人丟出訂單，開啟您的司機模式接單吧！"]
+        
         let dictionary:[String:Any] = ["broadcast": true, "title":"新訂單訊息", "message":"附近有人丟出訂單，開啟您的司機模式接單吧！"]
+        
+
+        
+        
         do {
             let data = try  JSONSerialization.data(withJSONObject: dictionary, options: [])
             let task = URLSession.shared.uploadTask(with: urlRequest, from: data, completionHandler: { (data, response, err) in
-            
+                        print("erraaaa \(err.debugDescription)")
+                
             
                 })
                 task.resume()
@@ -320,6 +414,36 @@ class GoogleMap_EXMPLE_ViewController: UIViewController,CLLocationManagerDelegat
         
         }
     }
+    func directionAPITest(origin: String!, destination: String!) {
+        var directionsURLString = baseURLDirections + "origin=" + origin + "&destination=" + destination
+        
+        directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        Alamofire.request(directionsURLString).responseJSON
+            { response in
+                print(response.request!)  // original URL request
+                print(response.response!) // HTTP URL response
+                print(response.data!)     // server data
+                print(response.result)   // result of response serialization
+                if let dictionary: NSDictionary = response.result.value  as? NSDictionary {
+                    print("JSON: \(dictionary)")
+                    let parsedData = JSON(response.result.value!)
+                    let status = dictionary["status"] as! String
+                    if status == "OK" {
+                        let routes = dictionary["routes"] as! [NSDictionary]
+                        print(routes)
+                        let path = GMSPath.init(fromEncodedPath: (parsedData["routes"][0]["overview_polyline"]["points"].string)!)
+                        let distance = (parsedData["routes"][0]["legs"][0]["distance"]["value"].intValue)
+                        print(distance)
+                        self.count_price(meter: distance)
+                        let singleLine = GMSPolyline.init(path: path)
+                        singleLine.strokeWidth = 5
+                        singleLine.geodesic = true
+                        singleLine.map = self.GMapView
+                    }
+                }
+        }
+    }
+
        /*
     // MARK: - Navigation
 

@@ -14,6 +14,9 @@ import AVKit
 import AVFoundation
 import FirebaseStorage
 import FirebaseDatabase
+import SVProgressHUD
+import KumulosSDK
+
 class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate,FBSDKLoginButtonDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -24,7 +27,6 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
 
    
     @IBOutlet weak var TableViewCustom: UITableView!
-    @IBOutlet weak var aivLoadingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var LoginButton: FBSDKLoginButton!
     var email_text: String?
     var password_text: String?
@@ -36,7 +38,10 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
             if user != nil {
                 let mainstoryboard: UIStoryboard = UIStoryboard(name:"Main",bundle:nil)
                 let homeviewcontroller: UIViewController = mainstoryboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+                SVProgressHUD.dismiss()
+                
                 self.present(homeviewcontroller, animated: true, completion: nil)
+                
             }
             else{
             // No user is signed in.
@@ -82,6 +87,8 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
             let cell = tableView.dequeueReusableCell(withIdentifier: "secondCustomCell", for: indexPath) as! login_tableinput2TableViewCell
             cell.configure(text: "", placeholder: "請輸入電子郵件")
             cell.textfiledCum.tag = indexPath.row
+            cell.icon_plan.image = UIImage(named: "envelope")
+            
             //set the data here
             return cell
         }
@@ -89,6 +96,7 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
            let cell = tableView.dequeueReusableCell(withIdentifier: "secondCustomCell", for: indexPath) as! login_tableinput2TableViewCell
             cell.configure(text: "", placeholder: "請輸入密碼")
             cell.textfiledCum.tag = indexPath.row
+            cell.icon_plan.image = UIImage(named: "Key_Document-512")
             //set the data here
             return cell
         }
@@ -102,17 +110,17 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
     }
        public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
     {
-        aivLoadingSpinner.startAnimating()
+        SVProgressHUD.show(withStatus: "登入中")
         if(error != nil)
         {
             print(error.localizedDescription)
             self.LoginButton.isHidden = false
-            aivLoadingSpinner.stopAnimating()
+            SVProgressHUD.dismiss()
         }
         else if (result.isCancelled)
         {
             self.LoginButton.isHidden = false
-            aivLoadingSpinner.stopAnimating()
+            SVProgressHUD.dismiss()
         }
         else
         {
@@ -125,13 +133,16 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
                     let profilePicRef = storageRef.child(user!.uid + "profile_pic_small.jpg")
                     let userID = user?.uid
                     let databaseRef = FIRDatabase.database().reference()
+                    let installId = Kumulos.installId
+                    print("installId: \(installId)")
+                    databaseRef.child("user_profile").child((user?.uid)!).child("install_id").setValue(installId)
                     databaseRef.child("user_profile").child(userID!).child("profile_pic_small").observeSingleEvent(of: .value, with: {
                         (snapshot) in
-                        var profilePic = snapshot.value as? String?
+                        let profilePic = snapshot.value as? String?
                         
                         if(profilePic == nil){
                             if let imageData = NSData(contentsOf: user!.photoURL!){
-                                let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+                                _ = profilePicRef.put(imageData as Data, metadata: nil){
                                     metadata,error in
                                     if(error == nil){
                                     
@@ -155,6 +166,7 @@ class LoginViewController: UIViewController,UITableViewDataSource, UITableViewDe
                             databaseRef.child("user_profile").child("\(user!.uid)/email").setValue(user?.email)
                             databaseRef.child("user_profile").child("\(user!.uid)/friends").setValue("")
                             databaseRef.child("user_profile").child("\(user!.uid)/driver_mode").setValue(false)
+                            
                         }else{
                             print("User has logged in earlier")
                         }

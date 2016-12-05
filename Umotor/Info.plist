@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,6 +31,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>a96d9a779fbfd9cfb7ab15506c20346d548183ee</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>1742699819311440</string>
 	<key>FacebookDisplayName</key>
@@ -75,12 +91,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>系統將取用您的相機！</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>I need location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>I need location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>系統將上傳您的相片資訊</string>
+	<string>系統將使用您的照片！！</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

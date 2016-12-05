@@ -12,6 +12,7 @@ import AVKit
 import AVFoundation
 import FirebaseAuth
 
+
 class ViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var Umotor_inc: UIImageView!
@@ -25,7 +26,6 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-//        setupView()
         
         
         // Do any additional setup after loading the view.
@@ -64,20 +64,18 @@ class ViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if FIRAuth.auth()?.currentUser != nil{
+                if FIRAuth.auth()?.currentUser != nil{
         
-            let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-                                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                                        appDelegate.window?.rootViewController = revealViewControl
-
-        }else{self.setupView()}
-    }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//        let R_video = segue.destination as! RegisterViewController
-//        let L_video = segue.destination as! LoginViewController
-//    
-//    }
+                    let revealViewControl = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = revealViewControl
+        
+                }
+            else{
+                // No user is signed in.
+                self.setupView()
+            }
+        }
 
     /*
     // MARK: - Navigation
@@ -88,5 +86,6 @@ class ViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }

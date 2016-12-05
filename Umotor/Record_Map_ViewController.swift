@@ -47,6 +47,10 @@ class Record_Map_ViewController: UIViewController {
         let date = NSDate(timeIntervalSince1970: Time_point_value!)
         self.Start_point_lab.text = regandata?.object(forKey: "startpoint") as? String
         self.End_point_lab.text = regandata?.object(forKey: "endpoint") as? String
+        let commition = regandata?.object(forKey: "commit") as? String
+        if commition != ""{
+            commit.text = commition
+        }
         let stlat :String = String(format:"%f", Start_latitude!.doubleValue)
         let stlng :String = String(format:"%f", Start_longitude!.doubleValue)
         print(Start_latitude!.doubleValue)

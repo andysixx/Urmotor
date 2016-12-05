@@ -77,7 +77,7 @@ class ProfileTableViewController: UITableViewController, UITextFieldDelegate {
             
         }
        
-       var refHandle = self.ref.child("user_profile").observe(FIRDataEventType.value, with: { (snapshot) in
+       _ = self.ref.child("user_profile").observe(FIRDataEventType.value, with: { (snapshot) in
             let usersDict = snapshot.value as! NSDictionary
             let userDetails = usersDict.object(forKey: self.user!.uid) as! NSDictionary
             print(userDetails)

@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import  FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
+import SDWebImage
 class sidebarTableViewController: UITableViewController {
     @IBOutlet weak var User_profile_pic: UIImageView!
 //    @IBOutlet weak var User_profile_pic: UIImageView!
@@ -33,12 +34,15 @@ class sidebarTableViewController: UITableViewController {
         
         if let user = FIRAuth.auth()?.currentUser {
             let name = user.displayName
-            let email = user.email
-            let photoUrl = user.photoURL
+            _ = user.email
+            _ = user.photoURL
             let uid = user.uid
             self.uidofuser = user.uid
+//            print(email!)
+//            print(photoUrl!)
             self.databaseRef.child("user_profile").child(user.uid).child("driver_mode").observeSingleEvent(of: .value, with:{ (snapshot) in
-                let mode_check = snapshot.value as? AnyObject
+                let mode_check = snapshot.value
+               
                 print(user.uid)
                 print(mode_check!)
                 if(mode_check as! Bool == true){
@@ -50,59 +54,20 @@ class sidebarTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             })
+            
+            
+            
             if(FBSDKAccessToken.current() != nil){
+                print(name!)
                 FBLogin_Prepare(Name: name!, UserID: uid)
             
-            }else{
-                
             }
-//            User_name.text = "Hi!~"+name!
-//            manageConnections(userID: uid)
-//            let storage = FIRStorage.storage()
-//            let storageRef = storage.reference(forURL: "gs://umotor-7f3dd.appspot.com")
-//            let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height":300,"width":"300","redirect":false],httpMethod:"GET")
-//            let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
-//            profilePicRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-//                if (error != nil) {
-//                    print("Uable to download image")
-//                }else{
-//                    if(data != nil){
-//                        print("User already has an Image Not need to Download from facebook")
-//                        self.User_profile_pic.image = UIImage(data : data!)
-//                    }
-//                }
-//            }
-//            if(self.User_profile_pic.image == nil)
-//            {
-//                _ = profilePic?.start(completionHandler:  { (connection, result, error) -> Void in
-//            
-//                if(error == nil){
-//                    let dictionary = result as? NSDictionary
-//                    let data = dictionary?.object(forKey: "data") as? NSDictionary
-//                    let urlPic = data?.object(forKey: "url") as! String
-//                    if let imageData = NSData(contentsOf: URL(string:urlPic)!)
-//                    {
-//                        let profilePicRef = storageRef.child(user.uid+"/profile_pic.jpg")
-//                        let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
-//                            metadata,error in
-//                            
-//                            if(error == nil)
-//                            {
-//                                let downloadUrl = metadata?.downloadURLs
-//                            }
-//                            else
-//                            {
-//                                print("error in download image")
-//                            }
-//                        }
-//                        
-//                        self.User_profile_pic.image = UIImage(data: imageData as Data)
-//                    }
-//                    
-//                    
-//                }
-//            })
-//            }
+            else{
+                self.databaseRef.child("user_profile").child(uid).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
+                    let obName = snapshot.value as! String
+                    self.EmailLogin_Prepare(Names: obName, UserID: uid)})
+            }
+
             // User is signed in.
         
         }
@@ -112,13 +77,21 @@ class sidebarTableViewController: UITableViewController {
         
         
     }
-    func EmailLogin_Prepare(Name: String,User_ID: String){
-        User_name.text = "Hi!~"+Name
-        FIRDatabase.database().reference().child("user_profile").child(User_ID).child("profile_pic_small").observeSingleEvent(of: .value, with:{ (snapshot) in
+   
+    
+    
+    func EmailLogin_Prepare(Names: String, UserID: String){
+        User_name.text = "Hi!~"+Names
+        print(Names)
+        print(UserID)
+      let Ref = FIRDatabase.database().reference()
+        Ref.child("user_profile").child(UserID).child("profile_pic_small").observeSingleEvent(of: .value, with:{ (snapshot) in
+//            if snapshot.value != nil{
             let pictureURL = snapshot.value as! String
-            if let url = NSURL(string: pictureURL){
+                if let url = NSURL(string: pictureURL ){
+                    self.User_profile_pic.sd_setImage(with: url as URL!)
             
-            }
+                }
         
         })
     }
@@ -151,12 +124,12 @@ class sidebarTableViewController: UITableViewController {
                             if let imageData = NSData(contentsOf: URL(string:urlPic)!)
                             {
                                 let profilePicRef = storageRef.child( UserID + "/profile_pic.jpg")
-                                let uploadTask = profilePicRef.put(imageData as Data, metadata: nil){
+                                _ = profilePicRef.put(imageData as Data, metadata: nil){
                                     metadata,error in
         
                                     if(error == nil)
                                     {
-                                        let downloadUrl = metadata?.downloadURLs
+                                        _ = metadata?.downloadURLs
                                     }
                                     else
                                     {
@@ -178,11 +151,8 @@ class sidebarTableViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.databaseRef.child("user_profile").child(self.uidofuser!).child("driver_mode").observeSingleEvent(of: .value, with:{ (snapshot) in
-            let mode_check = snapshot.value as? AnyObject
-//            print(user.uid)self.uidofuser!
-            //                child("driver_mode").
+            let mode_check = snapshot.value
             print(mode_check!)
-            //                let switchCange = mode_check?.object(forKey: "")
             if(mode_check as! Bool == true){
                 self.toggle.isOn = true
                 self.tableView.reloadData()

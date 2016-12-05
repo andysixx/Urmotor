@@ -9,12 +9,12 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import SVProgressHUD
 
 private let reuseIdentifier = "Drivercell"
 
 class Credit_Driver_TableViewController: UITableViewController{
 
-    @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     let databaseRef = FIRDatabase.database().reference()
     var userDict : NSDictionary? = NSDictionary()
     var usersArray = [AnyObject]()
@@ -24,14 +24,13 @@ class Credit_Driver_TableViewController: UITableViewController{
     @IBOutlet var Button: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.aivLoading.startAnimating()
+        SVProgressHUD.show()
         self.loggedInUser = FIRAuth.auth()?.currentUser
-        self.databaseRef.child("user_profile").child((loggedInUser?.uid)!).observe(.value, with: {
+        self.databaseRef.child("user_profile").child((loggedInUser?.uid)!).observeSingleEvent(of: .value, with: {
             (snapshot) in
             print(snapshot)
             self.userDict = snapshot.value as? NSDictionary
             print(self.userDict!)
-            self.usersArray = [AnyObject]()
             self.friendArray = [AnyObject]()
             for(Cla,details) in self.userDict!{
                 print(Cla as! String)
@@ -46,43 +45,36 @@ class Credit_Driver_TableViewController: UITableViewController{
                 }
             }
         })
-        self.databaseRef.child("user_profile").observeSingleEvent(of: .value, with: {
-                                        (snapshot1) in
-//                                        var idex = 0
-                                        let fir = snapshot1.value as? NSDictionary
-                                        print(fir!)
+        self.databaseRef.child("user_profile").observe( .value, with: {
+            (snapshot1) in
+            self.usersArray = [AnyObject]()
+            let fir = snapshot1.value as? NSDictionary
+            print(fir!)
             for fridIDD in  self.friendArray{
                 for(fid,fdel) in fir!{
-                                            
-                                            if(fridIDD as! String == fid as! String){
-//                                                print(self.friendArray[idex] as! String)
-//                                                idex = idex + 1
-                                                let connections = (fdel as? NSDictionary)?.object(forKey: "connection") as? NSDictionary
-                                                for(_, connection) in connections!{
-                                                    if((connection as AnyObject).object(forKey: "online") as! Bool)
-                                                    {
-                                                        (fdel as AnyObject).setValue(true, forKey:"online")
+                    if(fridIDD as! String == fid as! String){
+                        let connections = (fdel as? NSDictionary)?.object(forKey: "connection") as? NSDictionary
+                        for(_, connection) in connections!{
+                            if((connection as AnyObject).object(forKey: "online") as! Bool)
+                            {
+                                (fdel as AnyObject).setValue(true, forKey:"online")
+                            }
+                            else{
+                                if((fdel as AnyObject).object(forKey: "online") == nil){
+                                    (fdel as AnyObject).setValue(false, forKey:"online")
+                                }
                                                         
-                                                    }
-                                                    else{
-                                                        if((fdel as AnyObject).object(forKey: "online") == nil){
-                                                            
-                                                            (fdel as AnyObject).setValue(false, forKey:"online")
-                                                        }
-                                                        
-                                                    }
-                                                }
-                                                 (fdel as AnyObject).setValue(fid, forKey:"uid")
-                                        self.usersArray.append(fdel as AnyObject)
-                                                
-                                            }
-                                        }
+                            }
+                        }
+                        (fdel as AnyObject).setValue(fid, forKey:"uid")
+                        self.usersArray.append(fdel as AnyObject)
+                    }
+                }
             }
             self.tableView?.reloadData()
-            self.aivLoading.stopAnimating()
-            self.aivLoading.isHidden = true
+            SVProgressHUD.dismiss()
             self.tableView?.reloadData()
-                                    })
+        })
 
         // burger side bar menu
         if revealViewController() != nil{
@@ -135,9 +127,10 @@ class Credit_Driver_TableViewController: UITableViewController{
         }
         return cell
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-//        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
-    }
+//    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+////        self.performSegue(withIdentifier: "Chat", sender: self.usersArray[indexPath.row])
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Chat"{
             if let indexPath = tableView.indexPathForSelectedRow{

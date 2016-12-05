@@ -11,17 +11,17 @@ target ‘Umotor’ do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod ‘Firebase/Database’
-  pod ‘Firebase/Messaging’
   pod 'SwiftyJSON'
   pod 'GoogleMaps'
+  pod 'GooglePlaces’
   pod ‘FBSDKCoreKit’
   pod ‘FBSDKShareKit’
   pod ‘FBSDKLoginKit’
   pod ‘JSQMessagesViewController’
   pod ’Alamofire’
   pod 'AFNetworking'
-  pod ‘Cosmos’
-  pod 'UrbanAirship-iOS-SDK'
-  pod 'Pushbots'
   pod 'SDWebImage'
+  pod 'SVProgressHUD'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end

@@ -12,6 +12,7 @@
 		4F0176911DCC84A7006FFADC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176901DCC84A7006FFADC /* NotificationCenter.framework */; };
 		4F0176931DCC84AD006FFADC /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */; };
 		4F099B6F1DE4117D00C3D63F /* Register_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F099B6E1DE4117D00C3D63F /* Register_TableViewCell.swift */; };
+		4F099B721DE6B64700C3D63F /* RoulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F099B711DE6B64700C3D63F /* RoulesViewController.swift */; };
 		4F0DD7E81DDED6F400A07215 /* Login_TableInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DD7E71DDED6F400A07215 /* Login_TableInputTableViewCell.swift */; };
 		4F0DD7EA1DDF073700A07215 /* login_tableinput2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DD7E91DDF073700A07215 /* login_tableinput2TableViewCell.swift */; };
 		4F0DD7EC1DDF096300A07215 /* login_tableinput3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0DD7EB1DDF096300A07215 /* login_tableinput3TableViewCell.swift */; };
@@ -46,8 +47,6 @@
 		4FEEDFF31DDC951300EC53C5 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */; };
 		4FF40EBA1DD747C30010B7BE /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF40EB91DD747C30010B7BE /* AFNetworking.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		4FF40EBC1DD7B2830010B7BE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF40EBB1DD7B2830010B7BE /* QuartzCore.framework */; };
-		4FF41F4E1DE232F9009DA1E3 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF41F4D1DE232F9009DA1E3 /* HamburgerButton.swift */; };
-		4FF41F501DE2CFBA009DA1E3 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF41F4F1DE2CFBA009DA1E3 /* CosmosDistrib.swift */; };
 		4FF41F541DE2DBB6009DA1E3 /* KumulosSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF41F521DE2DBA6009DA1E3 /* KumulosSDK.framework */; };
 		4FF41F551DE2DBB6009DA1E3 /* KumulosSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF41F521DE2DBA6009DA1E3 /* KumulosSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4FFC9E4A1DBF28EB00DC93A7 /* Ordertable_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */; };
@@ -76,6 +75,7 @@
 		4F0176901DCC84A7006FFADC /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		4F0176921DCC84AD006FFADC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		4F099B6E1DE4117D00C3D63F /* Register_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register_TableViewCell.swift; sourceTree = "<group>"; };
+		4F099B711DE6B64700C3D63F /* RoulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoulesViewController.swift; sourceTree = "<group>"; };
 		4F0DD7E71DDED6F400A07215 /* Login_TableInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login_TableInputTableViewCell.swift; sourceTree = "<group>"; };
 		4F0DD7E91DDF073700A07215 /* login_tableinput2TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = login_tableinput2TableViewCell.swift; sourceTree = "<group>"; };
 		4F0DD7EB1DDF096300A07215 /* login_tableinput3TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = login_tableinput3TableViewCell.swift; sourceTree = "<group>"; };
@@ -116,8 +116,6 @@
 		4FEEDFF21DDC951300EC53C5 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		4FF40EB91DD747C30010B7BE /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../Library/Developer/Xcode/DerivedData/Umotor-fwqqmkwpgmoqddchndwwaztynodg/Build/Products/Debug-iphonesimulator/AFNetworking/AFNetworking.framework"; sourceTree = "<group>"; };
 		4FF40EBB1DD7B2830010B7BE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		4FF41F4D1DE232F9009DA1E3 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
-		4FF41F4F1DE2CFBA009DA1E3 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		4FF41F521DE2DBA6009DA1E3 /* KumulosSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KumulosSDK.framework; sourceTree = "<group>"; };
 		4FFC9E491DBF28EB00DC93A7 /* Ordertable_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordertable_TableViewController.swift; sourceTree = "<group>"; };
 		4FFC9E4B1DBF370700DC93A7 /* Order_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order_TableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +157,15 @@
 				3C9F1D478795E883FE53595C /* Pods_Umotor.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F099B701DE5CA8700C3D63F /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				4F099B6E1DE4117D00C3D63F /* Register_TableViewCell.swift */,
+				4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */,
+			);
+			name = Register;
 			sourceTree = "<group>";
 		};
 		4F0DD02C1DE20B1400C2E274 /* Order */ = {
@@ -246,20 +253,18 @@
 		4FD192801CEC470900B835E4 /* te */ = {
 			isa = PBXGroup;
 			children = (
-				4FF41F4D1DE232F9009DA1E3 /* HamburgerButton.swift */,
 				4F7302D51DB0E5E500BD6CB3 /* TableView */,
 				4F0DD02E1DE20BBE00C2E274 /* Login */,
 				4F0DD02C1DE20B1400C2E274 /* Order */,
 				4F0DD02D1DE20B4600C2E274 /* Record */,
 				4F0DD02F1DE20BDE00C2E274 /* DriverInfo */,
+				4F099B701DE5CA8700C3D63F /* Register */,
 				4FD192811CEC470900B835E4 /* AppDelegate.swift */,
 				4FD192851CEC470900B835E4 /* Main.storyboard */,
-				4F099B6E1DE4117D00C3D63F /* Register_TableViewCell.swift */,
+				4F099B711DE6B64700C3D63F /* RoulesViewController.swift */,
 				4F3AC62D1DB7263F0087D02F /* ChatViewController.swift */,
 				4F75936F1D4F0F87000C305E /* Credit_Driver_TableViewController.swift */,
-				4FF41F4F1DE2CFBA009DA1E3 /* CosmosDistrib.swift */,
 				4F57E7251DB50FF700CE696C /* Driver_TableViewCell.swift */,
-				4F88CF381DAE861E00B7B2AC /* RegisterViewController.swift */,
 				4F8C4D261DACB4A700716A05 /* ViewController.swift */,
 				4F4B1F351DC094CD00286D87 /* GoogleMap_EXMPLE_ViewController.swift */,
 				4FD192881CEC470900B835E4 /* Assets.xcassets */,
@@ -298,6 +303,7 @@
 				72F637C93224047EB3600482 /* [CP] Embed Pods Frameworks */,
 				426C2B4D7E75E6C2E631C1D0 /* [CP] Copy Pods Resources */,
 				4FF41F561DE2DBB7009DA1E3 /* Embed Frameworks */,
+				4F02AFF51DED7A2C00235344 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -390,6 +396,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Umotor/Pods-Umotor-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4F02AFF51DED7A2C00235344 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a96d9a779fbfd9cfb7ab15506c20346d548183ee 92c9ddd44b62a55394a8490ba81c408123d7192d05f7a3b6b1bc443d635ca602";
+		};
 		72F637C93224047EB3600482 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -429,14 +448,13 @@
 			files = (
 				4F75936E1D4F0EB5000C305E /* Record_ViewController.swift in Sources */,
 				4F57E7261DB50FF700CE696C /* Driver_TableViewCell.swift in Sources */,
-				4FF41F4E1DE232F9009DA1E3 /* HamburgerButton.swift in Sources */,
 				4F7B72151D2E3A1B004A7B20 /* sidebarTableViewController .swift in Sources */,
 				4FD192821CEC470900B835E4 /* AppDelegate.swift in Sources */,
 				4F75936C1D4F09FE000C305E /* LoginViewController.swift in Sources */,
 				4FE8AEE01DCF7B4E00E8AA39 /* Record_Map_ViewController.swift in Sources */,
 				4F574A141DB0BD1B00C80BF6 /* ProfileTableViewController.swift in Sources */,
-				4FF41F501DE2CFBA009DA1E3 /* CosmosDistrib.swift in Sources */,
 				4F88CF391DAE861E00B7B2AC /* RegisterViewController.swift in Sources */,
+				4F099B721DE6B64700C3D63F /* RoulesViewController.swift in Sources */,
 				4FEEDFEF1DDC454700EC53C5 /* DriverInformation+handler.swift in Sources */,
 				4F7593701D4F0F87000C305E /* Credit_Driver_TableViewController.swift in Sources */,
 				4F3AC62E1DB7263F0087D02F /* ChatViewController.swift in Sources */,
@@ -570,7 +588,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 07CC6090B2938A2E62C1C615 /* Pods-Umotor.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Umotor/Umotor.entitlements;
@@ -602,7 +619,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1DF087C82C8F77D7B4ADBC1D /* Pods-Umotor.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Umotor/Umotor.entitlements;

@@ -10,6 +10,7 @@ import UIKit
 
 class Register_TableViewCell: UITableViewCell {
 
+//    @IBOutlet weak var Label_text: UILabel!
     @IBOutlet weak var Label_text: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,8 +27,10 @@ class Register_TableViewCell: UITableViewCell {
 
 class Register_TableViewCell_1: UITableViewCell {
     
-    @IBOutlet weak var email_text: UITextField!
+//    @IBOutlet weak var email_text: UITextField!
     @IBOutlet weak var Email_image: UIImageView!
+//    @IBOutlet weak var Email_image: UIImageView!
+    @IBOutlet weak var email_text: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

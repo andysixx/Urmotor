@@ -83,8 +83,9 @@ extension Diver_Info_TableViewController: UIImagePickerControllerDelegate, UINav
             showfinishAlert()
             insertDriverInfo()
             navigationItem.leftBarButtonItem = UIBarButtonItem(title:"完成", style: UIBarButtonItemStyle.plain, target: self , action: #selector(exit_view))
-        }//            dismiss(animated: true, completion: nil)
-
+            
+            navigationItem.rightBarButtonItem = nil
+        }
         
     }
     func showfinishAlert(){
